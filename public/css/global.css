@@ -1,0 +1,41 @@
+:root {
+    --primary-color: #4a90e2;
+    /* Blue for primary actions/highlights */
+    --secondary-color: #28a745;
+    /* Green */
+    --accent-color-yellow: #ffd700;
+    --accent-color-green-light: #66cdaa;
+    --text-dark: #333;
+    --text-light: #666;
+    --border-color: #e0e0e0;
+    --card-bg: #fff;
+    --sidebar-bg: #fff;
+
+    /* Base for rem units */
+    font-size: 100%;
+
+    /* Converted from px to rem */
+    --sidebar-width: 15.625rem;
+    /* 250px */
+    --header-height: 4.375rem;
+    /* 70px */
+    --spacing-sm: 0.625rem;
+    /* 10px */
+    --spacing-md: 1.25rem;
+    /* 20px */
+    --spacing-lg: 1.875rem;
+    /* 30px */
+    --border-radius-sm: 0.5rem;
+    --border-radius-md: 0.75rem;
+
+    /* Colors for Specific Buttons (centralized) */
+    --button-dark-bg: #212529;
+    --button-dark-hover-bg: #343a40;
+    --button-primary-alt-bg: #ffd700;
+    --button-primary-alt-hover-bg: #daa520;
+    --button-success-bg: #28a745;
+    --button-success-hover-bg: #218838;
+    --button-secondary-bg: #6c757d;
+    --button-secondary-hover-bg: #5a6268;
+    --button-danger-icon-color: #dc3545;
+}

@@ -1,0 +1,167 @@
+/* public/css/reset.css */
+
+/*
+  Basic CSS Reset / Normalize
+  Aims to provide a consistent cross-browser default styling.
+*/
+
+/* Box Sizing Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* HTML Base */
+html {
+    line-height: 1.15;
+    /* 1. Correct the line height in all browsers. */
+    -webkit-text-size-adjust: 100%;
+    /* 2. Prevent adjustments of font size after orientation changes in iOS. */
+}
+
+/* Body Reset */
+body {
+    margin: 0;
+    /* Remove default margin */
+}
+
+/* Headings, Paragraphs, Lists, Figures, Blockquotes, Definition Lists */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+    /* Remove default margins */
+}
+
+/* List Reset */
+ul,
+ol {
+    padding: 0;
+    /* Remove default padding */
+    list-style: none;
+    /* Remove default list markers (bullets, numbers) */
+}
+
+/* Anchor Reset */
+a {
+    background-color: transparent;
+    /* Remove the gray background on active links in IE 10. */
+    text-decoration: none;
+    /* Remove underline */
+    color: inherit;
+    /* Inherit color from parent, to be defined in base.css or elsewhere */
+}
+
+/* Bold/Strong text */
+b,
+strong {
+    font-weight: bolder;
+    /* Correct the inherit font weight in all browsers. */
+}
+
+/* Small text */
+small {
+    font-size: 80%;
+    /* Consistent font size for small elements */
+}
+
+/* Image Reset */
+img {
+    border-style: none;
+    /* Remove the border on images inside links in IE 10. */
+    max-width: 100%;
+    /* Ensure images are responsive within their containers */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+/* Form Elements Reset */
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    /* 1. Correct the font family in all browsers. */
+    font-size: 100%;
+    /* 1. Correct the font size in all browsers. */
+    line-height: 1.15;
+    /* 1. Correct the line height in all browsers. */
+    margin: 0;
+    /* 2. Remove default margins */
+}
+
+button,
+input {
+    overflow: visible;
+    /* Show the overflow in Edge and IE. */
+}
+
+button,
+select {
+    text-transform: none;
+    /* Remove the inheritance of text transform in Edge, Firefox, and IE. */
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+    /* 1. Correct the inability to style clickable types in iOS and Safari. */
+}
+
+/* Textarea Reset */
+textarea {
+    overflow: auto;
+    /* Show the scrollbar in IE. */
+    resize: vertical;
+    /* Allow vertical resizing by default */
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+main {
+    display: block;
+}
+
+/* Other form elements that might need normalization */
+[type="search"] {
+    -webkit-appearance: textfield;
+    /* 1. Correct the odd appearance in Chrome and Safari. */
+    outline-offset: -2px;
+    /* 2. Correct the outline style in Safari. */
+}
+
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1. Correct the inability to style button inputs in iOS and Safari. */
+    font: inherit;
+    /* 2. Change font properties to inherit in Safari. */
+}

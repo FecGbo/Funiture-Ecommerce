@@ -1,0 +1,23 @@
+/* public/css/base.css */
+
+/* Basic typography definitions */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* General link styling that overrides reset's inherit but is fundamental */
+a {
+    color: #007bff;
+    /* Default blue link color */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Image rendering consistency */
+img {
+    display: block;
+    /* Remove extra space below inline images */
+}
