@@ -108,27 +108,5 @@
             e.preventDefault();
             document.getElementById('deleteModal').style.display = 'flex';
         });
-
-        document.getElementById('cancelDeleteBtn').addEventListener('click', function () {
-            document.getElementById('deleteModal').style.display = 'none';
-        });
-
-        document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
-            document.getElementById('deleteCategoryForm').submit();
-        });
-
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                document.getElementById('deleteModal').style.display = 'none';
-            }
-        });
-
-
-        document.getElementById('deleteModal').addEventListener('click', function (e) {
-            if (e.target === this) {
-                document.getElementById('deleteModal').style.display = 'none';
-            }
-        });
     </script>
 @endsection
