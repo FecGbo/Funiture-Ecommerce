@@ -121,12 +121,15 @@
 }
 
 .admin-header {
-    background: #fff;
+    height: 84px !important;
+    min-height: 84px !important;
+    max-height: 84px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
     padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .admin-header-right {

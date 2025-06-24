@@ -1,0 +1,36 @@
+ .form-group {
+     margin-bottom: 1.25rem;
+     display: flex;
+     flex-direction: column;
+ }
+
+ .form-label {
+     margin-bottom: 0.5rem;
+     font-weight: 500;
+     color: var(--text-dark);
+ }
+
+ .form-control {
+     padding: 0.5rem 0.75rem;
+     border: 1px solid var(--border-color);
+     border-radius: 0.5rem;
+     font-size: 1rem;
+     color: var(--text-dark);
+     background: #fff;
+     transition: border-color 0.2s;
+ }
+
+ .form-control:focus {
+     border-color: var(--primary-color);
+     outline: none;
+ }
+
+ .invalid-feedback {
+     color: #dc3545;
+     font-size: 0.875rem;
+     margin-top: 0.25rem;
+ }
+
+ .is-invalid {
+     border-color: #dc3545;
+ }
