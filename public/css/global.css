@@ -357,9 +357,21 @@
         display: none;
     }
 
-    /* .admin-sidebar .sidebar-text {
+    .admin-sidebar .sidebar-text {
         display: none;
-    } */
+    }
+
+    .admin-card-profile {
+        display: none;
+    }
+
+    aside.admin-sidebar.sidebar-open {
+        width: 100px;
+    }
+
+    .admin-sidebar .admin-logo {
+        margin-top: 3rem;
+    }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {

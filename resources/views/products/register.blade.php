@@ -106,7 +106,7 @@
 
                     <div class="image-preview-container">
                         <div class="image-preview" id="imagePreview">
-                            <img src="/images/logo.png" alt="Category Image" id="previewImg">
+                            <img src="" alt="Category Image" id="previewImg">
                         </div>
                         <x-button type="button" class="btn-change-image"
                             onclick="document.getElementById('category_image').click()">
