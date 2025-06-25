@@ -50,7 +50,7 @@
                 <div class="image-upload-section">
                     <div class="image-preview-container">
                         <div class="image-preview" id="imagePreview">
-                            <img src="/images/chair-placeholder.png" alt="Category Image" id="previewImg">
+                            <img src="/images/logo.png" alt="Category Image" id="previewImg">
                         </div>
                         <x-button type="button" class="btn-change-image"
                             onclick="document.getElementById('category_image').click()">
@@ -69,14 +69,14 @@
     </div>
 
     <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('previewImg').src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+        // function previewImage(input) {
+        //     if (input.files && input.files[0]) {
+        //         const reader = new FileReader();
+        //         reader.onload = function (e) {
+        //             document.getElementById('previewImg').src = e.target.result;
+        //         };
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
     </script>
 @endsection

@@ -285,6 +285,11 @@ a.action-btn {
     text-decoration: none;
 }
 
+.table-cell[data-label="Stock"] {
+    /* text-align: center; */
+    padding-left: 2.5em;
+}
+
 @media (max-width: 768px) {
 
     .categories-table,

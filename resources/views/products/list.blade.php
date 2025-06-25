@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('title', 'Category List')
-<link rel="stylesheet" href="/css/list_categories.css">
+<link rel="stylesheet" href="/css/list_products.css">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @php
-    $newCategoryId = session('new_category_id');
+    $newProductId = session('new_product_id');
 @endphp
 
 @section('content')
@@ -12,10 +12,10 @@
         <!-- Header -->
         <div class="categories-header">
             <div>
-                <h2 class="categories-title">Categories</h2>
-                <p class="categories-subtitle">Here is a list of all categories</p>
+                <h2 class="categories-title">Products</h2>
+                <p class="categories-subtitle">Here is a list of all products</p>
             </div>
-            <a href="{{ route('category.register') }}" class="add-category-btn">Add Category</a>
+            <a href="{{ route('product.register') }}" class="add-category-btn">Add Product</a>
         </div>
 
         <!-- Table -->
@@ -24,39 +24,68 @@
                 <tr>
                     <th style="width: 40px;"></th>
                     <th>CATEGORY</th>
-                    <th>DESCRIPTION</th>
+                    <th>PRODUCT</th>
+                    <th>PURCHASE PRICE</th>
+                    <th>SALE PRICE</th>
+                    <th>STOCK</th>
+
                     <th style="width: 80px;">ACTION</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($categories as $category)
-                    <tr class="table-row" data-category-id="{{ $category->id }}">
+                @foreach($products as $product)
+                    <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}"
+                        data-product-id="{{ $product->id }}">
+
                         <td class="table-cell" data-label="Select">
                             <input type="checkbox" class="checkbox">
                         </td>
+
                         <td class="table-cell" data-label="Category">
                             <div class="category-info">
-                                @if($category->image)
-                                    <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                @if($product->category && $product->category->image)
+                                    <img src="{{ asset('storage/' . $product->category->image) }}"
+                                        alt="{{ $product->category->name }}" class="category-img">
+                                @else
+                                    <div class="category-icon sofa">{{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}
+                                    </div>
+                                @endif
+                                <span class="category-name">
+                                    {{ $product->category->name ?? 'No Category' }}
+                                </span>
+                            </div>
+                        </td>
+
+                        <td class="table-cell" data-label="Product">
+                            <div class="category-info">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                                         class="category-img">
                                 @else
-                                    <div class="category-icon sofa">{{ strtoupper(substr($category->name, 0, 2)) }}</div>
+                                    <div class="category-icon sofa">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
                                 @endif
-                                <span class="category-name editable" data-field="name">
-                                    {{ $category->name }}
-                                    @if(isset($newCategoryId) && $category->id == $newCategoryId)
+                                <span class="product-name editable" data-field="name">
+                                    {{ $product->name }}
+                                    @if(isset($newProductId) && $product->id == $newProductId)
                                         <span class="new-badge">new</span>
                                     @endif
                                 </span>
                             </div>
                         </td>
-                        <td class="table-cell" data-label="Description">
-                            <p class="category-description editable" data-field="description">{{ $category->description }}</p>
+                        <td class="table-cell" data-label="Purchase Price">
+                            <span class="purchase-price editable" data-field="purchase_price">{{ $product->purchase_price }}
+                                MMK</span>
+                        </td>
+                        <td class="table-cell" data-label="Sale Price">
+                            <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }} MMK</span>
+                        </td>
+                        <td class="table-cell" data-label="Stock">
+                            <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
                         </td>
                         <td class="table-cell" data-label="Action">
                             <div class="action-menu">
-                                <a href="{{ route('category.detail', $category->id) }}" class="action-btn" title="View Details">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                <a href="{{ route('product.detail', $product->id) }}" class="action-btn" title="View Details">
+                                    <i class="fa fa-eye"></i>
                                 </a>
                             </div>
                         </td>
@@ -65,7 +94,7 @@
             </tbody>
         </table>
         <div class="pagination-wrapper">
-            {{ $categories->links() }}
+            {{ $products->links() }}
         </div>
     </div>
 @endsection
@@ -97,10 +126,14 @@
                     const newValue = input.value.trim();
                     if (newValue !== oldValue) {
                         const row = element.closest('.table-row');
-                        const categoryId = row.getAttribute('data-category-id');
+                        let id = row.getAttribute('data-category-id');
+                        const isProductPage = window.location.pathname.includes('list-products');
+                        if (isProductPage) {
+                            id = row.getAttribute('data-product-id') || id;
+                        }
                         const field = element.getAttribute('data-field');
                         // Send AJAX request
-                        fetch(`/categories/${categoryId}/inline-update`, {
+                        fetch(`${isProductPage ? '/products' : '/categories'}/${id}/inline-update`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -134,15 +167,32 @@
                     }
                 });
             }
-            document.querySelectorAll('.category-name.editable').forEach(el => {
+            document.querySelectorAll('.product-name.editable').forEach(el => {
                 el.addEventListener('click', function () {
                     makeEditable(el, 'input');
                 });
             });
-            document.querySelectorAll('.category-description.editable').forEach(el => {
+            document.querySelectorAll('.purchase-price.editable').forEach(el => {
                 el.addEventListener('click', function () {
-                    makeEditable(el, 'textarea');
+                    makeEditable(el, 'input');
                 });
+            });
+            document.querySelectorAll('.sale-price.editable').forEach(el => {
+                el.addEventListener('click', function () {
+                    makeEditable(el, 'input');
+                });
+            });
+            document.querySelectorAll('.stock.editable').forEach(el => {
+                el.addEventListener('click', function () {
+                    makeEditable(el, 'input');
+                });
+            });
+            document.querySelectorAll('.category-description').forEach(el => {
+                if (el.classList.contains('editable')) {
+                    el.addEventListener('click', function () {
+                        makeEditable(el, 'textarea');
+                    });
+                }
             });
         });
     </script>

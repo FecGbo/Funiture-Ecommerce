@@ -279,7 +279,7 @@
     align-items: center;
     width: 100%;
     padding: 15px;
-    gap: 10px;
+    /* gap: 10px; */
     border-radius: var(--border-radius-md);
 }
 
@@ -356,6 +356,10 @@
     .admin-search-bar {
         display: none;
     }
+
+    /* .admin-sidebar .sidebar-text {
+        display: none;
+    } */
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -382,5 +386,23 @@
 
     .admin-header {
         padding-left: 5rem;
+    }
+}
+
+.admin-content {
+    flex: 1;
+    padding: 1.5rem;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
+    overflow-x: auto;
+
+}
+
+@media (max-width: 1280px) {
+    .admin-content {
+        padding: 1rem;
+
     }
 }

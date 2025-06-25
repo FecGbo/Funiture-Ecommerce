@@ -26,42 +26,42 @@
                 <li>
                     <a href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-home"></i>
-                        <span>Dashboard</span>
+                        <span class="sidebar-text">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <i class="fas fa-shopping-cart"></i>
-                        <span>Orders</span>
+                        <span class="sidebar-text">Orders</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <i class="fas fa-users"></i>
-                        <span>Customers</span>
+                        <span class="sidebar-text">Customers</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <i class="fas fa-user"></i>
-                        <span>Users</span>
+                        <span class="sidebar-text">Users</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('category.register') }}">
                         <i class="fas fa-list"></i>
-                        <span>Categories</span>
+                        <span class="sidebar-text">Categories</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('product.register') }}">
                         <i class="fas fa-box"></i>
-                        <span>Products</span>
+                        <span class="sidebar-text">Products</span>
                     </a>
                 </li>
 
@@ -104,7 +104,7 @@
         <div class="admin-content">
             @yield('content')
         </div>
-        
+
         @stack('scripts')
 
     </main>

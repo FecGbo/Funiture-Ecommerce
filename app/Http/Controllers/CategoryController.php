@@ -30,14 +30,14 @@ class CategoryController extends Controller
         $category->description = $description;
         $category->image = $imagePath;
         $category->save();
+        session()->flash('new_category_id', $category->id);
 
-
-        return redirect()->route('category.register')->with('success', 'Category added successfully!');
+        return redirect()->route('category.list')->with('success', 'Category added successfully!');
     }
 
     public function listCategories()
     {
-        $categories = Category::paginate(2);
+        $categories = Category::orderBy('id', 'desc')->paginate(2);
         return view('categories.list', compact('categories'));
     }
     public function inlineUpdate(Request $request, $id)
@@ -70,6 +70,7 @@ class CategoryController extends Controller
         $category->name = $request->input('category_name');
         $category->description = $request->input('category_description');
         $category->save();
+
         return redirect()->route('category.detail', $category->id)->with('success', 'Category updated successfully!');
     }
 
@@ -79,4 +80,5 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
     }
+  
 }

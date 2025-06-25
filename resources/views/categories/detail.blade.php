@@ -23,6 +23,7 @@
                             <span class="error-message">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="form-group">
                         <label for="category_description" class="form-label">Category Description</label>
                         <textarea id="category_description" name="category_description" class="form-textarea"
@@ -56,7 +57,7 @@
                             @if($category->image)
                                 <img src="{{ asset('storage/' . $category->image) }}" alt="Category Image" id="previewImg">
                             @else
-                                <img src="/images/chair-placeholder.png" alt="Category Image" id="previewImg">
+                                <img src="/images/logo.png" alt="Category Image" id="previewImg">
                             @endif
                         </div>
                         <button type="button" class="btn btn-primary btn-change-image"
@@ -79,21 +80,12 @@
             <input type="hidden" name="_method" value="DELETE">
         </form>
 
-        <!-- Delete Confirmation -->
-        <div id="deleteModal" class="custom-modal" style="display:none;">
-            <div class="custom-modal-content">
-                <h4>Confirm Delete</h4>
-                <p>Are you sure you want to delete this category?</p>
-                <div style="display: flex; justify-content: flex-end; gap: 1rem;">
-                    <x-button type="button" variant="secondary" id="cancelDeleteBtn">Cancel</x-button>
-                    <x-button type="button" variant="danger" id="confirmDeleteBtn">Confirm</x-button>
-                </div>
-            </div>
-        </div>
+        <!-- Delete Confirmation Modal Component -->
+        <x-delete-modal :modalId="'deleteModal'" :title="'Confirm Delete'" :message="'Are you sure you want to delete this category?'" :cancelId="'cancelDeleteBtn'" :confirmId="'confirmDeleteBtn'" :formId="'deleteCategoryForm'" />
     </div>
 
     <script>
-        // Image preview logic
+                Image preview
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -108,5 +100,7 @@
             e.preventDefault();
             document.getElementById('deleteModal').style.display = 'flex';
         });
+
+
     </script>
 @endsection

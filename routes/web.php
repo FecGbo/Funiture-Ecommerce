@@ -27,3 +27,13 @@ Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name
 Route::delete('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
 
 
+// products
+Route::get('/register-product', [App\Http\Controllers\ProductController::class, 'CategoryDrop'])->name('product.register');
+Route::post('/add-product', [App\Http\Controllers\ProductController::class, 'addProduct'])->name('product.add');
+Route::get('/list-products', [App\Http\Controllers\ProductController::class, 'listProducts'])->name('product.list');
+
+Route::post('/products/{id}/inline-update', [App\Http\Controllers\ProductController::class, 'inlineUpdate']);
+Route::get('/product/{id}/detail', [App\Http\Controllers\ProductController::class, 'detail'])->name('product.detail');
+Route::post('/product/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+Route::delete('/product/{id}/delete', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.delete');
+
