@@ -37,7 +37,17 @@ class CategoryController extends Controller
 
     public function listCategories()
     {
-        $categories = Category::orderBy('id', 'desc')->paginate(2);
+        // Sorting
+        $allowedSorts = ['name', 'description', 'id'];
+        $allowedDirs = ['asc', 'desc'];
+        $sort = request('sort', 'id');
+        $dir = request('dir', 'desc');
+        if (!in_array($sort, $allowedSorts))
+            $sort = 'id';
+        if (!in_array($dir, $allowedDirs))
+            $dir = 'desc';
+
+        $categories = Category::orderBy($sort, $dir)->paginate(6);
         return view('categories.list', compact('categories'));
     }
     public function inlineUpdate(Request $request, $id)
@@ -80,5 +90,5 @@ class CategoryController extends Controller
         $category->delete();
         return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
     }
-  
+
 }

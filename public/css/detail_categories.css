@@ -92,6 +92,7 @@
     gap: 1rem;
     flex-grow: 1;
     justify-content: space-between;
+    align-items: center;
 }
 
 .form-actions-group #showDeleteModalBtn {
@@ -99,7 +100,20 @@
 }
 
 button.btn.btn-success {
-    width: 120px;
+    width: 130px !important;
+}
+
+.form-actions-left {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.form-actions-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -129,6 +143,67 @@ button.btn.btn-success {
         width: 100%;
         justify-content: center;
         display: flex;
+    }
+}
+
+@media (max-width: 450px) {
+    .form-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+    }
+
+    .form-actions-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .form-actions-left,
+    .form-actions-right {
+        width: 100% !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+
+    .form-actions-left>*,
+    .form-actions-right>* {
+        width: 100% !important;
+    }
+
+    button.btn.btn-success {
+        width: 100% !important;
+    }
+
+}
+
+@media (min-width: 451px) {
+    .form-actions {
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+
+    .form-actions-group {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 1rem !important;
+    }
+
+    .form-actions-left {
+        flex-direction: row !important;
+        gap: 1rem !important;
+        display: flex !important;
+    }
+
+    .form-actions-right {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+
+    .form-actions-left>*,
+    .form-actions-right>* {
+        width: auto !important;
     }
 }
 
@@ -259,6 +334,10 @@ button.btn.btn-success {
     .image-preview {
         width: 120px;
         height: 120px;
+    }
+
+    .category-form-container {
+        min-width: 350px;
     }
 }
 

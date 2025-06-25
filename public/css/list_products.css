@@ -2,8 +2,7 @@
     background: white;
     border-radius: var(--border-radius-md);
     box-shadow: var(--box-shadow-md);
-    /* Remove overflow hidden to allow box-shadow to show */
-    /* overflow: hidden; */
+    font-family: Arial, sans-serif;
 }
 
 .categories-header {
@@ -45,10 +44,20 @@
     text-decoration: none !important;
 }
 
+.add-category-short {
+    display: none;
+}
+
+.add-category-full {
+    display: inline;
+}
+
 .categories-table {
     width: 100%;
     border-collapse: collapse;
 }
+
+
 
 .categories-thead {
     background: var(--table-header-bg);
@@ -194,6 +203,7 @@ thead {
     display: flex;
     justify-content: flex-end;
     margin: 1rem;
+
 }
 
 .new-badge {
@@ -207,6 +217,7 @@ thead {
     vertical-align: middle;
     text-transform: uppercase;
 }
+
 
 .pagination {
     display: flex;
@@ -232,6 +243,7 @@ thead {
     box-shadow: var(--box-shadow-xs);
     padding: 0;
     border: 1px solid var(--border-color);
+    text-decoration: none;
 }
 
 .pagination .page-link.active,
@@ -290,7 +302,38 @@ a.action-btn {
     padding-left: 2.5em;
 }
 
-@media (max-width: 768px) {
+/* .btn-short-text {
+    display: none;
+}
+.btn-full-text {
+    display: inline;
+} */
+
+@media (max-width: 350px) {
+    .btn-full-text {
+        display: none;
+    }
+
+    .btn-short-text {
+        display: inline;
+    }
+
+    .add-category-full {
+        display: none;
+    }
+
+    .add-category-short {
+        display: inline;
+    }
+}
+
+@media (max-width: 400px) {
+    .categories-section {
+        min-width: 400px;
+    }
+}
+
+/* @media (max-width: 768px) {
 
     .categories-table,
     .categories-thead,
@@ -339,4 +382,144 @@ a.action-btn {
         width: 6.5em;
         white-space: nowrap;
     }
+} */
+@media (max-width:550px) {
+
+    p.category-description,
+    p.category-description.editable {
+        margin: 0;
+        white-space: normal !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        max-width: 100%;
+        display: block;
+    }
+
+    p.category-description.editable {
+        margin: 0;
+
+    }
+
+    .categories-table,
+    .categories-thead,
+    .categories-thead tr,
+    .categories-thead th,
+    .table-row,
+    .table-cell {
+        display: block;
+        width: 100%;
+    }
+
+    .categories-thead {
+        display: none;
+    }
+
+    .table-row {
+        border-bottom: 2px solid var(--border-color-light);
+        border-radius: 0;
+        background: #fff;
+        padding: 1rem 0.5rem;
+        position: relative;
+        z-index: 1;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+
+    .table-cell {
+        position: relative;
+        padding-left: 7.5em;
+        padding-top: 0.75em;
+        padding-bottom: 0.75em;
+        border: none;
+        min-height: 2.5em;
+    }
+
+    .table-cell[data-label]:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        color: var(--text-light);
+        font-size: 0.95em;
+        text-align: left;
+        width: 6.5em;
+        white-space: nowrap;
+    }
+
+    .category-info {
+        margin-left: 3rem;
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    span.purchase-price.editable,
+    span.sale-price.editable,
+
+    a.action-btn {
+        margin-left: 5.5rem;
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    span.stock.editable {
+        margin-left: 11.2rem;
+    }
+}
+
+@media (min-width: 551px) {
+    .categories-section {
+        min-width: 800px;
+    }
+
+
+}
+
+@media (min-width: 800px) {
+    .categories-table {
+        min-width: 700px;
+    }
+
+    .sort-btn-group {
+        justify-content: space-around;
+    }
+}
+
+
+/* Sort  */
+.sortable-header {
+    vertical-align: middle;
+}
+
+.sort-btn-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+
+    margin-top: 2px;
+}
+
+.sort-btn {
+    background: none;
+    border: none;
+    padding: 0 2px;
+    cursor: pointer;
+    outline: none;
+    color: inherit;
+    font-size: 1em;
+    line-height: 1;
+}
+
+.sort-btn:focus {
+    outline: 2px solid #007bff;
+}
+
+.sort-btn-group-tdown {
+    display: flex;
+    flex-direction: column;
 }

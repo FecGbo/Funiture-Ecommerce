@@ -170,6 +170,10 @@ button.btn.btn-success {
         max-width: 100%;
     }
 
+    .image-preview-container {
+        align-items: center;
+    }
+
     .image-upload-section {
         order: 1;
     }
@@ -191,7 +195,7 @@ button.btn.btn-success {
     }
 
     .form-actions-group {
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
         gap: 0.75rem;
     }
@@ -202,53 +206,6 @@ button.btn.btn-success {
     }
 }
 
-@media (max-width: 768px) {
-    .form-actions {
-        flex-direction: column;
-        gap: 0.75rem;
-        width: 100%;
-        align-items: stretch;
-        justify-content: flex-start;
-    }
-
-    .form-actions-group {
-        flex-direction: column;
-        width: 100%;
-        gap: 0.75rem;
-    }
-
-    .form-actions-group #showDeleteModalBtn {
-        margin-left: 0;
-    }
-
-    button.btn.btn-success {
-        width: 100%;
-    }
-
-    .form-actions>* {
-        width: 100%;
-        justify-content: center;
-        display: flex;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .image-upload-section {
-        order: -1;
-    }
-
-    .image-preview {
-        width: 150px;
-        height: 150px;
-    }
-
-    .product-form-container {
-        padding: 1rem;
-    }
-}
 
 @media (max-width: 480px) {
     .form-header h3 {
@@ -258,6 +215,10 @@ button.btn.btn-success {
     .image-preview {
         width: 120px;
         height: 120px;
+    }
+
+    .product-form-container {
+        min-width: 350px;
     }
 }
 

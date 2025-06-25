@@ -66,51 +66,6 @@ form.admin-search-bar {
     border-radius: 0;
 }
 
-@media (max-width: 900px) {
-    .form-grid {
-        flex-direction: column;
-    }
-
-    .form-fields,
-    .image-upload-section {
-        flex: 1 1 100%;
-    }
-
-    .image-upload-section {
-        order: 1;
-    }
-
-    .form-fields {
-        order: 2;
-    }
-
-    .form-actions {
-        flex-direction: column;
-        align-items: stretch;
-        margin-top: 2rem;
-        justify-content: flex-end;
-        width: 100%;
-        /* position: static;
-        left: unset;
-        right: unset;
-        bottom: unset; */
-    }
-
-    .form-actions x-button,
-    .form-actions button,
-    .form-actions input[type="submit"] {
-        width: 100%;
-        /* max-width: 260px;
-        min-width: 120px; */
-        margin: 0 auto 0.5rem auto;
-        display: block;
-    }
-
-    .category-form-container {
-        position: relative;
-        padding-bottom: 5.5rem;
-    }
-}
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -167,4 +122,66 @@ select.form-input:focus {
     font-size: 0.95rem;
     padding: 0.5rem 0.75rem;
     align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+    .form-grid {
+        flex-direction: column;
+    }
+
+    .form-fields,
+    .image-upload-section {
+        flex: 1 1 100%;
+
+    }
+
+    .image-upload-section {
+        order: 1;
+    }
+
+    .form-fields {
+        order: 2;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 2rem;
+        justify-content: flex-end;
+        width: 100%;
+
+    }
+
+    .image-preview-container {
+        align-items: center;
+    }
+
+    .image-preview-container>button.btn.btn-success.btn-change-image {
+        /* align-items: center; */
+        margin-left: auto;
+        margin-right: auto;
+        /* display: flex;
+        justify-content: center; */
+    }
+
+    .form-actions x-button,
+    .form-actions button,
+    .form-actions input[type="submit"] {
+        width: 100%;
+        /* max-width: 260px;
+        min-width: 120px; */
+        margin: 0 auto 0.5rem auto;
+        display: block;
+    }
+
+    .category-form-container {
+        position: relative;
+        padding-bottom: 5.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .category-form-container {
+        min-width: 400px;
+    }
 }

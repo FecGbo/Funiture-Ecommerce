@@ -51,13 +51,24 @@
 }
 
 .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     width: var(--sidebar-width);
+    max-width: 80vw;
     background: var(--sidebar-bg);
     color: var(--text-dark);
     padding: var(--spacing-lg) var(--spacing-md);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.admin-sidebar.sidebar-open {
+    left: 0;
 }
 
 .admin-sidebar .admin-logo {
@@ -184,13 +195,12 @@
 }
 
 
-.admin-hamburger {
-    display: none;
+/* .admin-hamburger {
+    display: flex !important;
     position: fixed;
     top: 1rem;
     left: 1rem;
-    z-index: 1001;
-    /* background: var(--primary-color); */
+    z-index: 3000;
     border: none;
     border-radius: var(--border-radius-sm);
     width: 3rem;
@@ -202,6 +212,27 @@
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+} */
+.admin-hamburger {
+    display: flex !important;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    /* <— make sure it's above sidebar/main */
+    border: none;
+    border-radius: var(--border-radius-sm);
+    width: 3rem;
+    height: 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background: white;
+    /* <— makes it visible on light backgrounds */
 }
 
 .admin-hamburger:hover {
@@ -290,10 +321,6 @@
 }
 
 @media (max-width: 768px) {
-    .admin-hamburger {
-        display: flex;
-    }
-
     .admin-layout {
         position: relative;
     }
@@ -326,7 +353,7 @@
     .admin-header-right {
         flex-direction: row;
         gap: 0.5rem;
-        align-items: flex-end;
+        /* align-items: flex-end; */
     }
 
     .admin-search-bar {
@@ -339,7 +366,7 @@
         font-size: 0.875rem;
     }
 
-    /* Overlay for mobile */
+
     .admin-sidebar.sidebar-open::after {
         content: '';
         position: fixed;
@@ -416,5 +443,27 @@
     .admin-content {
         padding: 1rem;
 
+    }
+
+
+}
+
+@media (min-width: 1025px) {
+    .admin-main {
+        margin-left: 2.5rem;
+
+
+    }
+
+
+
+    .admin-sidebar.sidebar-open~.admin-main {
+        margin-left: 0 !important;
+
+
+    }
+
+    .admin-hamburger {
+        display: flex !important;
     }
 }

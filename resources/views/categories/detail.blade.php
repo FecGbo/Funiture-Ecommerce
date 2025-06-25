@@ -35,18 +35,21 @@
                     </div>
                     <div class="form-actions">
                         <div class="form-actions-group">
-                            <x-button type="submit" variant="success">
-                                <i class=""></i>
-                                Save
-                            </x-button>
-                            <x-button type="button" variant="secondary" onclick="window.history.back()">
-                                <i class=""></i>
-                                Cancel
-                            </x-button>
-
-                            <x-button type="button" variant="danger" id="showDeleteModalBtn">
-                                <i class="fas fa-trash"></i>
-                            </x-button>
+                            <div class="form-actions-left">
+                                <x-button type="submit" variant="success">
+                                    <i class=""></i>
+                                    Save
+                                </x-button>
+                                <x-button type="button" variant="secondary" onclick="window.history.back()">
+                                    <i class=""></i>
+                                    Cancel
+                                </x-button>
+                            </div>
+                            <div class="form-actions-right">
+                                <x-button type="button" variant="danger" id="showDeleteModalBtn">
+                                    <i class="fas fa-trash"></i>
+                                </x-button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
     </div>
 
     <script>
-                Image preview
+
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();

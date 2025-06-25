@@ -47,11 +47,21 @@ class ProductController extends Controller
         return redirect()->route('product.list')->with('success', 'Product added successfully!');
     }
 
-    public function listProducts()
+    public function listProducts(Request $request)
     {
-        $products = Product::with('category')->orderBy('id', 'desc')->paginate(3);
+        $sort = $request->query('sort', 'id');
+        $dir = $request->query('dir', 'desc');
+        $allowedSorts = ['id', 'name', 'purchase_price', 'sale_price', 'stock'];
+        $allowedDirs = ['asc', 'desc'];
+        if (!in_array($sort, $allowedSorts)) {
+            $sort = 'id';
+        }
+        if (!in_array($dir, $allowedDirs)) {
+            $dir = 'desc';
+        }
+        $products = Product::with('category')->orderBy($sort, $dir)->paginate(5);
         $categories = Category::all();
-        return view('products.list', compact('products', 'categories'));
+        return view('products.list', compact('products', 'categories', 'sort', 'dir'));
     }
 
 
@@ -61,7 +71,7 @@ class ProductController extends Controller
         $field = $request->input('field');
         $value = $request->input('value');
 
-        // Remove currency for numeric fields if present
+        // Remove currency for numeric fields if exits
         if (in_array($field, ['purchase_price', 'sale_price'])) {
             $value = preg_replace('/[^\d.]/', '', $value); // Remove all non-numeric except dot
         }
@@ -78,7 +88,7 @@ class ProductController extends Controller
             }
         }
 
-        // Handle numeric fields
+        //  num fields
         if (in_array($field, ['purchase_price', 'sale_price', 'stock'])) {
             if (!is_numeric($value)) {
                 return response()->json(['success' => false, 'message' => 'Value must be numeric.']);

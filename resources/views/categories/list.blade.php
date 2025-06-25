@@ -15,25 +15,51 @@
                 <h2 class="categories-title">Categories</h2>
                 <p class="categories-subtitle">Here is a list of all categories</p>
             </div>
-            <a href="{{ route('category.register') }}" class="add-category-btn">Add Category</a>
+            <a href="{{ route('category.register') }}" class="add-category-btn"><span class="add-category-full">Add
+                    Category</span><span class="add-category-short">Add</span></a>
         </div>
 
         <!-- Table -->
         <table class="categories-table">
             <thead class="categories-thead">
                 <tr>
-                    <th style="width: 40px;"></th>
-                    <th>CATEGORY</th>
-                    <th>DESCRIPTION</th>
+                    <!-- <th style="width: 40px;"></th> -->
+                    <th class="sortable-header">
+                        <!-- <span>CATEGORY</span> -->
+                        <div class="sort-btn-group">
+                            CATEGORY
+                            <div class="sort-btn-group-tdown">
+                                <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                </button>
+                                <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </th>
+                    <th class="sortable-header">
+                        <!--  -->
+                        <div class="sort-btn-group">
+                            <span>DESCRIPTION</span>
+                            <div class="sort-btn-group-tdown">
+                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                </button>
+                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
                     <th style="width: 80px;">ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($categories as $category)
                     <tr class="table-row" data-category-id="{{ $category->id }}">
-                        <td class="table-cell" data-label="Select">
-                            <input type="checkbox" class="checkbox">
-                        </td>
+
                         <td class="table-cell" data-label="Category">
                             <div class="category-info">
                                 @if($category->image)
@@ -80,22 +106,19 @@
                 let input;
                 if (type === 'textarea') {
                     input = document.createElement('textarea');
-                    input.style.minHeight = '50px';
-
+                    input.style.minHeight = '20px';
                 } else {
                     input = document.createElement('input');
                     input.type = 'text';
-
                 }
-                input.value = oldValue;
+                input.value = oldValue.trim();
                 input.className = 'inline-edit-input';
-                element.textContent = '';
+                element.innerHTML = '';
                 element.appendChild(input);
-                input.focus();
-                input.select();
+                setTimeout(() => { input.focus(); input.select(); }, 0);
                 input.addEventListener('blur', function () {
                     const newValue = input.value.trim();
-                    if (newValue !== oldValue) {
+                    if (newValue !== oldValue.trim()) {
                         const row = element.closest('.table-row');
                         const categoryId = row.getAttribute('data-category-id');
                         const field = element.getAttribute('data-field');
@@ -135,13 +158,28 @@
                 });
             }
             document.querySelectorAll('.category-name.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopPropagation();
                     makeEditable(el, 'input');
                 });
             });
             document.querySelectorAll('.category-description.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopPropagation();
                     makeEditable(el, 'textarea');
+                });
+            });
+            // Sorting
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sortField = btn.getAttribute('data-sort');
+                    const dir = btn.getAttribute('data-dir');
+                    // Redirect with sort params (or use AJAX)
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('sort', sortField);
+                    url.searchParams.set('dir', dir);
+                    window.location.href = url.toString();
                 });
             });
         });

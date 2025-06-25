@@ -15,87 +15,150 @@
                 <h2 class="categories-title">Products</h2>
                 <p class="categories-subtitle">Here is a list of all products</p>
             </div>
-            <a href="{{ route('product.register') }}" class="add-category-btn">Add Product</a>
+            <a href="{{ route('product.register') }}" class="add-category-btn"><span class="add-category-full">Add
+                    Product</span><span class="add-category-short">Add</span></a>
         </div>
 
         <!-- Table -->
         <table class="categories-table">
             <thead class="categories-thead">
                 <tr>
-                    <th style="width: 40px;"></th>
-                    <th>CATEGORY</th>
-                    <th>PRODUCT</th>
-                    <th>PURCHASE PRICE</th>
-                    <th>SALE PRICE</th>
-                    <th>STOCK</th>
+                    <th class="sortable-header">
+                        <span>CATEGORY</span>
+                    </th>
+                    <th class="sortable-header">
 
-                    <th style="width: 80px;">ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($products as $product)
-                    <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}"
-                        data-product-id="{{ $product->id }}">
 
-                        <td class="table-cell" data-label="Select">
-                            <input type="checkbox" class="checkbox">
-                        </td>
+                        <div class="sort-btn-group">
+                            <span>PRODUCT</span>
+                            <div class="sort-btn-group-tdown">
 
-                        <td class="table-cell" data-label="Category">
-                            <div class="category-info">
-                                @if($product->category && $product->category->image)
-                                    <img src="{{ asset('storage/' . $product->category->image) }}"
-                                        alt="{{ $product->category->name }}" class="category-img">
-                                @else
-                                    <div class="category-icon sofa">{{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}
-                                    </div>
-                                @endif
-                                <span class="category-name">
-                                    {{ $product->category->name ?? 'No Category' }}
-                                </span>
+                                <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                </button>
+                                <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                </button>
                             </div>
-                        </td>
+                        </div>
+    </div>
 
-                        <td class="table-cell" data-label="Product">
-                            <div class="category-info">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
-                                        class="category-img">
-                                @else
-                                    <div class="category-icon sofa">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
-                                @endif
-                                <span class="product-name editable" data-field="name">
-                                    {{ $product->name }}
-                                    @if(isset($newProductId) && $product->id == $newProductId)
-                                        <span class="new-badge">new</span>
-                                    @endif
-                                </span>
-                            </div>
-                        </td>
-                        <td class="table-cell" data-label="Purchase Price">
-                            <span class="purchase-price editable" data-field="purchase_price">{{ $product->purchase_price }}
-                                MMK</span>
-                        </td>
-                        <td class="table-cell" data-label="Sale Price">
-                            <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }} MMK</span>
-                        </td>
-                        <td class="table-cell" data-label="Stock">
-                            <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
-                        </td>
-                        <td class="table-cell" data-label="Action">
-                            <div class="action-menu">
-                                <a href="{{ route('product.detail', $product->id) }}" class="action-btn" title="View Details">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="pagination-wrapper">
-            {{ $products->links() }}
+
+    </th>
+    <th class="sortable-header">
+
+
+        <div class="sort-btn-group">
+            <span>PURCHASE PRICE</span>
+            <div class="sort-btn-group-tdown">
+                <button class="sort-btn" data-sort="purchase_price" data-dir="asc" aria-label="Sort Low-High">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                </button>
+                <button class="sort-btn" data-sort="purchase_price" data-dir="desc" aria-label="Sort High-Low">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
+        </div>
+    </th>
+    <th class="sortable-header">
+
+
+        <div class="sort-btn-group">
+            <span>SALE PRICE</span>
+            <div class="sort-btn-group-tdown">
+
+                <button class="sort-btn" data-sort="sale_price" data-dir="asc" aria-label="Sort Low-High">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                </button>
+                <button class="sort-btn" data-sort="sale_price" data-dir="desc" aria-label="Sort High-Low">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+    </th>
+    <th class="sortable-header">
+
+        <div class="sort-btn-group">
+            <span>STOCK</span>
+            <div class="sort-btn-group-tdown">
+                <button class="sort-btn" data-sort="stock" data-dir="asc" aria-label="Sort Low-High">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                </button>
+                <button class="sort-btn" data-sort="stock" data-dir="desc" aria-label="Sort High-Low">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        </div>
+    </th>
+
+    <th style="width: 80px;">ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach($products as $product)
+            <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}" data-product-id="{{ $product->id }}">
+
+                <!-- <td class="table-cell" data-label="Select">
+                                                                                                                                                                                                                    <input type="checkbox" class="checkbox">
+                                                                                                                                                                                                                </td> -->
+
+                <td class="table-cell" data-label="Category">
+                    <div class="category-info">
+                        @if($product->category && $product->category->image)
+                            <img src="{{ asset('storage/' . $product->category->image) }}" alt="{{ $product->category->name }}"
+                                class="category-img">
+                        @else
+                            <div class="category-icon sofa">{{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}
+                            </div>
+                        @endif
+                        <span class="category-name">
+                            {{ $product->category->name ?? 'No Category' }}
+                        </span>
+                    </div>
+                </td>
+
+                <td class="table-cell" data-label="Product">
+                    <div class="category-info">
+                        @if($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="category-img">
+                        @else
+                            <div class="category-icon sofa">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
+                        @endif
+                        <span class="product-name editable" data-field="name">
+                            {{ $product->name }}
+                            @if(isset($newProductId) && $product->id == $newProductId)
+                                <span class="new-badge">new</span>
+                            @endif
+                        </span>
+                    </div>
+                </td>
+                <td class="table-cell" data-label="Purchase Price">
+                    <span class="purchase-price editable" data-field="purchase_price">{{ $product->purchase_price }}
+                    </span>MMK
+                </td>
+                <td class="table-cell" data-label="Sale Price">
+                    <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }} </span>MMK
+                </td>
+                <td class="table-cell" data-label="Stock">
+                    <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
+                </td>
+                <td class="table-cell" data-label="Action">
+                    <div class="action-menu">
+                        <a href="{{ route('product.detail', $product->id) }}" class="action-btn" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+    </table>
+    <div class="pagination-wrapper">
+        {{ $products->links() }}
+    </div>
     </div>
 @endsection
 
@@ -115,16 +178,18 @@
                     input = document.createElement('input');
                     input.type = 'text';
 
+
                 }
-                input.value = oldValue;
+                input.value = oldValue.trim();
                 input.className = 'inline-edit-input';
-                element.textContent = '';
+                element.innerHTML = '';
                 element.appendChild(input);
                 input.focus();
-                input.select();
+                // input.select();
+                setTimeout(() => { input.focus(); input.select(); }, 0);
                 input.addEventListener('blur', function () {
                     const newValue = input.value.trim();
-                    if (newValue !== oldValue) {
+                    if (newValue !== oldValue.trim()) {
                         const row = element.closest('.table-row');
                         let id = row.getAttribute('data-category-id');
                         const isProductPage = window.location.pathname.includes('list-products');
@@ -168,31 +233,48 @@
                 });
             }
             document.querySelectorAll('.product-name.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopImmediatePropagation();
                     makeEditable(el, 'input');
                 });
             });
             document.querySelectorAll('.purchase-price.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopImmediatePropagation();
                     makeEditable(el, 'input');
                 });
             });
             document.querySelectorAll('.sale-price.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopImmediatePropagation();
                     makeEditable(el, 'input');
                 });
             });
             document.querySelectorAll('.stock.editable').forEach(el => {
-                el.addEventListener('click', function () {
+                el.addEventListener('click', function (e) {
+                    e.stopImmediatePropagation();
                     makeEditable(el, 'input');
                 });
             });
             document.querySelectorAll('.category-description').forEach(el => {
                 if (el.classList.contains('editable')) {
-                    el.addEventListener('click', function () {
+                    el.addEventListener('click', function (e) {
+                        e.stopImmediatePropagation();
                         makeEditable(el, 'textarea');
                     });
                 }
+            });
+            // Sorting button logic
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sortField = btn.getAttribute('data-sort');
+                    const dir = btn.getAttribute('data-dir');
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('sort', sortField);
+                    url.searchParams.set('dir', dir);
+                    window.location.href = url.toString();
+                });
             });
         });
     </script>

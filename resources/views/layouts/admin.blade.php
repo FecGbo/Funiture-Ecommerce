@@ -12,11 +12,7 @@
 </head>
 
 <body class="admin-layout">
-    <button id="admin-hamburger" class="admin-hamburger" aria-label="Toggle sidebar">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+
     <aside class="admin-sidebar">
         <div class="admin-logo">
             <img src="/images/logo.png" alt="" width="50" height="50">
@@ -24,42 +20,45 @@
         <nav>
             <ul>
                 <li>
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <i class="fas fa-home"></i>
                         <span class="sidebar-text">Dashboard</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="#" class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="sidebar-text">Orders</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="#" class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span class="sidebar-text">Customers</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="#" class="{{ request()->is('admin/users*') ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text">Users</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('category.register') }}">
+                    <a href="{{ route('category.list') }}"
+                        class="{{ request()->routeIs('category.list') ? 'active' : '' }}">
                         <i class="fas fa-list"></i>
                         <span class="sidebar-text">Categories</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('product.register') }}">
+                    <a href="{{ route('product.list') }}"
+                        class="{{ request()->routeIs('product.list') ? 'active' : '' }}">
                         <i class="fas fa-box"></i>
                         <span class="sidebar-text">Products</span>
                     </a>
@@ -80,6 +79,11 @@
     </aside>
     <main class="admin-main">
         <header class="admin-header">
+            <button id="admin-hamburger" class="admin-hamburger" aria-label="Toggle sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <h2>@yield('header', 'Dashboard')</h2>
             <div class="admin-header-right">
                 <form class="admin-search-bar" action="#" method="get">
