@@ -2,7 +2,7 @@
 
 @section('title', 'Category Register')
 
-<link rel="stylesheet" href="/css/add_categories.css">
+<link rel="stylesheet" href="/css/category/add_categories.css">
 @section('content')
     <div class="category-form-container">
         <div class="form-header">
@@ -39,7 +39,7 @@
                             <i class=""></i>
                             Save Data
                         </x-button>
-                        
+
                         <x-button type="button" variant="secondary" onclick="window.history.back()">
                             <i class=""></i>
                             Cancel

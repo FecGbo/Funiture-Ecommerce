@@ -81,7 +81,7 @@ class CategoryController extends Controller
         $category->description = $request->input('category_description');
         $category->save();
 
-        return redirect()->route('category.detail', $category->id)->with('success', 'Category updated successfully!');
+        return redirect()->route('category.list', $category->id)->with('success', 'Category updated successfully!');
     }
 
     public function delete($id)

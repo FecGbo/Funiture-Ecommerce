@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Category Details')
-<link rel="stylesheet" href="/css/detail_categories.css">
+<link rel="stylesheet" href="/css/category/detail_categories.css">
 @section('content')
     <div class="category-form-container">
         <div class="form-header">
@@ -36,6 +36,7 @@
                     <div class="form-actions">
                         <div class="form-actions-group">
                             <div class="form-actions-left">
+
                                 <x-button type="submit" variant="success">
                                     <i class=""></i>
                                     Save

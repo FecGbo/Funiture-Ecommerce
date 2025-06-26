@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Category List')
-<link rel="stylesheet" href="/css/list_products.css">
+<link rel="stylesheet" href="/css/product/list_products.css">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @php
     $newProductId = session('new_product_id');

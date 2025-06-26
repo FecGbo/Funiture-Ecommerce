@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Category List')
-<link rel="stylesheet" href="/css/list_categories.css">
+<link rel="stylesheet" href="/css/category/list_categories.css">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @php
     $newCategoryId = session('new_category_id');

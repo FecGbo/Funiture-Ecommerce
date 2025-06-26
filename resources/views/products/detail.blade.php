@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title', 'Product Details')
-<link rel="stylesheet" href="/css/detail_products.css">
+<link rel="stylesheet" href="/css/product/detail_products.css">
 @section('content')
     <div class="product-form-container">
         <div class="form-header">

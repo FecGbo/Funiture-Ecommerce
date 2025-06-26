@@ -5,17 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - @yield('title', 'Furniture E-Commerce')</title>
-    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 
 <body class="admin-layout">
-
     <aside class="admin-sidebar">
         <div class="admin-logo">
-            <img src="/images/logo.png" alt="" width="50" height="50">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" width="50" height="50">
         </div>
         <nav>
             <ul>
@@ -26,28 +24,24 @@
                         <span class="sidebar-text">Dashboard</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
+                    <a href=" " class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="sidebar-text">Orders</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
+                    <a href=" " class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span class="sidebar-text">Customers</span>
                     </a>
                 </li>
-
                 <li>
-                    <a href="#" class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+                    <a href=" " class="{{ request()->is('admin/users*') ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text">Users</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="{{ route('category.list') }}"
                         class="{{ request()->routeIs('category.list') ? 'active' : '' }}">
@@ -55,7 +49,6 @@
                         <span class="sidebar-text">Categories</span>
                     </a>
                 </li>
-
                 <li>
                     <a href="{{ route('product.list') }}"
                         class="{{ request()->routeIs('product.list') ? 'active' : '' }}">
@@ -63,77 +56,74 @@
                         <span class="sidebar-text">Products</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
         <div class="admin-card">
             <div class="admin-card-profile">
-                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="admin">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin">
                 <p>Furino Owner</p>
-                <p>Mr.Kelvin</p>
-
+                <p>Mr. Kelvin</p>
             </div>
-
-
         </div>
     </aside>
     <main class="admin-main">
         <header class="admin-header">
-            <button id="admin-hamburger" class="admin-hamburger" aria-label="Toggle sidebar">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <h2>@yield('header', 'Dashboard')</h2>
+            <div class="admin-header-left">
+                <button id="admin-hamburger" class="admin-hamburger" aria-label="Toggle sidebar" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2>@yield('header', 'Dashboard')</h2>
+            </div>
             <div class="admin-header-right">
-                <form class="admin-search-bar" action="#" method="get">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                    <input type="text" placeholder="Search here" name="search">
-
+                <form class="admin-search-bar" action="" method="get">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Search here" name="search" aria-label="Search input">
                 </form>
                 <div class="admin-profile">
                     <span>Admin</span>
-                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="admin"
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
                         id="adminAvatar">
-
-                    <ul class="admin-dropdown" id="adminDropdown" style="display:none;">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="#">Logout</a></li>
+                    <ul class="admin-dropdown" id="adminDropdown">
+                        <li><a href=" ">Profile</a></li>
+                        <li><a href=" ">Settings</a></li>
+                        <li><a href=" ">Logout</a></li>
                     </ul>
-
                 </div>
             </div>
         </header>
         <div class="admin-content">
             @yield('content')
         </div>
-
         @stack('scripts')
-
     </main>
 </body>
 
 </html>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const hamburger = document.getElementById('admin-hamburger');
         const sidebar = document.querySelector('.admin-sidebar');
+        const main = document.querySelector('.admin-main');
+        const avatar = document.getElementById('adminAvatar');
+        const dropdown = document.getElementById('adminDropdown');
+
+        // Sidebar toggle
         hamburger.addEventListener('click', function () {
             sidebar.classList.toggle('sidebar-open');
+            main.classList.toggle('sidebar-open');
+            const isOpen = sidebar.classList.contains('sidebar-open');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Profile dropdown
+        avatar.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function () {
+            dropdown.classList.remove('active');
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const avatar = document.getElementById('adminAvatar');
-        const dropdown = document.getElementById('adminDropdown');
-        avatar.addEventListener('click', function (e) {
-            e.stopPropagation();
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
-        document.addEventListener('click', function () {
-            dropdown.style.display = 'none';
-        });
-    });
 </script>

@@ -374,7 +374,7 @@ a.action-btn {
     }
 }
 
-/* Ensure table does not squish on desktop/tablet */
+ 
 @media (min-width: 551px) {
     .categories-section {
         min-width: 800px;

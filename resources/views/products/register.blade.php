@@ -2,7 +2,7 @@
 
 @section('title', 'Category Register')
 
-<link rel="stylesheet" href="/css/add_product.css">
+<link rel="stylesheet" href="/css/product/add_product.css">
 @section('content')
     <div class="category-form-container">
         <div class="form-header">
