@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href=" " class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+                    <a href="{{ route('user.list') }}" class="{{ request()->is('list-users') ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text">Users</span>
                     </a>

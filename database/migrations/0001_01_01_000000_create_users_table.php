@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->longText('password');
-            $table->enum('role', ['user', 'admin'])->default('user');
+            $table->enum('role', ['customer', 'admin'])->default('customer');
             $table->string('phone');
             $table->string('address');
             $table->longText('image');

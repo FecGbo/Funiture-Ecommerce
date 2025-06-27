@@ -307,19 +307,37 @@
 
 /* Tablet (768px–1024px) */
 @media (max-width: 1024px) {
+    .admin-layout {
+        flex-direction: row;
+    }
+
     .admin-sidebar {
+        position: relative;
         width: 0;
+        min-width: 0;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        box-shadow: none;
+        background: var(--sidebar-bg);
+        transition: width 0.3s, padding 0.3s;
+        display: flex;
         padding: 0;
     }
 
     .admin-sidebar.sidebar-open {
         width: var(--sidebar-width);
+        max-width: 320px;
         padding: var(--spacing-lg) var(--spacing-md);
     }
 
     .admin-main {
         margin-left: 0;
+        transition: margin-left 0.3s;
     }
+
+    .admin-sidebar.sidebar-open~.admin-main {}
 
     .admin-hamburger {
         display: flex;
@@ -337,91 +355,5 @@
     .admin-sidebar:not(.sidebar-open) .admin-card-profile {
         display: none;
     }
-
-    .admin-search-bar input {
-        font-size: 0.75rem;
-    }
-
-    .admin-header-right {
-        gap: var(--spacing-sm);
-    }
-
-    .admin-logo {
-        font-size: 1.5rem;
-    }
 }
 
-/* Mobile (≤767px) */
-@media (max-width: 767px) {
-    .admin-sidebar {
-        width: 0;
-        padding: 0;
-    }
-
-    .admin-sidebar.sidebar-open {
-
-        padding: var(--spacing-md);
-        width: 20%;
-    }
-
-    .admin-main {
-        margin-left: 0;
-    }
-
-    .admin-hamburger {
-        display: flex;
-    }
-
-    .admin-header {
-        padding: 0.75rem;
-        height: 60px;
-    }
-
-    .admin-content {
-        padding: 0.75rem;
-    }
-
-    .admin-search-bar {
-        display: none;
-        /* Hide search bar on mobile for simplicity */
-    }
-
-    .admin-header-right {
-        gap: var(--spacing-sm);
-    }
-
-    .admin-profile img {
-        width: 1.5rem;
-        height: 1.5rem;
-    }
-
-    .admin-dropdown {
-        min-width: 120px;
-        top: 2rem;
-    }
-
-    .admin-logo {
-        font-size: 1.25rem;
-    }
-
-    .admin-sidebar nav ul li a {
-        font-size: 0.875rem;
-    }
-
-    .admin-card {
-        display: none;
-        padding: 15px;
-        height: 150px;
-    }
-
-    .admin-card img {
-        width: 40px;
-        height: 40px;
-    }
-
-    span.sidebar-text {
-        display: none;
-    }
-
-
-}

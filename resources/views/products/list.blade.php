@@ -102,8 +102,8 @@
             <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}" data-product-id="{{ $product->id }}">
 
                 <!-- <td class="table-cell" data-label="Select">
-                                                                                                                                                                                                                    <input type="checkbox" class="checkbox">
-                                                                                                                                                                                                                </td> -->
+                                                                                                                                                                                                                                            <input type="checkbox" class="checkbox">
+                                                                                                                                                                                                                                        </td> -->
 
                 <td class="table-cell" data-label="Category">
                     <div class="category-info">
@@ -177,6 +177,7 @@
                 } else {
                     input = document.createElement('input');
                     input.type = 'text';
+                    input.style.maxWidth = '100px';
 
 
                 }
@@ -234,7 +235,7 @@
             }
             document.querySelectorAll('.product-name.editable').forEach(el => {
                 el.addEventListener('click', function (e) {
-                    e.stopImmediatePropagation();
+                    e.stopPropagation();
                     makeEditable(el, 'input');
                 });
             });

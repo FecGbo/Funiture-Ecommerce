@@ -68,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Right Column - Category, Stock, Image Upload -->
                  
                 <div class="image-upload-section">
@@ -119,6 +120,7 @@
             @csrf
             <input type="hidden" name="_method" value="DELETE">
         </form>
+
         <!-- Delete Confirmation Modal Component -->
         <x-delete-modal :modalId="'deleteModal'" :title="'Confirm Delete'" :message="'Are you sure you want to delete this product?'" :cancelId="'cancelDeleteBtn'" :confirmId="'confirmDeleteBtn'" :formId="'deleteProductForm'" />
     </div>

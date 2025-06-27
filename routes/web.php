@@ -37,3 +37,9 @@ Route::get('/product/{id}/detail', [App\Http\Controllers\ProductController::clas
 Route::post('/product/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/{id}/delete', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.delete');
 
+//add user
+Route::get('/register-user', function () {
+    return view('add_user.register');
+})->name('user.register');
+Route::get('/list-users', [App\Http\Controllers\AddUserController::class, 'listUsers'])->name('user.list');
+Route::post('/register-user', [App\Http\Controllers\AddUserController::class, 'addUser'])->name('user.register');
