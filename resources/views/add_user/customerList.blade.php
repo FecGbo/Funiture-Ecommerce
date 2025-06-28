@@ -12,8 +12,8 @@
         <!-- Header -->
         <div class="categories-header">
             <div>
-                <h2 class="categories-title">Users</h2>
-                <p class="categories-subtitle">Here is a list of all users</p>
+                <h2 class="categories-title">Customers</h2>
+                <p class="categories-subtitle">Here is a list of all customers</p>
             </div>
             <a href="{{ route('user.register') }}" class="add-user-btn"><span class="add-user-full">Add
                     User</span><span class="add-user-short">Add</span></a>
@@ -27,7 +27,7 @@
                     <th class="sortable-header">
                         <!-- <span>CATEGORY</span> -->
                         <div class="sort-btn-group">
-                            USER
+                            Cus
                             <div class="sort-btn-group-tdown">
                                 <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>

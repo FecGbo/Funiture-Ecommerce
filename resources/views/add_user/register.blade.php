@@ -18,7 +18,7 @@
                 <div class="form-fields">
                     <div class="form-group">
                         <label for="name" class="form-label">User Name</label>
-                        <input type="text" id="name" name="name" class="form-input" value="{{ old('name') }}" required>
+                        <x-input type="text" id="name" name="name" class="form-input" :value="old('name')" required />
                         @error('name')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label for="email" class="form-label">User Email</label>
-                        <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}" required>
+                        <x-input type="email" id="email" name="email" class="form-input" :value="old('email')" required />
                         @error('email')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label for="dob" class="form-label">User DOB</label>
-                        <input type="text" id="dob" name="dob" class="form-input" value="{{ old('dob') }}" required>
+                        <x-input type="text" id="dob" name="dob" class="form-input" :value="old('dob')" required />
                         @error('dob')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="phone" class="form-label">User Phone</label>
-                        <input type="text" id="phone" name="phone" class="form-input" value="{{ old('phone') }}" required>
+                        <x-input type="text" id="phone" name="phone" class="form-input" :value="old('phone')" required />
                         @error('phone')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -81,8 +81,8 @@
 
                     <div class="form-group">
                         <label for="address" class="form-label">User Address</label>
-                        <input type="text" id="address" name="address" class="form-input" value="{{ old('address') }}"
-                            required>
+                        <x-input type="text" id="address" name="address" class="form-input" :value="old('address')"
+                            required />
                         @error('address')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -90,8 +90,8 @@
 
                     <div class="form-group">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password" class="form-input"
-                            value="{{ old('password') }}" required>
+                        <x-input type="password" id="password" name="password" class="form-input"
+                            :value="old('password')" required />
                         @error('password')
                             <span class="error-message">{{ $message }}</span>
                         @enderror

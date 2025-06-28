@@ -128,6 +128,8 @@
         const categoryImages = @json($categories->pluck('image', 'id'));
         const storageBase = "{{ asset('storage') }}";
         const defaultImg = "/images/logo.png";
+
+        
         document.addEventListener('DOMContentLoaded', function () {
             const categorySelect = document.getElementById('category_id');
             const previewImg = document.getElementById('previewImg');

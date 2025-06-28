@@ -43,3 +43,13 @@ Route::get('/register-user', function () {
 })->name('user.register');
 Route::get('/list-users', [App\Http\Controllers\AddUserController::class, 'listUsers'])->name('user.list');
 Route::post('/register-user', [App\Http\Controllers\AddUserController::class, 'addUser'])->name('user.register');
+Route::post('/users/{id}/inline-update', [App\Http\Controllers\AddUserController::class, 'inlineUpdate']);
+Route::get('/user/{id}/detail', [App\Http\Controllers\AddUserController::class, 'detail'])->name('user.detail');
+Route::post('/user/{id}/update', [App\Http\Controllers\AddUserController::class, 'update'])->name('user.update');
+
+Route::delete('/user/{id}/delete', [App\Http\Controllers\AddUserController::class, 'delete'])->name('user.delete');
+
+
+Route::get('/list-customers', function () {
+    return view('add_user.customerList');
+})->name('customer.list');

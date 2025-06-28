@@ -91,4 +91,6 @@ class CategoryController extends Controller
         return redirect()->route('category.list')->with('success', 'Category deleted successfully!');
     }
 
+  
+
 }
