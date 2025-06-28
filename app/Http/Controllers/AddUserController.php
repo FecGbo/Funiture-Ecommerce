@@ -117,7 +117,7 @@ class AddUserController extends Controller
     {
         $customers = DB::table('users')
             ->where('role', 'customer')
-            ->get();
+            ->paginate(6); // Use paginate instead of get
 
         return view('add_user.customerList', compact('customers'));
     }

@@ -31,7 +31,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href=" " class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
+                    <a href="{{ route('customer.list') }}"
+                        class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span class="sidebar-text">Customers</span>
                     </a>

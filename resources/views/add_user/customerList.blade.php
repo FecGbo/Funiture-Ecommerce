@@ -27,7 +27,7 @@
                     <th class="sortable-header">
                         <!-- <span>CATEGORY</span> -->
                         <div class="sort-btn-group">
-                            Cus
+                            CUSTOMER
                             <div class="sort-btn-group-tdown">
                                 <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
                                     <i class="fa fa-caret-up" aria-hidden="true"></i>
@@ -105,7 +105,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @foreach($customers as $user)
                     <tr class="table-row" data-user-id="{{ $user->id }}">
 
                         <td class="table-cell" data-label="Category">
@@ -149,7 +149,7 @@
             </tbody>
         </table>
         <div class="pagination-wrapper">
-            {{ $users->links() }}
+            {{ $customers->links() }}
         </div>
     </div>
 @endsection

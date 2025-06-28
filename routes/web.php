@@ -50,6 +50,4 @@ Route::post('/user/{id}/update', [App\Http\Controllers\AddUserController::class,
 Route::delete('/user/{id}/delete', [App\Http\Controllers\AddUserController::class, 'delete'])->name('user.delete');
 
 
-Route::get('/list-customers', function () {
-    return view('add_user.customerList');
-})->name('customer.list');
+Route::get('/list-customers', [App\Http\Controllers\AddUserController::class, 'getCustomer'])->name('customer.list');
