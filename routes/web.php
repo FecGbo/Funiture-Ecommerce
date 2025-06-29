@@ -3,24 +3,56 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //Search
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
 
 
 
-Route::get('/admin-dashboard', function () {
-    return view('layouts.admin');
-})->name('admin.dashboard');
 
+
+// Auth
+Route::get('/login', function () {
+    return view('auth.loginForm');
+})->name('login');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/login')->with('success', 'Logged out successfully');
+})->name('logout');
+
+Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])->name('auth.login');
+
+
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin-only routes
+
+    Route::get('/admin-dashboard', function () {
+        return view('layouts.admin');
+    })->name('admin.dashboard');
+
+
+});
+
+Route::middleware(['auth', 'customer'])->group(function () {
+
+    Route::get('/customer-dashboard', function () {
+        return view('welcome');
+    })->name('welcome');
+
+});
+
+// categories
 
 Route::get('/register-category', function () {
     return view('categories.register');
 })->name('category.register');
- 
-// categories
+
 Route::get('/list-categories', [CategoryController::class, 'listCategories'])->name('category.list');
 
 Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('category.add');
@@ -28,7 +60,7 @@ Route::post('/categories/{id}/inline-update', [CategoryController::class, 'inlin
 Route::get('/category/{id}/detail', [CategoryController::class, 'detail'])->name('category.detail');
 Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
-Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
+
 
 
 // products
