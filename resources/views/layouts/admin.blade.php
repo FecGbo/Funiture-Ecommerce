@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body class="admin-layout">
@@ -78,7 +79,8 @@
             <div class="admin-header-right">
                 <form class="admin-search-bar" action="" method="get">
                     <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-                    <input type="text" placeholder="Search here" name="search" aria-label="Search input">
+                    <input type="text" placeholder="Search here" name="search" aria-label="Search input"
+                        id="searchInput">
                 </form>
                 <div class="admin-profile">
                     <span>Admin</span>
@@ -127,4 +129,7 @@
         });
     });
 
+
+    //Search
+   
 </script>

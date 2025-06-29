@@ -97,13 +97,14 @@
     <th style="width: 80px;">ACTION</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="all-data" id="all-data">
         @foreach($products as $product)
             <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}" data-product-id="{{ $product->id }}">
 
                 <!-- <td class="table-cell" data-label="Select">
-                                                                                                                                                                                                                                            <input type="checkbox" class="checkbox">
-                                                                                                                                                                                                                                        </td> -->
+
+                                                                                                                                                                                                                                                                                    <input type="checkbox" class="checkbox">
+                                                                                                                                                                                                                                                                                </td> -->
 
                 <td class="table-cell" data-label="Category">
                     <div class="category-info">
@@ -154,7 +155,9 @@
                 </td>
             </tr>
         @endforeach
+
     </tbody>
+    <tbody id="Content" class="search-data"></tbody>
     </table>
     <div class="pagination-wrapper">
         {{ $products->links() }}
@@ -278,5 +281,34 @@
                 });
             });
         });
+
+
+
+        //search
+
+        $('#searchInput').on('input', function () {
+            $value = $(this).val();
+
+            if ($value) {
+                $('#all-data').css('display', 'none');
+                $('#Content').css('display', 'table-row-group');
+            } else {
+                $('#all-data').css('display', 'table-row-group');
+                $('#Content').css('display', 'none');
+            }
+            $.ajax({
+                type: 'GET',
+                url: '{{ URL::to('search') }}',
+                data: {
+                    'search': $value,
+                    'type': 'products'
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#Content').html(data.html);
+                },
+            });
+        })
+
     </script>
 @endpush

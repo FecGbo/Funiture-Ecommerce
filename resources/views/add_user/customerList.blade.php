@@ -104,7 +104,7 @@
                     <th style="width: 80px;">ACTION</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="all-data">
                 @foreach($customers as $user)
                     <tr class="table-row" data-user-id="{{ $user->id }}">
 
@@ -147,6 +147,7 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tbody class="search-data" id="Content"></tbody>
         </table>
         <div class="pagination-wrapper">
             {{ $customers->links() }}
@@ -259,5 +260,33 @@
                 });
             });
         });
+
+
+
+
+
+        $('#searchInput').on('input', function () {
+            $value = $(this).val();
+
+            if ($value) {
+                $('#all-data').css('display', 'none');
+                $('#Content').css('display', 'table-row-group');
+            } else {
+                $('#all-data').css('display', 'table-row-group');
+                $('#Content').css('display', 'none');
+            }
+            $.ajax({
+                type: 'GET',
+                url: '{{ URL::to('search') }}',
+                data: {
+                    'search': $value,
+                    'type': 'customers'
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#Content').html(data.html);
+                },
+            });
+        })
     </script>
 @endpush

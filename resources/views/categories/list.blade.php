@@ -56,7 +56,7 @@
                     <th style="width: 80px;">ACTION</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="all-data" id="all-data">
                 @foreach($categories as $category)
                     <tr class="table-row" data-category-id="{{ $category->id }}">
 
@@ -88,7 +88,11 @@
                         </td>
                     </tr>
                 @endforeach
+
+
+
             </tbody>
+            <tbody id="Content" class="search-data"></tbody>
         </table>
         <div class="pagination-wrapper">
             {{ $categories->links() }}
@@ -183,5 +187,33 @@
                 });
             });
         });
+
+        //search
+
+
+        $('#searchInput').on('input', function () {
+            $value = $(this).val();
+
+            if ($value) {
+                $('#all-data').css('display', 'none');
+                $('#Content').css('display', 'table-row-group');
+            } else {
+                $('#all-data').css('display', 'table-row-group');
+                $('#Content').css('display', 'none');
+            }
+            $.ajax({
+                type: 'GET',
+                url: '{{ URL::to('search') }}',
+                data: {
+                    'search': $value,
+                    'type': 'categories'
+                },
+                success: function (data) {
+                    console.log(data);
+                    $('#Content').html(data.html);
+                },
+            });
+        })
+
     </script>
 @endpush
