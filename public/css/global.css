@@ -1,3 +1,6 @@
+@import url('reset.css');
+@import url('base.css');
+
 /* Admin Layout Styles */
 :root {
     --sidebar-width: 250px;

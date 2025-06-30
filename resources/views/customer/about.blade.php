@@ -3,6 +3,4 @@
 
 @section('title', 'Contact')
 @section('content')
-    <h1>cu index</h1>
-
 @endsection
