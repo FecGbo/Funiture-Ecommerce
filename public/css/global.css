@@ -27,6 +27,14 @@
     --button-danger-icon-color: #dc3545;
 }
 
+button.sort-btn {
+    height: 9px;
+}
+
+.sort-btn-group-tdown {
+
+    padding: 1px;
+}
 
 .admin-layout {
     display: flex;
