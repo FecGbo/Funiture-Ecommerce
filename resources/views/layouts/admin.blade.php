@@ -33,27 +33,28 @@
                 </li>
                 <li>
                     <a href="{{ route('customer.list') }}"
-                        class="{{ request()->is('admin/customers*') ? 'active' : '' }}">
+                        class="{{ request()->routeIs('customer.list') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span class="sidebar-text">Customers</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('user.list') }}" class="{{ request()->is('list-users') ? 'active' : '' }}">
+                    <a href="{{ route('user.list') }}"
+                        class="{{ request()->routeIs('user.list', 'user.register', 'user.detail') ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text">Users</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('category.list') }}"
-                        class="{{ request()->routeIs('category.list') ? 'active' : '' }}">
+                        class="{{ request()->routeIs('category.list', 'category.register', 'category.detail') ? 'active' : '' }}">
                         <i class="fas fa-list"></i>
                         <span class="sidebar-text">Categories</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('product.list') }}"
-                        class="{{ request()->routeIs('product.list') ? 'active' : '' }}">
+                        class="{{ request()->routeIs('product.list', 'product.register', 'product.detail') ? 'active' : '' }}">
                         <i class="fas fa-box"></i>
                         <span class="sidebar-text">Products</span>
                     </a>
