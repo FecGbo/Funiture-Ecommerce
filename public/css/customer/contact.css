@@ -178,13 +178,14 @@
     }
 
     .row {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        align-items: center;
         gap: 40px;
     }
 
     .form,
     .info {
-        max-width: 100%;
+        width: 100%;
     }
 
     .title h2 {

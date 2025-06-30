@@ -418,10 +418,13 @@ button.sort-btn {
 /* Mobile (≤767px) */
 @media (max-width: 767px) {
     .admin-sidebar {
-        width: 0;
-        padding: 0;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease, width 0.3s ease, padding 0.3s ease;
+        position: relative;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        transform: none;
+        transition: width 0.3s ease, padding 0.3s ease;
+        z-index: 1000;
     }
 
     .admin-sidebar.sidebar-open {
@@ -509,7 +512,7 @@ button.sort-btn {
 /* Fix for very small screens */
 @media (max-width: 480px) {
     .admin-sidebar.sidebar-open {
-        width: 250px;
+        width: 4.3rem;
     }
 
     .admin-header-left h2 {
@@ -518,5 +521,13 @@ button.sort-btn {
 
     .admin-content {
         padding: 0.5rem;
+    }
+
+    span.sidebar-text {
+        display: none;
+    }
+
+    .admin-card {
+        display: none;
     }
 }

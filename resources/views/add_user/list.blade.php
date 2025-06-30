@@ -20,135 +20,137 @@
         </div>
 
         <!-- Table -->
-        <table class="categories-table">
-            <thead class="categories-thead">
-                <tr>
-                    <!-- <th style="width: 40px;"></th> -->
-                    <th class="sortable-header">
-                        <!-- <span>CATEGORY</span> -->
-                        <div class="sort-btn-group">
-                            USER
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+        <div class="table-container">
+            <table class="categories-table">
+                <thead class="categories-thead">
+                    <tr>
+                        <!-- <th style="width: 40px;"></th> -->
+                        <th class="sortable-header">
+                            <!-- <span>CATEGORY</span> -->
+                            <div class="sort-btn-group">
+                                USER
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+
                             </div>
-
-                        </div>
-                    </th>
-                    <th class="sortable-header">
-                        <!--  -->
-                        <div class="sort-btn-group">
-                            <span>EMAIL</span>
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+                        </th>
+                        <th class="sortable-header">
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>EMAIL</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th class="sortable-header">
-                        <!--  -->
-                        <div class="sort-btn-group">
-                            <span>ROLE</span>
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+                        </th>
+                        <th class="sortable-header">
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>ROLE</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </th>
+                        </th>
 
-                    <th class="sortable-header">
-                        <!--  -->
-                        <div class="sort-btn-group">
-                            <span>ADDRESS</span>
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+                        <th class="sortable-header">
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>ADDRESS</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </th>
+                        </th>
 
-                    <th class="sortable-header">
-                        <!--  -->
-                        <div class="sort-btn-group">
-                            <span>PHONE</span>
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+                        <th class="sortable-header">
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>PHONE</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </th>
+                        </th>
 
 
 
 
-                    <th style="width: 80px;">ACTION</th>
-                </tr>
-            </thead>
-            <tbody id="all-data">
-                @foreach($users as $user)
-                    <tr class="table-row" data-user-id="{{ $user->id }}">
-
-                        <td class="table-cell" data-label="Category">
-                            <div class="user-info">
-                                @if($user->image)
-                                    <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" class="user-img">
-                                @else
-                                    <div class="user-icon sofa">{{ strtoupper(substr($user->name, 0, 2)) }}</div>
-                                @endif
-                                <span class="user-name editable" data-field="name">
-                                    {{ $user->name }}
-                                    @if(isset($newUserId) && $user->id == $newUserId)
-                                        <span class="new-badge">new</span>
-                                    @endif
-                                </span>
-                            </div>
-                        </td>
-
-                        <td class="table-cell" data-label="Email">
-                            <p class="user-email editable" data-field="email">{{ $user->email }}</p>
-                        </td>
-                        <td class="table-cell" data-label="Role">
-                            <p class="user-role editable" data-field="role">{{ $user->role }}</p>
-                        </td>
-                        <td class="table-cell" data-label="Address">
-                            <p class="user-address editable" data-field="address">{{ $user->address }}</p>
-                        </td>
-                        <td class="table-cell" data-label="Phone">
-                            <p class="user-phone editable" data-field="phone">{{ $user->phone }}</p>
-                        </td>
-
-                        <td class="table-cell" data-label="Action">
-                            <div class="action-menu">
-                                <a href="{{ route('user.detail', $user->id)}}" class="action-btn" title="View Details">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </td>
+                        <th style="width: 80px;">ACTION</th>
                     </tr>
-                @endforeach
-            </tbody>
-            <tbody class="search-data" id="Content"></tbody>
-        </table>
+                </thead>
+                <tbody id="all-data">
+                    @foreach($users as $user)
+                        <tr class="table-row" data-user-id="{{ $user->id }}">
+
+                            <td class="table-cell" data-label="Category">
+                                <div class="user-info">
+                                    @if($user->image)
+                                        <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" class="user-img">
+                                    @else
+                                        <div class="user-icon sofa">{{ strtoupper(substr($user->name, 0, 2)) }}</div>
+                                    @endif
+                                    <span class="user-name editable" data-field="name">
+                                        {{ $user->name }}
+                                        @if(isset($newUserId) && $user->id == $newUserId)
+                                            <span class="new-badge">new</span>
+                                        @endif
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td class="table-cell" data-label="Email">
+                                <p class="user-email editable" data-field="email">{{ $user->email }}</p>
+                            </td>
+                            <td class="table-cell" data-label="Role">
+                                <p class="user-role editable" data-field="role">{{ $user->role }}</p>
+                            </td>
+                            <td class="table-cell" data-label="Address">
+                                <p class="user-address editable" data-field="address">{{ $user->address }}</p>
+                            </td>
+                            <td class="table-cell" data-label="Phone">
+                                <p class="user-phone editable" data-field="phone">{{ $user->phone }}</p>
+                            </td>
+
+                            <td class="table-cell" data-label="Action">
+                                <div class="action-menu">
+                                    <a href="{{ route('user.detail', $user->id)}}" class="action-btn" title="View Details">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tbody class="search-data" id="Content"></tbody>
+            </table>
+        </div>
         <div class="pagination-wrapper">
             {{ $users->links() }}
         </div>

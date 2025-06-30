@@ -20,80 +20,85 @@
         </div>
 
         <!-- Table -->
-        <table class="categories-table">
-            <thead class="categories-thead">
-                <tr>
-                    <!-- <th style="width: 40px;"></th> -->
-                    <th class="sortable-header">
-                        <!-- <span>CATEGORY</span> -->
-                        <div class="sort-btn-group">
-                            CATEGORY
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
-                            </div>
+        <div class="table-container">
 
-                        </div>
-                    </th>
-                    <th class="sortable-header">
-                        <!--  -->
-                        <div class="sort-btn-group">
-                            <span>DESCRIPTION</span>
-                            <div class="sort-btn-group-tdown">
-                                <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th style="width: 80px;">ACTION</th>
-                </tr>
-            </thead>
-            <tbody class="all-data" id="all-data">
-                @foreach($categories as $category)
-                    <tr class="table-row" data-category-id="{{ $category->id }}">
+            <table class="categories-table">
+                <thead class="categories-thead">
+                    <tr>
+                        <!-- <th style="width: 40px;"></th> -->
+                        <th class="sortable-header">
+                            <!-- <span>CATEGORY</span> -->
+                            <div class="sort-btn-group">
+                                CATEGORY
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
 
-                        <td class="table-cell" data-label="Category">
-                            <div class="category-info">
-                                @if($category->image)
-                                    <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
-                                        class="category-img">
-                                @else
-                                    <div class="category-icon sofa">{{ strtoupper(substr($category->name, 0, 2)) }}</div>
-                                @endif
-                                <span class="category-name editable" data-field="name">
-                                    {{ $category->name }}
-                                    @if(isset($newCategoryId) && $category->id == $newCategoryId)
-                                        <span class="new-badge">new</span>
-                                    @endif
-                                </span>
                             </div>
-                        </td>
-                        <td class="table-cell" data-label="Description">
-                            <p class="category-description editable" data-field="description">{{ $category->description }}</p>
-                        </td>
-                        <td class="table-cell" data-label="Action">
-                            <div class="action-menu">
-                                <a href="{{ route('category.detail', $category->id) }}" class="action-btn" title="View Details">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
+                        </th>
+                        <th class="sortable-header">
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>DESCRIPTION</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="description" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="description" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </td>
+                        </th>
+                        <th style="width: 80px;">ACTION</th>
                     </tr>
-                @endforeach
+                </thead>
+                <tbody class="all-data" id="all-data">
+                    @foreach($categories as $category)
+                        <tr class="table-row" data-category-id="{{ $category->id }}">
+
+                            <td class="table-cell" data-label="Category">
+                                <div class="category-info">
+                                    @if($category->image)
+                                        <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                            class="category-img">
+                                    @else
+                                        <div class="category-icon sofa">{{ strtoupper(substr($category->name, 0, 2)) }}</div>
+                                    @endif
+                                    <span class="category-name editable" data-field="name">
+                                        {{ $category->name }}
+                                        @if(isset($newCategoryId) && $category->id == $newCategoryId)
+                                            <span class="new-badge">new</span>
+                                        @endif
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="table-cell" data-label="Description">
+                                <p class="category-description editable" data-field="description">{{ $category->description }}
+                                </p>
+                            </td>
+                            <td class="table-cell" data-label="Action">
+                                <div class="action-menu">
+                                    <a href="{{ route('category.detail', $category->id) }}" class="action-btn"
+                                        title="View Details">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
 
 
 
-            </tbody>
-            <tbody id="Content" class="search-data"></tbody>
-        </table>
+                </tbody>
+                <tbody id="Content" class="search-data"></tbody>
+            </table>
+        </div>
         <div class="pagination-wrapper">
             {{ $categories->links() }}
         </div>

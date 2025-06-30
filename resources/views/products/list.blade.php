@@ -1,12 +1,11 @@
 @extends('layouts.admin')
-
-@section('title', 'Category List')
 <link rel="stylesheet" href="/css/product/list_products.css">
+@section('title', 'Category List')
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @php
     $newProductId = session('new_product_id');
 @endphp
-
 @section('content')
     <div class="categories-section">
         <!-- Header -->
@@ -19,149 +18,132 @@
                     Product</span><span class="add-category-short">Add</span></a>
         </div>
 
-        <!-- Table -->
-        <table class="categories-table">
-            <thead class="categories-thead">
-                <tr>
-                    <th class="sortable-header">
-                        <span>CATEGORY</span>
-                    </th>
-                    <th class="sortable-header">
-
-
-                        <div class="sort-btn-group">
-                            <span>PRODUCT</span>
-                            <div class="sort-btn-group-tdown">
-
-                                <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
-                                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                                </button>
-                                <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
-                                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </button>
+        <!-- Table with Scrollable Container -->
+        <div class="table-container">
+            <table class="categories-table">
+                <thead class="categories-thead">
+                    <tr>
+                        <th class="sortable-header"><span>CATEGORY</span></th>
+                        <th class="sortable-header">
+                            <div class="sort-btn-group">
+                                <span>PRODUCT</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-    </div>
-
-
-    </th>
-    <th class="sortable-header">
-
-
-        <div class="sort-btn-group">
-            <span>PURCHASE PRICE</span>
-            <div class="sort-btn-group-tdown">
-                <button class="sort-btn" data-sort="purchase_price" data-dir="asc" aria-label="Sort Low-High">
-                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                </button>
-                <button class="sort-btn" data-sort="purchase_price" data-dir="desc" aria-label="Sort High-Low">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        </div>
-    </th>
-    <th class="sortable-header">
-
-
-        <div class="sort-btn-group">
-            <span>SALE PRICE</span>
-            <div class="sort-btn-group-tdown">
-
-                <button class="sort-btn" data-sort="sale_price" data-dir="asc" aria-label="Sort Low-High">
-                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                </button>
-                <button class="sort-btn" data-sort="sale_price" data-dir="desc" aria-label="Sort High-Low">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        </div>
-    </th>
-    <th class="sortable-header">
-
-        <div class="sort-btn-group">
-            <span>STOCK</span>
-            <div class="sort-btn-group-tdown">
-                <button class="sort-btn" data-sort="stock" data-dir="asc" aria-label="Sort Low-High">
-                    <i class="fa fa-caret-up" aria-hidden="true"></i>
-                </button>
-                <button class="sort-btn" data-sort="stock" data-dir="desc" aria-label="Sort High-Low">
-                    <i class="fa fa-caret-down" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-        </div>
-    </th>
-
-    <th style="width: 80px;">ACTION</th>
-    </tr>
-    </thead>
-    <tbody class="all-data" id="all-data">
-        @foreach($products as $product)
-            <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}" data-product-id="{{ $product->id }}">
-
-                <!-- <td class="table-cell" data-label="Select">
-
-                                                                                                                                                                                                                                                                                    <input type="checkbox" class="checkbox">
-                                                                                                                                                                                                                                                                                </td> -->
-
-                <td class="table-cell" data-label="Category">
-                    <div class="category-info">
-                        @if($product->category && $product->category->image)
-                            <img src="{{ asset('storage/' . $product->category->image) }}" alt="{{ $product->category->name }}"
-                                class="category-img">
-                        @else
-                            <div class="category-icon sofa">{{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}
+                        </th>
+                        <th class="sortable-header">
+                            <div class="sort-btn-group">
+                                <span>PURCHASE PRICE</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="purchase_price" data-dir="asc"
+                                        aria-label="Sort Low-High">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="purchase_price" data-dir="desc"
+                                        aria-label="Sort High-Low">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        @endif
-                        <span class="category-name">
-                            {{ $product->category->name ?? 'No Category' }}
-                        </span>
-                    </div>
-                </td>
-
-                <td class="table-cell" data-label="Product">
-                    <div class="category-info">
-                        @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="category-img">
-                        @else
-                            <div class="category-icon sofa">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
-                        @endif
-                        <span class="product-name editable" data-field="name">
-                            {{ $product->name }}
-                            @if(isset($newProductId) && $product->id == $newProductId)
-                                <span class="new-badge">new</span>
-                            @endif
-                        </span>
-                    </div>
-                </td>
-                <td class="table-cell" data-label="Purchase Price">
-                    <span class="purchase-price editable" data-field="purchase_price">{{ $product->purchase_price }}
-                    </span>MMK
-                </td>
-                <td class="table-cell" data-label="Sale Price">
-                    <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }} </span>MMK
-                </td>
-                <td class="table-cell" data-label="Stock">
-                    <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
-                </td>
-                <td class="table-cell" data-label="Action">
-                    <div class="action-menu">
-                        <a href="{{ route('product.detail', $product->id) }}" class="action-btn" title="View Details">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        @endforeach
-
-    </tbody>
-    <tbody id="Content" class="search-data"></tbody>
-    </table>
-    <div class="pagination-wrapper">
-        {{ $products->links() }}
-    </div>
+                        </th>
+                        <th class="sortable-header">
+                            <div class="sort-btn-group">
+                                <span>SALE PRICE</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="sale_price" data-dir="asc"
+                                        aria-label="Sort Low-High">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="sale_price" data-dir="desc"
+                                        aria-label="Sort High-Low">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="sortable-header">
+                            <div class="sort-btn-group">
+                                <span>STOCK</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="stock" data-dir="asc" aria-label="Sort Low-High">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="stock" data-dir="desc" aria-label="Sort High-Low">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th style="width: 80px;">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody class="all-data" id="all-data">
+                    @foreach($products as $product)
+                        <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}"
+                            data-product-id="{{ $product->id }}">
+                            <td class="table-cell" data-label="Category">
+                                <div class="category-info">
+                                    @if($product->category && $product->category->image)
+                                        <img src="{{ asset('storage/' . $product->category->image) }}"
+                                            alt="{{ $product->category->name }}" class="category-img">
+                                    @else
+                                        <div class="category-icon sofa">
+                                            {{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}</div>
+                                    @endif
+                                    <span class="category-name">
+                                        {{ $product->category->name ?? 'No Category' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="table-cell" data-label="Product">
+                                <div class="category-info">
+                                    @if($product->image)
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                            class="category-img">
+                                    @else
+                                        <div class="category-icon sofa">{{ strtoupper(substr($product->name, 0, 2)) }}</div>
+                                    @endif
+                                    <span class="product-name editable" data-field="name">
+                                        {{ $product->name }}
+                                        @if(isset($newProductId) && $product->id == $newProductId)
+                                            <span class="new-badge">new</span>
+                                        @endif
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="table-cell" data-label="Purchase Price">
+                                <span class="purchase-price editable"
+                                    data-field="purchase_price">{{ $product->purchase_price }}</span>MMK
+                            </td>
+                            <td class="table-cell" data-label="Sale Price">
+                                <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }}</span>MMK
+                            </td>
+                            <td class="table-cell" data-label="Stock">
+                                <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
+                            </td>
+                            <td class="table-cell" data-label="Action">
+                                <div class="action-menu">
+                                    <a href="{{ route('product.detail', $product->id) }}" class="action-btn"
+                                        title="View Details">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+                <tbody id="Content" class="search-data"></tbody>
+            </table>
+        </div>
+        <div class="pagination-wrapper">
+            {{ $products->links() }}
+        </div>
     </div>
 @endsection
 
