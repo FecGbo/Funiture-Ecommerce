@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href=" " class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
+                    <a href="#" class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="sidebar-text">Orders</span>
                     </a>
@@ -68,6 +68,7 @@
             </div>
         </div>
     </aside>
+
     <main class="admin-main">
         <header class="admin-header">
             <div class="admin-header-left">
@@ -87,8 +88,8 @@
                     <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
                         id="adminAvatar">
                     <ul class="admin-dropdown" id="adminDropdown">
-                        <li><a href=" ">Profile</a></li>
-                        <li><a href=" ">Settings</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     </ul>
                 </div>
@@ -99,37 +100,83 @@
         </div>
         @stack('scripts')
     </main>
+
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('admin-hamburger');
+            const sidebar = document.querySelector('.admin-sidebar');
+            const main = document.querySelector('.admin-main');
+            const avatar = document.getElementById('adminAvatar');
+            const dropdown = document.getElementById('adminDropdown');
+            const overlay = document.getElementById('sidebarOverlay');
+            const body = document.body;
+
+            // Sidebar toggle
+            hamburger.addEventListener('click', function () {
+                const isOpen = sidebar.classList.contains('sidebar-open');
+
+                if (isOpen) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            // Overlay click to close sidebar
+            overlay.addEventListener('click', function () {
+                closeSidebar();
+            });
+
+            function openSidebar() {
+                sidebar.classList.add('sidebar-open');
+                overlay.classList.add('active');
+                hamburger.setAttribute('aria-expanded', 'true');
+
+                // Prevent body scroll on mobile when sidebar is open
+                if (window.innerWidth <= 767) {
+                    body.classList.add('no-scroll');
+                }
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                body.classList.remove('no-scroll');
+            }
+
+            // Profile dropdown
+            avatar.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 767) {
+                    body.classList.remove('no-scroll');
+                    overlay.classList.remove('active');
+                }
+            });
+
+            // Close sidebar on escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sidebar.classList.contains('sidebar-open')) {
+                    closeSidebar();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const hamburger = document.getElementById('admin-hamburger');
-        const sidebar = document.querySelector('.admin-sidebar');
-        const main = document.querySelector('.admin-main');
-        const avatar = document.getElementById('adminAvatar');
-        const dropdown = document.getElementById('adminDropdown');
-
-        // Sidebar toggle
-        hamburger.addEventListener('click', function () {
-            sidebar.classList.toggle('sidebar-open');
-            main.classList.toggle('sidebar-open');
-            const isOpen = sidebar.classList.contains('sidebar-open');
-            hamburger.setAttribute('aria-expanded', isOpen);
-        });
-
-        // Profile dropdown
-        avatar.addEventListener('click', function (e) {
-            e.stopPropagation();
-            dropdown.classList.toggle('active');
-        });
-
-        document.addEventListener('click', function () {
-            dropdown.classList.remove('active');
-        });
-    });
-
-
-    //Search
-
-</script>
