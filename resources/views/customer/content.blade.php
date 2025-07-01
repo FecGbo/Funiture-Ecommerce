@@ -41,8 +41,8 @@
                         </div>
                         <div class="text">
                             <h4>Address</h4>
-                            <p>236 5th SE Avenue,<br>
-                                Yangon NY10000,<br>
+                            <p>236 5th SE AAAA,<br>
+                                Yangon AA10000,<br>
                                 Myanmar</p>
                         </div>
                     </div>
@@ -57,8 +57,8 @@
                         </div>
                         <div class="text">
                             <h4>Phone</h4>
-                            <p>Mobile: +(95) 9451333330<br>
-                                Hotline: +(95) 9451333330</p>
+                            <p>Mobile: +(95) 911111111<br>
+                                Hotline: +(95) 922222222</p>
                         </div>
                     </div>
 

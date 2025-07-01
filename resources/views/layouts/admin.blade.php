@@ -112,7 +112,7 @@
             const main = document.querySelector('.admin-main');
             const avatar = document.getElementById('adminAvatar');
             const dropdown = document.getElementById('adminDropdown');
-            const overlay = document.getElementById('sidebarOverlay');
+            // const overlay = document.getElementById('sidebarOverlay');
             const body = document.body;
 
             // Sidebar toggle
@@ -127,13 +127,14 @@
             });
 
             // Overlay click to close sidebar
-            overlay.addEventListener('click', function () {
-                closeSidebar();
-            });
+
+            // overlay.addEventListener('click', function () {
+            //     closeSidebar();
+            // });
 
             function openSidebar() {
                 sidebar.classList.add('sidebar-open');
-                overlay.classList.add('active');
+                // overlay.classList.add('active');
                 hamburger.setAttribute('aria-expanded', 'true');
 
                 // Prevent body scroll on mobile when sidebar is open
@@ -144,7 +145,7 @@
 
             function closeSidebar() {
                 sidebar.classList.remove('sidebar-open');
-                overlay.classList.remove('active');
+                // overlay.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 body.classList.remove('no-scroll');
             }
@@ -166,9 +167,10 @@
             window.addEventListener('resize', function () {
                 if (window.innerWidth > 767) {
                     body.classList.remove('no-scroll');
-                    overlay.classList.remove('active');
+                    // overlay.classList.remove('active');
                 }
             });
+
 
             // Close sidebar on escape key
             document.addEventListener('keydown', function (e) {

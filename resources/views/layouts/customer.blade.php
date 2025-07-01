@@ -28,10 +28,13 @@
 
             <ul class="nav-links" id="navLinks">
                 <li><a href="" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                <li><a href="" class="">Product</a></li>
-                <li><a href="{{route('customer.about')}}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a>
+                <li><a href="{{ route('customer.product') }}"
+                        class="{{ request()->routeIs('product') ? 'active' : '' }}">Product</a></li>
+                <li><a href="{{route('customer.about')}}"
+                        class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a>
                 </li>
-                <li><a href="{{ route('customer.content') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+                <li><a href="{{ route('customer.content') }}"
+                        class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
             </ul>
 
             <div class="nav-icons">

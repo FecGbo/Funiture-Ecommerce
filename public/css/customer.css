@@ -2,6 +2,48 @@
 @import url('base.css');
 
 
+:root {
+    --sidebar-width: 250px;
+    --sidebar-icon-only-width: 80px;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --primary-color: #3a7bc8;
+    --sidebar-bg: #fff;
+    --text-dark: #333;
+    --border-color: #e0e0e0;
+    --button-dark-bg: #f3f4f6;
+    --card-bg: #333;
+    --header-height: 84px;
+    --header-height-tablet: 60px;
+    --header-height-mobile: 56px;
+
+    /* Colors for Specific Buttons (centralized) */
+    --button-dark-bg: #212529;
+    --button-dark-hover-bg: #343a40;
+    --button-primary-alt-bg: #ffd700;
+    --button-primary-alt-hover-bg: #daa520;
+    --button-success-bg: #28a745;
+    --button-success-hover-bg: #218838;
+    --button-secondary-bg: #6c757d;
+    --button-secondary-hover-bg: #5a6268;
+    --button-danger-icon-color: #dc3545;
+}
+
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
 
 /* Header Styles */
 .header {
@@ -17,7 +59,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 1rem 2%;
 
     margin: 0 auto;
 }

@@ -102,13 +102,17 @@ Route::get('/list-customers', [App\Http\Controllers\AddUserController::class, 'g
 // customer view
 
 
-    // Route::get('/customer-dashboard', function () {
-    //     return view('welcome');
-    // })->name('welcome');
+// Route::get('/customer-dashboard', function () {
+//     return view('welcome');
+// })->name('welcome');
 
-Route::get('/customer-content',function(){
+Route::get('/customer-content', function () {
     return view('customer.content');
 })->name('customer.content');
-Route::get('/customer-about',function(){
+Route::get('/customer-about', function () {
     return view('customer.about');
 })->name('customer.about');
+
+Route::get('/customer-product', function () {
+    return view('customer.product');
+})->name('customer.product');
