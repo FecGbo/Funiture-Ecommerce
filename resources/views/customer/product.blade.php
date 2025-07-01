@@ -46,7 +46,7 @@
 
             </div>
             <div class="main-content-product">
-                <!-- Sidebar Filters -->
+
                 <div class="product-sidebar">
                     <div class="filter-section">
                         <h3>Searching Information</h3>
@@ -70,13 +70,9 @@
 
                     <div class="filter-section">
                         <h3>Filter</h3>
+                        <h3>Furniture</h3>
                         <ul class="filter-options">
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="furniture">
-                                    Furniture
-                                </label>
-                            </li>
+
                             <li>
                                 <label>
                                     <input type="checkbox" name="category" value="chair">
@@ -105,7 +101,7 @@
                     </div>
                 </div>
 
-                <!-- Product Flex -->
+
                 <div class="product-flex">
                     <div class="products-container">
                         <!-- Product Card 1 -->
@@ -117,10 +113,7 @@
                                 <h3 class="product-name">Syltherine</h3>
                                 <p class="product-description">Stylish cafe chair perfect for modern dining spaces</p>
                                 <div class="product-price">MMK 2,500,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -133,10 +126,7 @@
                                 <h3 class="product-name">Lolito</h3>
                                 <p class="product-description">Luxury big sofa for comfortable living room experience</p>
                                 <div class="product-price">MMK 7,000,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -149,10 +139,7 @@
                                 <h3 class="product-name">Respira</h3>
                                 <p class="product-description">Outdoor bar table and stool set for garden parties</p>
                                 <div class="product-price">MMK 500,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -165,10 +152,7 @@
                                 <h3 class="product-name">Leviosa</h3>
                                 <p class="product-description">Stylish cafe chair perfect for modern dining spaces</p>
                                 <div class="product-price">MMK 2,500,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -181,10 +165,7 @@
                                 <h3 class="product-name">Lolito</h3>
                                 <p class="product-description">Luxury big sofa for comfortable living room experience</p>
                                 <div class="product-price">MMK 7,000,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
 
@@ -197,22 +178,15 @@
                                 <h3 class="product-name">Respira</h3>
                                 <p class="product-description">Outdoor bar table and stool set for garden parties</p>
                                 <div class="product-price">MMK 500,000</div>
-                                <div class="product-actions">
-                                    <button class="btn-add-cart">Add to Cart</button>
-                                    <button class="btn-view">View</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
 
-                    <!-- Pagination -->
-                    <div class="pagination">
-                        <button class="pagination-btn active">1</button>
-                        <button class="pagination-btn">2</button>
-                        <button class="pagination-btn">3</button>
-                        <button class="pagination-btn next">Next</button>
-                    </div>
+
+
                 </div>
+
             </div>
 
 
