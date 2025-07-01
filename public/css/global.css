@@ -498,10 +498,23 @@ button.sort-btn {
         height: 40px;
     }
 
-    /* Show overlay when sidebar is open on mobile */
+
     .admin-sidebar.sidebar-open~.sidebar-overlay {
         display: none !important;
     }
+
+    span.sidebar-text {
+        display: none;
+    }
+
+    .admin-sidebar.sidebar-open {
+        width: 4.3rem;
+    }
+
+    .admin-card {
+        display: none;
+    }
+
 }
 
 /* Additional utility classes */
