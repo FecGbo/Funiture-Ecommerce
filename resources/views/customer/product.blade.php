@@ -1,5 +1,6 @@
 @extends('layouts.customer')
 <link rel="stylesheet" href="{{ asset('css/customer/product.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 @section('title', 'Product')
 @section('content')
@@ -26,7 +27,7 @@
 
                 <div class="title-right">
                     <div class="search-bar">
-                        <input type="text" placeholder="Search for products...">
+                        <input type="text" placeholder="Search for products..." id="searchInput" name="searchInput">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </div>
                     <div class="sort">
@@ -58,11 +59,11 @@
                             <div class="price-inputs">
                                 <div class="price-input">
                                     <label>Min</label>
-                                    <input type="number" placeholder="0" min="0">
+                                    <input type="number" placeholder="0" min="0" id="minPrice">
                                 </div>
                                 <div class="price-input">
                                     <label>Max</label>
-                                    <input type="number" placeholder="1000000" min="0">
+                                    <input type="number" placeholder="1000000" min="0" id="maxPrice">
                                 </div>
                             </div>
                         </div>
@@ -103,97 +104,96 @@
 
 
                 <div class="product-flex">
-                    <div class="products-container">
-                        <!-- Product Card 1 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/syltherine.jpg') }}" alt="Syltherine">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Syltherine</h3>
-                                <p class="product-description">Stylish cafe chair perfect for modern dining spaces</p>
-                                <div class="product-price">MMK 2,500,000</div>
+                    <div class="products-container" class="all-data" id="all-data">
+                        @foreach($products as $product)
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">{{ $product->name }}</h3>
+                                    <p class="product-description">{{ $product->description }}</p>
+                                    <div class="product-price">MMK {{ number_format($product->sale_price, 2) }}</div>
 
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- Product Card 2 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/lolito.jpg') }}" alt="Lolito">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Lolito</h3>
-                                <p class="product-description">Luxury big sofa for comfortable living room experience</p>
-                                <div class="product-price">MMK 7,000,000</div>
-
-                            </div>
-                        </div>
-
-                        <!-- Product Card 3 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/respira.jpg') }}" alt="Respira">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Respira</h3>
-                                <p class="product-description">Outdoor bar table and stool set for garden parties</p>
-                                <div class="product-price">MMK 500,000</div>
-
-                            </div>
-                        </div>
-
-                        <!-- Product Card 4 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/leviosa.jpg') }}" alt="Leviosa">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Leviosa</h3>
-                                <p class="product-description">Stylish cafe chair perfect for modern dining spaces</p>
-                                <div class="product-price">MMK 2,500,000</div>
-
-                            </div>
-                        </div>
-
-                        <!-- Product Card 5 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/lolito2.jpg') }}" alt="Lolito">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Lolito</h3>
-                                <p class="product-description">Luxury big sofa for comfortable living room experience</p>
-                                <div class="product-price">MMK 7,000,000</div>
-
-                            </div>
-                        </div>
-
-                        <!-- Product Card 6 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{ asset('images/products/respira2.jpg') }}" alt="Respira">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">Respira</h3>
-                                <p class="product-description">Outdoor bar table and stool set for garden parties</p>
-                                <div class="product-price">MMK 500,000</div>
-
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
+                    <div id="Content" class="search-data"></div>
+
+
 
 
 
                 </div>
 
+
             </div>
 
 
 
-
+            <div class="pagination">
+                {{ $products->links() }}
+            </div>
 
 
         </div>
     </div>
+
+
+    <script>
+        //search
+        $(document).ready(function () {
+            $('#searchInput, #minPrice, #maxPrice').on('input', function () {
+                var $search = $('#searchInput').val();
+                var $minPrice = $('#minPrice').val();
+                var $maxPrice = $('#maxPrice').val();
+
+                if ($search || $minPrice || $maxPrice) {
+                    $('#all-data').hide();
+                    $('#Content').show();
+                } else {
+                    $('#all-data').show();
+                    $('#Content').hide();
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ URL::to('customer-search') }}',
+                    data: {
+                        'customer-search': $search,
+                        'min-price': $minPrice,
+                        'max-price': $maxPrice
+                    },
+                    success: function (data) {
+                        $('#Content').html(data.html);
+                    }
+                });
+            });
+        });
+
+        //   $('#searchInput, #minPrice, #maxPrice').on('input', function () {
+        //     var $minPrice = $('#minPrice').val();
+        //     var $maxPrice = $('#maxPrice').val();
+        //     var $value = $(this).val();
+        //     if ($value || $minPrice || $maxPrice) {
+        //         $('#all-data').hide();
+        //         $('#Content').show();
+        //     } else {
+        //         $('#all-data').show();
+        //         $('#Content').hide();
+        //     }
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '{{ URL::to('customer-search') }}',
+        //         data: {
+        //             'customer-search': $value,
+        //             'min-price': $minPrice,
+        //             'max-price': $maxPrice
+        //         },
+        //         success: function (data) {
+        //             $('#Content').html(data.html);
+        //         }
+        //     });
+        // });
+    </script>
 @endsection

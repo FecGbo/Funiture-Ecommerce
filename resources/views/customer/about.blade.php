@@ -44,7 +44,8 @@
     <div class="founder-section">
         <div class="founder-content">
             <div class="founder-image">
-                <img src="{{ asset('images/founder.jpg') }}" alt="Mr. David" class="founder-photo">
+                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Mr. David"
+                    class="founder-photo">
             </div>
             <div class="founder-info">
                 <h2>Luxury Furniture Founder</h2>

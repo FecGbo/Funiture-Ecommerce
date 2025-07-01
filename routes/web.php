@@ -116,3 +116,10 @@ Route::get('/customer-about', function () {
 Route::get('/customer-product', function () {
     return view('customer.product');
 })->name('customer.product');
+
+
+
+
+// customer view
+Route::get('/customer-product', [App\Http\Controllers\customerViewController::class, 'productView'])->name('customer.product');
+Route::get('/customer-search', [App\Http\Controllers\customerViewController::class, 'customerSearch'])->name('customer.search');
