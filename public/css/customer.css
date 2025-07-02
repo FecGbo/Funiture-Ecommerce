@@ -237,6 +237,7 @@ i.fas.fa-shopping-cart {
 
     .nav-links.active {
         display: flex;
+        background: black;
     }
 
     .mobile-menu-btn {

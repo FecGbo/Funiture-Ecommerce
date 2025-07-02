@@ -313,7 +313,11 @@ a.action-btn {
 
 @media (max-width: 550px) {
     .table-container {
-        overflow-x: hidden;
+        overflow-x: auto;
+    }
+
+    .categories-table {
+        min-width: 400px;
     }
 
     p.category-description,
@@ -403,7 +407,7 @@ a.action-btn {
 @media (min-width: 551px) and (max-width: 800px) {
     .categories-table {
         min-width: 700px;
-        /* Adjust based on content */
+
     }
 }
 
