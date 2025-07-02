@@ -63,16 +63,21 @@
     <div class="cart-modal" style="display: none;">
         <div class="cart-content">
             <h2>Shopping Cart</h2>
-
             <ul id="cartItems">
-                <li>hi</li>
-                <li>hi</li>
-                <li>hi</li>
-                <li>hi</li>
-                <li>hi</li>
+                @forelse($cart as $item)
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" width="40" height="40"
+                            style="border-radius:4px;">
+                        <span>{{ $item['name'] }}</span>
+                        <span>x{{ $item['quantity'] }}</span>
+                        <span>MMK {{ number_format($item['price']) }}</span>
+                    </li>
+                @empty
+                    <li>Your cart is empty.</li>
+                @endforelse
             </ul>
             <div class="cart-total">
-                <strong>Total:</strong> <span id="cartTotal">0</span>
+                <strong>Total:</strong> <span id="cartTotal"></span>
             </div>
             <button id="checkoutBtn">Checkout</button>
             <span style="cursor:pointer;float:right;font-size:24px;"

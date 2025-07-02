@@ -33,7 +33,7 @@
                     <div class="sort">
                         <span style="color: #ffd700;">Sort by</span>
                         <select name="sort" id="sort">
-                            <option value="default">lower to higher</option>
+
                             <option value="price-asc">Price: Low to High</option>
                             <option value="price-desc">Price: High to Low</option>
                             <option value="newest">Newest</option>
@@ -107,8 +107,8 @@
 
                     <div class="products-container" class="all-data" id="all-data">
                         @foreach($products as $product)
-                            <a href="{{ route('customerProduct.detail', $product->id) }}">
-                                <div class="product-card">
+                            <div class="product-card">
+                                <a href="{{ route('customerProduct.detail', $product->id) }}">
                                     <div class="product-image">
                                         <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                     </div>
@@ -116,15 +116,10 @@
                                         <h3 class="product-name">{{ $product->name }}</h3>
                                         <p class="product-description">{{ $product->description }}</p>
                                         <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
-
                                     </div>
-
-                                    <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to
-                                        Cart</button>
-
-
-                                </div>
-                            </a>
+                                </a>
+                                <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</button>
+                            </div>
                         @endforeach
                     </div>
                     <div id="Content" class="search-data"></div>
@@ -206,29 +201,5 @@
             });
         });
 
-        //   $('#searchInput, #minPrice, #maxPrice').on('input', function () {
-        //     var $minPrice = $('#minPrice').val();
-        //     var $maxPrice = $('#maxPrice').val();
-        //     var $value = $(this).val();
-        //     if ($value || $minPrice || $maxPrice) {
-        //         $('#all-data').hide();
-        //         $('#Content').show();
-        //     } else {
-        //         $('#all-data').show();
-        //         $('#Content').hide();
-        //     }
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: '{{ URL::to('customer-search') }}',
-        //         data: {
-        //             'customer-search': $value,
-        //             'min-price': $minPrice,
-        //             'max-price': $maxPrice
-        //         },
-        //         success: function (data) {
-        //             $('#Content').html(data.html);
-        //         }
-        //     });
-        // });
     </script>
 @endsection
