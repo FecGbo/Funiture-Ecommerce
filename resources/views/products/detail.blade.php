@@ -137,6 +137,7 @@
 
             categorySelect.addEventListener('change', function () {
                 //   if no product image  
+              
                 if (!productImageInput.value) {
                     const selectedId = this.value;
                     const imgPath = categoryImages[selectedId];

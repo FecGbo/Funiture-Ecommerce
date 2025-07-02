@@ -55,6 +55,7 @@ class customerViewController extends Controller
                         <p class="product-description">' . $product->description . '</p>
                         <div class="product-price">MMK ' . number_format($product->sale_price, 2) . '</div>
                     </div>
+                    <button class="addToCart-btn">Add to Cart</button>
                 </div>';
             }
         }
@@ -63,4 +64,34 @@ class customerViewController extends Controller
 
         return response()->json(['html' => $output]);
     }
+
+
+    public function addToCart(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity', 1);
+        $product = Product::find($productId);
+
+
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            $cart[$productId] = [
+                "name" => $product->name,
+                "quantity" => $quantity,
+                "price" => $product->sale_price,
+                "image" => $product->image
+            ];
+        }
+        session()->put('cart', $cart);
+        $cartCount = 0;
+        foreach ($cart as $item) {
+            $cartCount += $item['quantity'];
+        }
+        return response()
+            ->json(['message' => 'success', 'cart_count' => $cartCount, 'cart_items' => $cart]);
+    }
+
+
 }

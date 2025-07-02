@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
@@ -73,7 +74,7 @@ Route::post('/add-product', [App\Http\Controllers\ProductController::class, 'add
 Route::get('/list-products', [App\Http\Controllers\ProductController::class, 'listProducts'])->name('product.list');
 
 Route::post('/products/{id}/inline-update', [App\Http\Controllers\ProductController::class, 'inlineUpdate']);
-Route::get('/product/{id}/detail', [App\Http\Controllers\ProductController::class, 'detail'])->name('product.detail');
+Route::get('/admin/product/{id}/detail', [App\Http\Controllers\ProductController::class, 'detail'])->name('product.detail');
 Route::post('/product/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
 Route::delete('/product/{id}/delete', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.delete');
 
@@ -123,3 +124,10 @@ Route::get('/customer-product', function () {
 // customer view
 Route::get('/customer-product', [App\Http\Controllers\customerViewController::class, 'productView'])->name('customer.product');
 Route::get('/customer-search', [App\Http\Controllers\customerViewController::class, 'customerSearch'])->name('customer.search');
+
+Route::post('/add-to-cart', [App\Http\Controllers\customerViewController::class, 'addToCart'])->name('cart.add');
+
+Route::get('/product/{id}/detail', function ($id) {
+    $product = Product::findOrFail($id);
+    return view('customer.product_detail', compact('product'));
+})->name('customerProduct.detail');

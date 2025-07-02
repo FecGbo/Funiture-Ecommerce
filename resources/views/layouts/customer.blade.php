@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
+    $cart = session('cart', []);
+    $cartCount = 0;
+    foreach ($cart as $item) {
+        $cartCount += $item['quantity'];
+    }
+@endphp
 
 <head>
     <meta charset="UTF-8">
@@ -41,8 +48,10 @@
                 <a href="" title="Profile">
                     <i class="fas fa-user"></i>
                 </a>
-                <a href="" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
+
+                <a href="javascript:void(0)" title="Cart" id="cartIcon">
+                    <i class="fas fa-shopping-cart" onclick="openmodal()"></i>
+                    <span id="cartCount" class="cart-count-badge">{{ $cartCount }}</span>
                 </a>
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars"></i>
@@ -50,6 +59,26 @@
             </div>
         </nav>
     </header>
+
+    <div class="cart-modal" style="display: none;">
+        <div class="cart-content">
+            <h2>Shopping Cart</h2>
+
+            <ul id="cartItems">
+                <li>hi</li>
+                <li>hi</li>
+                <li>hi</li>
+                <li>hi</li>
+                <li>hi</li>
+            </ul>
+            <div class="cart-total">
+                <strong>Total:</strong> <span id="cartTotal">0</span>
+            </div>
+            <button id="checkoutBtn">Checkout</button>
+            <span style="cursor:pointer;float:right;font-size:24px;"
+                onclick="document.querySelector('.cart-modal').style.display='none'">&times;</span>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -117,6 +146,11 @@
                 navLinks.classList.remove('active');
             }
         });
+
+        function openmodal() {
+            document.querySelector('.cart-modal').style.display = 'block';
+        }
+
     </script>
 
     @stack('scripts')
