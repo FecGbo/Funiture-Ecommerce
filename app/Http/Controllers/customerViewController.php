@@ -8,9 +8,48 @@ use Illuminate\Http\Request;
 class customerViewController extends Controller
 {
 
-    public function productView()
+    public function productView(Request $request)
     {
-        $products = Product::paginate(6);
+        $sortBy = $request->input('sort', 'id'); // default is 'id'
+        $sortDir = $request->input('dir', 'asc');
+        $allowedSorts = ['id', 'sale_price'];
+        $allowedDirs = ['asc', 'desc'];
+
+        if (!in_array($sortBy, $allowedSorts)) {
+            $sortBy = 'id';
+        }
+        if (!in_array($sortDir, $allowedDirs)) {
+            $sortDir = 'asc';
+        }
+
+        $products = Product::orderBy($sortBy, $sortDir)->paginate(6);
+
+        if ($request->ajax()) {
+            $output = '<div class="products-container" id="all-data">';
+            foreach ($products as $product) {
+                $output .= '
+                <div class="product-card">
+                    <a href="' . route('customerProduct.detail', $product->id) . '">
+                        <div class="product-image">
+                            <img src="' . asset('storage/' . $product->image) . '" alt="' . $product->name . '">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">' . $product->name . '</h3>
+                            <p class="product-description">' . $product->description . '</p>
+                            <div class="product-price">MMK ' . number_format($product->sale_price) . '</div>
+                        </div>
+                    </a>
+                    <button class="addToCart-btn" onclick="addToCart(' . $product->id . ')">Add to Cart</button>
+                </div>';
+            }
+            if ($products->isEmpty()) {
+                $output .= '<div class="no-results">No products found.</div>';
+            }
+            $output .= '</div>';
+
+            return response()->json(['html' => $output]);
+        }
+
         return view('customer.product', compact('products'));
     }
     public function customerSearch(Request $request)

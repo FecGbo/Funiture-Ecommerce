@@ -33,10 +33,15 @@
                     <div class="sort">
                         <span style="color: #ffd700;">Sort by</span>
                         <select name="sort" id="sort">
+                            <option value="id-asc" {{ request('sort', 'id-asc') == 'id-asc' ? 'selected' : '' }}>Default
+                            </option>
+                            <option value="sale_price-asc" {{ request('sort') == 'sale_price-asc' ? 'selected' : '' }}>
+                                Price: Low to High
+                            </option>
+                            <option value="sale_price-desc" {{ request('sort') == 'sale_price-desc' ? 'selected' : '' }}>
+                                Price: High to Low
+                            </option>
 
-                            <option value="price-asc">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
-                            <option value="newest">Newest</option>
                         </select>
 
                     </div>
@@ -167,6 +172,10 @@
                     if (response.cart_items !== undefined) {
                         console.log(response.cart_items);
                     }
+
+                    $.get('{{ route("cart.items") }}', function (data) {
+                        $('#cartItems').parent().html(data.html);
+                    });
                 },
 
             });
@@ -200,6 +209,29 @@
                 });
             });
         });
+
+
+        //sort
+        $(document).ready(function () {
+            $('#sort').on('change', function () {
+                let sortValue = $(this).val();
+                let [sortBy, sortDir] = sortValue.split('-');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url()->current() }}',
+                    data: {
+                        sort: sortBy === 'price' ? 'sale_price' : sortBy,
+                        dir: sortDir
+                    },
+                    success: function (data) {
+                        if (data.html) {
+                            $('#all-data').html(data.html);
+                        }
+                    }
+                });
+            });
+        })
 
     </script>
 @endsection

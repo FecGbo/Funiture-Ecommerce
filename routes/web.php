@@ -131,3 +131,5 @@ Route::get('/product/{id}/detail', function ($id) {
     $product = Product::findOrFail($id);
     return view('customer.product_detail', compact('product'));
 })->name('customerProduct.detail');
+
+Route::get('/cart/items',[App\Http\Controllers\CartController::class, 'cartItems'])->name('cart.items');

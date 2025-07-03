@@ -250,6 +250,7 @@
                     });
                 }
             });
+            
             // Sorting button logic
             document.querySelectorAll('.sort-btn').forEach(btn => {
                 btn.addEventListener('click', function (e) {
