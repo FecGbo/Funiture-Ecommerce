@@ -139,3 +139,7 @@ Route::get('/clear-cart', function () {
     session()->forget('cart');
     return 'Cart cleared!';
 });
+
+Route::get('/cart', function () {
+    return view('customer.cart');
+})->name('customer.cart');

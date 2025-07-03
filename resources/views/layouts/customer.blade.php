@@ -91,8 +91,9 @@
 
                         </div>
                         <div class="cart-right">
-                            <span class="remove-cart-items" data-id="{{ $item['id'] }}" style="
-                                                                                            cursor:pointer;">&times;</span>
+                            <span class="remove-cart-items" data-id="{{ $item['id'] }}"
+                                style="
+                                                                                                    cursor:pointer;">&times;</span>
                         </div>
                     </li>
 
@@ -118,9 +119,11 @@
             <div class="cart-payment">
                 @if (count($cart))
                     <x-button id="checkoutBtn">PROCEED TO BAG</x-button>
-                    <x-button id="continueShoppingBtn">CONTINUE SHOPPING</x-button>
+                    <x-button id="continueShoppingBtn" onclick="location.href='{{ route('customer.product') }}'">CONTINUE
+                        SHOPPING</x-button>
                 @else
-                    <x-button id="continueShoppingBtn">CONTINUE SHOPPING</x-button>
+                    <x-button id="continueShoppingBtn" onclick="location.href='{{ route('customer.product') }}'">CONTINUE
+                        SHOPPING</x-button>
 
                 @endif
 

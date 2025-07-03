@@ -61,12 +61,15 @@ class CartController extends Controller
 
         // Cart payment buttons
         $output .= '<div class="cart-payment">';
+   
         if (count($cart)) {
+            
             $output .= '<button id="checkoutBtn" class="btn">PROCEED TO BAG</button>';
-            $output .= '<button id="continueShoppingBtn" class="btn">CONTINUE SHOPPING</button>';
+            $output .= '<button id="continueShoppingBtn" class="btn" onclick="location.href=\'' . route('customer.product') . '\'">CONTINUE SHOPPING</button>';
         } else {
-            $output .= '<button id="continueShoppingBtn" class="btn">CONTINUE SHOPPING</button>';
+            $output .= '<button id="continueShoppingBtn" class="btn" onclick="location.href=\'' . route('customer.product') . '\'">CONTINUE SHOPPING</button>';
         }
+     
         $output .= '</div>';
 
         $output .= '</div></div>';
