@@ -3,8 +3,12 @@
 @php
     $cart = session('cart', []);
     $cartCount = 0;
+    $subTotal = 0;
+    $Total_price = 0;
     foreach ($cart as $item) {
         $cartCount += $item['quantity'];
+        $subTotal += $item['price'] * $item['quantity'];
+
     }
 @endphp
 
@@ -12,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Furniro')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -49,7 +54,8 @@
                     <i class="fas fa-user"></i>
                 </a>
 
-                <a href="javascript:void(0)" title="Cart" id="cartIcon">
+                <a href="javascript:void(0)" title="Cart" id="cartIcon"
+                    style="position:relative; display:inline-block;">
                     <i class="fas fa-shopping-cart" onclick="openmodal()"></i>
                     <span id="cartCount" class="cart-count-badge">{{ $cartCount }}</span>
                 </a>
@@ -62,26 +68,67 @@
 
     <div class="cart-modal" style="display: none;">
         <div class="cart-content">
-            <h2>Shopping Cart</h2>
+            <div class="cart-content-header">
+                <h2>Shopping Cart</h2> <span style="cursor:pointer;float:right;font-size:24px;"
+                    onclick="document.querySelector('.cart-modal').style.display='none'">&times;</span>
+            </div>
+            <hr style="width:80%; margin: 0 auto;">
+
             <ul id="cartItems">
                 @forelse($cart as $item)
-                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" width="40" height="40"
-                            style="border-radius:4px;">
-                        <span>{{ $item['name'] }}</span>
-                        <span>x{{ $item['quantity'] }}</span>
-                        <span>MMK {{ number_format($item['price']) }}</span>
+
+                    <li style="" class="cart_list">
+                        <div class="cart-left">
+                            <img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" width="100%"
+                                height="100%" style="border-radius:4px;">
+                        </div>
+                        <div class="cart-center">
+                            <span>{{ $item['name'] }}</span>
+                            <div class="card-price">
+                                <span>{{ $item['quantity'] }} x</span>
+                                <span>MMK {{ number_format($item['price']) }}</span>
+                            </div>
+
+                        </div>
+                        <div class="cart-right">
+                            <span class="remove-cart-items" data-id="{{ $item['id'] }}" style="
+                                                                                            cursor:pointer;">&times;</span>
+                        </div>
                     </li>
+
                 @empty
-                    <li>Your cart is empty.</li>
+                    <div class="no_cart_list">
+                        <img src="{{ asset('images/nocart.png') }}" alt="No items in cart">
+                        <h2><strong>Your Cart is Empty</strong></h2>
+                    </div>
                 @endforelse
+
             </ul>
             <div class="cart-total">
-                <strong>Total:</strong> <span id="cartTotal"></span>
+
+
+                @if (count($cart))
+                    <span>Subtotal</span>
+                    <strong>MMK.{{ number_format($subTotal) }} <span id="cartTotal"></span>
+                @else
+                        <p style="text-align: center;">Add somethings to make happy.....!</p>
+
+                    @endif
             </div>
-            <button id="checkoutBtn">Checkout</button>
-            <span style="cursor:pointer;float:right;font-size:24px;"
-                onclick="document.querySelector('.cart-modal').style.display='none'">&times;</span>
+            <div class="cart-payment">
+                @if (count($cart))
+                    <x-button id="checkoutBtn">PROCEED TO BAG</x-button>
+                    <x-button id="continueShoppingBtn">CONTINUE SHOPPING</x-button>
+                @else
+                    <x-button id="continueShoppingBtn">CONTINUE SHOPPING</x-button>
+
+                @endif
+
+
+
+            </div>
+
+
         </div>
     </div>
 
@@ -155,6 +202,32 @@
         function openmodal() {
             document.querySelector('.cart-modal').style.display = 'block';
         }
+
+        $(document).on('click', '.remove-cart-items', function () {
+            var itemId = $(this).data('id');
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                    id: itemId
+                },
+                success: function (response) {
+                    if (response.cart_count !== undefined) {
+                        $('#cartCount').text(response.cart_count);
+
+                    }
+
+                    $.get('{{ route("cart.items") }}', function (data) {
+                        $('#cartItems').parent().html(data.html);
+                    });
+
+                }
+
+            });
+        });
+
+
 
     </script>
 

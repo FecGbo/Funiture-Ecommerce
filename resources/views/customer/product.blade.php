@@ -22,7 +22,7 @@
             <div class="title">
                 <div class="title-left">
                     <img src="{{ asset('images/logo.png') }}" alt="Product Banner">
-                    <span>Furniro</span>
+                    <span>Furniro Products</span>
                 </div>
 
                 <div class="title-right">

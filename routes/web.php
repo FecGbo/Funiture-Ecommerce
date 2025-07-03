@@ -132,4 +132,10 @@ Route::get('/product/{id}/detail', function ($id) {
     return view('customer.product_detail', compact('product'));
 })->name('customerProduct.detail');
 
-Route::get('/cart/items',[App\Http\Controllers\CartController::class, 'cartItems'])->name('cart.items');
+Route::get('/cart/items', [App\Http\Controllers\CartController::class, 'cartItems'])->name('cart.items');
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+
+Route::get('/clear-cart', function () {
+    session()->forget('cart');
+    return 'Cart cleared!';
+});

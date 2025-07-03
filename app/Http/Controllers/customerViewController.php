@@ -117,6 +117,7 @@ class customerViewController extends Controller
             $cart[$productId]['quantity'] += $quantity;
         } else {
             $cart[$productId] = [
+                "id" => $product->id,
                 "name" => $product->name,
                 "quantity" => $quantity,
                 "price" => $product->sale_price,

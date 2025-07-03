@@ -49,6 +49,7 @@ body {
     position: absolute;
     top: 0;
     right: 0;
+    transform: translate(40%, -40%);
     background: #ffd700;
     color: #222;
     border-radius: 50%;
@@ -56,6 +57,8 @@ body {
     font-size: 12px;
     font-weight: bold;
     z-index: 10;
+    min-width: 20px;
+    text-align: center;
 }
 
 /* Header Styles */
@@ -231,12 +234,12 @@ i.fas.fa-shopping-cart {
 
 
 .cart-modal {
-    width: 400px;
+    width: 350px;
     margin: 0 auto;
     height: auto;
     position: fixed;
     top: 0;
-
+    height: 100vh;
     right: 0;
 
 
@@ -248,10 +251,16 @@ i.fas.fa-shopping-cart {
 
 .cart-content {
     background: #fff;
-    padding: 30px;
+    padding: 1.5rem;
     border-radius: 8px;
     min-width: 300px;
     position: relative;
+    height: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
 }
 
 .close-modal {
@@ -262,6 +271,99 @@ i.fas.fa-shopping-cart {
     cursor: pointer;
 }
 
+
+.cart-content-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+
+.cart-center {
+    flex: 1;
+}
+
+
+
+.cart-center {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.cart_list {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 5px;
+    padding: 0.2rem 1rem;
+
+}
+
+ul#cartItems {
+    margin-top: 1rem;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    max-height: 460px;
+
+}
+
+.cart_list img {
+    width: 60px;
+    height: 60px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    padding: 0.2rem 1rem;
+
+}
+
+.cart-payment {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-top: auto;
+    padding: 0.2rem 1rem;
+    background: #fff;
+    z-index: 2;
+}
+
+.cart-payment button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: black;
+    color: #FFD700;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cart-payment button:hover {
+    background-color: black !important;
+    color: #FFD700 !important;
+}
+
+.no_cart_list {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
