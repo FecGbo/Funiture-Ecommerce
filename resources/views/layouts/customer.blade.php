@@ -85,15 +85,15 @@
                         <div class="cart-center">
                             <span>{{ $item['name'] }}</span>
                             <div class="card-price">
-                                <span>{{ $item['quantity'] }} x</span>
-                                <span>MMK {{ number_format($item['price']) }}</span>
+                                <span>{{ $item['quantity'] }}&nbsp;x&nbsp;</span>
+                                <span>MMK&nbsp;{{ number_format($item['price']) }}</span>
                             </div>
 
                         </div>
                         <div class="cart-right">
                             <span class="remove-cart-items" data-id="{{ $item['id'] }}"
                                 style="
-                                                                                                    cursor:pointer;">&times;</span>
+                                                                                                                    cursor:pointer;">&times;</span>
                         </div>
                     </li>
 
@@ -118,7 +118,7 @@
             </div>
             <div class="cart-payment">
                 @if (count($cart))
-                    <x-button id="checkoutBtn">PROCEED TO BAG</x-button>
+                    <x-button id="checkoutBtn" onclick="location.href='{{ route('cart.list') }}'">PROCEED TO BAG</x-button>
                     <x-button id="continueShoppingBtn" onclick="location.href='{{ route('customer.product') }}'">CONTINUE
                         SHOPPING</x-button>
                 @else

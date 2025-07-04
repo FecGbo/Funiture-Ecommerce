@@ -32,8 +32,8 @@ class CartController extends Controller
                     . '<div class="cart-center">'
                     . '<span>' . $item['name'] . '</span>'
                     . '<div class="card-price">'
-                    . '<span>' . $item['quantity'] . ' x</span>'
-                    . '<span>MMK ' . number_format($item['price']) . '</span>'
+                    . '<span>' . $item['quantity'] . '&nbsp;x&nbsp;</span>'
+                    . '<span>MMK&nbsp;' . number_format($item['price']) . '</span>'
                     . '</div>'
                     . '</div>'
                     . '<div class="cart-right">'
@@ -61,15 +61,15 @@ class CartController extends Controller
 
         // Cart payment buttons
         $output .= '<div class="cart-payment">';
-   
+
         if (count($cart)) {
-            
-            $output .= '<button id="checkoutBtn" class="btn">PROCEED TO BAG</button>';
+
+            $output .= '<button id="checkoutBtn" class="btn" onclick="location.href=\'' . route('cart.list') . '\'" >PROCEED TO BAG</button>';
             $output .= '<button id="continueShoppingBtn" class="btn" onclick="location.href=\'' . route('customer.product') . '\'">CONTINUE SHOPPING</button>';
         } else {
             $output .= '<button id="continueShoppingBtn" class="btn" onclick="location.href=\'' . route('customer.product') . '\'">CONTINUE SHOPPING</button>';
         }
-     
+
         $output .= '</div>';
 
         $output .= '</div></div>';
@@ -88,11 +88,24 @@ class CartController extends Controller
             }
         }
         session()->put('cart', $cart);
+
+        if (!request()->ajax()) {
+            return redirect()->route('cart.list');
+        }
+
         $cartCount = array_sum(array_column($cart, 'quantity'));
         return response()->json(['cart_count' => $cartCount]);
 
     }
-    public function cartList(){
-        $cart=session()->get('cart', []);
+    public function cartList()
+    {
+        $cart = session()->get('cart', []);
+
+        foreach ($cart as $item) {
+            $item['image'] = asset('storage/' . $item['image']);
+            $item['price'] = number_format($item['price']);
+
+        }
+        return view('customer.cart', compact('cart'));
     }
 }

@@ -28,7 +28,7 @@
                 <div class="title-right">
                     <div class="search-bar">
                         <input type="text" placeholder="Search for products..." id="searchInput" name="searchInput">
-                        <button type="submit"><i class="fas fa-search"></i></button>
+
                     </div>
                     <div class="sort">
                         <span style="color: #ffd700;">Sort by</span>
@@ -165,7 +165,7 @@
                     product_id: productId
                 },
                 success: function (response) {
-                    alert(response.message);
+                    // alert(response.message);
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
                     }

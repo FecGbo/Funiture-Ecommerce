@@ -143,3 +143,5 @@ Route::get('/clear-cart', function () {
 Route::get('/cart', function () {
     return view('customer.cart');
 })->name('customer.cart');
+
+Route::get('/cart-list', [App\Http\Controllers\CartController::class, 'cartList'])->name('cart.list');

@@ -423,6 +423,10 @@ body::-webkit-scrollbar {
     pointer-events: none;
 }
 
+.sort span {
+    min-width: 56px;
+}
+
 .product-card:hover .addToCart-btn {
     opacity: 1;
     pointer-events: auto;
@@ -467,12 +471,20 @@ body::-webkit-scrollbar {
     }
 
     .products-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
         gap: 1rem;
+    }
+
+    .contact {
+        padding: 0;
     }
 
     .product-actions {
         flex-direction: column;
+    }
+
+    .title-left {
+        display: none;
     }
 
 

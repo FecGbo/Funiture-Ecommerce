@@ -46,7 +46,7 @@
                     quantity: quantity
                 },
                 success: function (response) {
-                    alert(response.message);
+
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
                     }
