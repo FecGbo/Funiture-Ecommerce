@@ -31,3 +31,114 @@
 .title span {
     margin: 0 10px;
 }
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 5%;
+    flex-direction: row;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+thead {
+    background-color: black;
+    color: #ffd700;
+
+
+
+}
+
+
+
+th {
+    padding: 10px;
+
+}
+
+tbody tr {
+    width: 50px;
+}
+
+td img {
+    width: 100px;
+
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+td {
+    text-align: center;
+}
+
+form {
+    margin: 0;
+}
+
+.content-left,
+.content-right {
+    width: 100%;
+    padding: 1rem;
+}
+
+.content-left {
+    flex: 80%;
+}
+
+.content-right {
+    flex: 20%;
+    align-items: center;
+    padding: 1rem;
+}
+
+.cart-image {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.checkout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+    min-height: 200px;
+    background: black;
+    color: #ffd700;
+    padding: 1rem 5px;
+}
+
+.cart-subtotal {
+    margin: 1rem;
+}
+
+.cart-subtotal p {
+
+    padding: 5px;
+}
+
+.checkoutbtn {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #ffd700 !important;
+    color: black !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}

@@ -50,6 +50,9 @@
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
                     }
+                    $.get('{{ route("cart.items") }}', function (data) {
+                        $('.cart-modal').html($(data.html).html());
+                    });
 
                     if (response.cart_items !== undefined) {
                         console.log(response);

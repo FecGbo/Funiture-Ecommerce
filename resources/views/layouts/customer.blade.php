@@ -92,8 +92,7 @@
                         </div>
                         <div class="cart-right">
                             <span class="remove-cart-items" data-id="{{ $item['id'] }}"
-                                style="
-                                                                                                                    cursor:pointer;">&times;</span>
+                                style="cursor:pointer;">&times;</span>
                         </div>
                     </li>
 
