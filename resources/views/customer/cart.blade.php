@@ -73,8 +73,8 @@
                     @endphp
 
                     <!-- <div class="cart-total">
-                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
-                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                        <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
+                                                                                                                                                                                                                                                                                                                    </div> -->
                 @else
                     <p>Your cart is empty.</p>
                 @endif
@@ -90,11 +90,12 @@
                             <p>Subtotal: MMK {{ number_format($item['price'] * $item['quantity']) }}</p>
                         @endforeach
                     </div>
-                    <span>Total: MMK {{ number_format($Total_price) }}</span>
+                    <span class="total_price">Total: MMK {{ number_format($Total_price) }}</span>
                 @endif
 
 
-                <x-button type="submit" :variant="'success'" class="checkoutbtn">Checkout</x-button>
+                <x-button type="button" :variant="'success'" class="checkoutbtn"
+                    onclick="window.location.href='{{ route('customer.checkout') }}'">Pay now</x-button>
             </div>
 
         </div>

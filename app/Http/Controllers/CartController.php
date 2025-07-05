@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+
 
 class CartController extends Controller
 {
@@ -101,11 +104,93 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        foreach ($cart as $item) {
-            $item['image'] = asset('storage/' . $item['image']);
-            $item['price'] = number_format($item['price']);
-
+        if (empty($cart)) {
+            return redirect()->route('customer.product')->with('error', 'Your cart is empty.');
         }
         return view('customer.cart', compact('cart'));
+    }
+
+
+    //Built in form
+    // public function payment()
+    // {
+    //     $cart = session()->get('cart', []);
+    //     if (empty($cart)) {
+    //         return redirect()->route('cart.list')->with('error', 'Your cart is empty.');
+    //     }
+
+
+    //     $mmkToUsd = 2100;
+
+    //     $total = 0;
+    //     foreach ($cart as $item) {
+    //         $total += $item['price'] * $item['quantity'];
+    //     }
+
+    //     if (($total / $mmkToUsd) < 1) {
+    //         return redirect()->route('cart.list')->with('error', 'Minimum order amount is $1.');
+    //     }
+
+    //     \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+    //     $cart = array_values($cart); // Ensure sequential keys
+
+    //     $lineItems = array_map(function ($item) use ($mmkToUsd) {
+    //         $usdPrice = $item['price'] / $mmkToUsd;
+    //         return [
+    //             'price_data' => [
+    //                 'currency' => 'usd',
+    //                 'product_data' => [
+    //                     'name' => $item['name'],
+    //                 ],
+    //                 'unit_amount' => (int) round($usdPrice * 100), // USD in cents
+    //             ],
+    //             'quantity' => $item['quantity'],
+    //         ];
+    //     }, $cart);
+
+    //     $session = \Stripe\Checkout\Session::create([
+    //         'payment_method_types' => ['card'],
+    //         'line_items' => $lineItems,
+    //         'mode' => 'payment',
+    //         'success_url' => route('cart.success'),
+    //         'cancel_url' => route('cart.list'),
+    //     ]);
+
+    //     return redirect()->away($session->url);
+    // }
+
+    public function success()
+    {
+        session()->forget('cart');
+        return view('customer.success');
+    }
+
+
+
+    public function processPayment(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+        $cart = session()->get('cart', []);
+        $mmkToUsd = 2100;
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+        $usdAmount = round($total / $mmkToUsd, 2);
+
+        try {
+            \Stripe\Charge::create([
+                'amount' => $usdAmount * 100, // USD in cents
+                'currency' => 'usd',
+                'description' => 'Order Payment',
+                'source' => $request->stripeToken,
+            ]);
+            session()->forget('cart');
+            return redirect()->route('cart.success');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 }

@@ -121,11 +121,15 @@ form {
     background: black;
     color: #ffd700;
     padding: 1rem 5px;
+    position: relative;
 }
 
-.cart-subtotal {
-    margin: 1rem;
+.checkout h2 {
+    position: absolute;
+    top: 1rem;
 }
+
+
 
 .cart-subtotal p {
 
@@ -138,7 +142,41 @@ form {
     background-color: #ffd700 !important;
     color: black !important;
     border: none;
-    border-radius: 5px;
+
     cursor: pointer;
     font-size: 1rem;
+    position: absolute;
+    bottom: 5px;
+}
+
+.cart-container {
+    max-height: 345px;
+    overflow-y: auto;
+
+    width: 100%;
+}
+
+.cart-subtotal {
+    max-height: 105px;
+    width: 100%;
+    overflow-y: auto;
+
+}
+
+.total_price {
+    position: absolute;
+    bottom: 50px;
+}
+
+.cart-subtotal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cart-subtotal::-webkit-scrollbar-thumb {
+    background: #ffd700 !important;
+    border-radius: 4px;
+}
+
+.cart-subtotal::-webkit-scrollbar-track {
+    background: #222;
 }

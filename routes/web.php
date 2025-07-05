@@ -3,6 +3,8 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -140,8 +142,24 @@ Route::get('/clear-cart', function () {
     return 'Cart cleared!';
 });
 
-Route::get('/cart', function () {
-    return view('customer.cart');
-})->name('customer.cart');
+// Route::get('/cart', function () {
+//     return view('customer.cart');
+// })->name('customer.cart');
 
-Route::get('/cart-list', [App\Http\Controllers\CartController::class, 'cartList'])->name('cart.list');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'cartList'])->name('cart.list');
+
+
+use App\Http\Controllers\CartController;
+
+
+Route::get('/checkout', function () {
+    return view('customer.checkout');
+})->name('customer.checkout');
+
+//Route::get('/cart/payment', [CartController::class, 'payment'])->name('cart.payment');
+Route::get('/cart/success', [CartController::class, 'success'])->name('cart.success');
+
+
+
+
+Route::post('/cart/process-payment', [CartController::class, 'processPayment'])->name('cart.process-payment');
