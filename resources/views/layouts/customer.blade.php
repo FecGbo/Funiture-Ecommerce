@@ -39,7 +39,8 @@
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                <li><a href="{{ route('customer.latestFuniture') }}"
+                        class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                 <li><a href="{{ route('customer.product') }}"
                         class="{{ request()->routeIs('product') ? 'active' : '' }}">Product</a></li>
                 <li><a href="{{route('customer.about')}}"

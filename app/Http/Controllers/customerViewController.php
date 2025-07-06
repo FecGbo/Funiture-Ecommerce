@@ -133,5 +133,15 @@ class customerViewController extends Controller
             ->json(['message' => 'success', 'cart_count' => $cartCount, 'cart_items' => $cart]);
     }
 
+    public function latestFuniture()
+    {
+        $products = Product::orderBy('created_at', 'desc')->take(4)->get();
+
+        $bestSelling = Product::paginate(8);
+        return view('welcome', compact('products', 'bestSelling'));
+    }
+
+
+
 
 }

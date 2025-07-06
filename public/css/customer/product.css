@@ -241,6 +241,7 @@ body::-webkit-scrollbar {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     border-radius: 8px;
     overflow: hidden;
+    position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -294,6 +295,10 @@ body::-webkit-scrollbar {
     font-size: 1.3rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    position: absolute;
+    bottom: 11px;
+    right: 50%;
+    transform: translate(50%, 50%);
 }
 
 .product-actions {
@@ -437,6 +442,13 @@ body::-webkit-scrollbar {
     filter: blur(2px);
     transition: filter 0.2s;
 }
+
+.product-card:hover .product-price {
+    filter: blur(2px);
+    transition: filter 0.2s;
+
+}
+
 
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {

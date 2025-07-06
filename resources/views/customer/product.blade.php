@@ -120,8 +120,9 @@
                                     <div class="product-info">
                                         <h3 class="product-name">{{ $product->name }}</h3>
                                         <p class="product-description">{{ $product->description }}</p>
-                                        <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
+
                                     </div>
+                                    <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
                                 </a>
                                 <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</button>
                             </div>

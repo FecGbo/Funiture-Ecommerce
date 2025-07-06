@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customerViewController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -163,3 +164,9 @@ Route::get('/cart/success', [CartController::class, 'success'])->name('cart.succ
 
 
 Route::post('/cart/process-payment', [CartController::class, 'processPayment'])->name('cart.process-payment');
+
+
+
+//index page
+
+Route::get('/', [customerViewController::class, 'latestFuniture'])->name('customer.latestFuniture');
