@@ -121,7 +121,8 @@ class customerViewController extends Controller
                 "name" => $product->name,
                 "quantity" => $quantity,
                 "price" => $product->sale_price,
-                "image" => $product->image
+                "image" => $product->image,
+                "stock" => $product->stock
             ];
         }
         session()->put('cart', $cart);

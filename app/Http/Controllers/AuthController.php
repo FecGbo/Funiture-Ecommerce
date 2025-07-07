@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,4 +32,25 @@ class AuthController extends Controller
     }
 
 
+    public function customerRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:8',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'dob' => 'required|date',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ])->validate();
+
+        
+        $user = new User();
+
+
+    }
+
 }
+
+
+

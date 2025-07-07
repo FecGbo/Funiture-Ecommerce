@@ -112,6 +112,7 @@ class CartController extends Controller
 
 
     //Built in form
+
     // public function payment()
     // {
     //     $cart = session()->get('cart', []);
@@ -193,4 +194,52 @@ class CartController extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+
+    public function updateQuantity(Request $request)
+    {
+        $id = $request->input('product_id');
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $quantity = $request->input('quantity', 1);
+            if ($quantity < 1) {
+                $quantity = 1;
+            }
+            $cart[$id]['quantity'] = $quantity;
+            session()->put('cart', $cart);
+
+            // Calculate total price
+            $Total_price = 0;
+            foreach ($cart as $item) {
+                $Total_price += $item['price'] * $item['quantity'];
+            }
+
+            // Build the HTML output (like your Blade)
+            $output = '<div class="content-right">
+            <div class="checkout">
+                <div class="checkout-title">
+                    <h1>Carts Total</h1>
+                </div>';
+
+            if (count($cart) > 0) {
+                $output .= '<div class="cart-subtotal">';
+                foreach ($cart as $item) {
+                    $output .= '<p style="color:white">Subtotal: MMK ' . number_format($item['price'] * $item['quantity']) . '</p>';
+                }
+                $output .= '</div>
+                <span class="total_price">Total: MMK ' . number_format($Total_price) . '</span>';
+            }
+
+            $output .= '<div class="checkout-button">
+                <button type="button" class="checkoutbtn btn btn-success" onclick="window.location.href=\'' . route('customer.checkout') . '\'">Pay now</button>
+            </div>
+        </div>
+    </div>';
+
+            return response()->json(['success' => true, 'html' => $output]);
+        }
+        return response()->json(['success' => false, 'message' => 'Item not found in cart.']);
+    }
+
+
 }

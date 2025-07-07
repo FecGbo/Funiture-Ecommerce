@@ -51,9 +51,16 @@
             </ul>
 
             <div class="nav-icons">
-                <a href="" title="Profile">
-                    <i class="fas fa-user"></i>
-                </a>
+                <div class="admin-profile">
+
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
+                        id="adminAvatar">
+                    <ul class="admin-dropdown" id="adminDropdown">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                    </ul>
+                </div>
 
                 <a href="javascript:void(0)" title="Cart" id="cartIcon"
                     style="position:relative; display:inline-block;">
@@ -187,6 +194,22 @@
     </footer>
 
     <script>
+        const avatar = document.getElementById('adminAvatar');
+        const dropdown = document.getElementById('adminDropdown');
+        // Profile dropdown
+        avatar.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+
+
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');

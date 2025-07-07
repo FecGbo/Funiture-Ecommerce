@@ -320,7 +320,7 @@ button.sort-btn {
     text-align: center;
 }
 
-/* Sidebar overlay for mobile */
+
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -517,12 +517,12 @@ button.sort-btn {
 
 }
 
-/* Additional utility classes */
+
 .no-scroll {
     overflow: hidden;
 }
 
-/* Fix for very small screens */
+
 @media (max-width: 480px) {
     .admin-sidebar.sidebar-open {
         width: 4.3rem;

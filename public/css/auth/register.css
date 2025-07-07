@@ -1,0 +1,126 @@
+.banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.content {
+    background-color: var(--border-color);
+}
+
+.banner-content {
+    text-align: center;
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.1rem;
+}
+
+.title a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.title span {
+    margin: 0 10px;
+}
+
+
+.content {
+    display: flex;
+    padding: 4rem 5%;
+}
+
+.content-left {
+    flex: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100% !important;
+}
+
+.content-left img {
+    width: 90%;
+    height: 100%;
+    object-fit: cover;
+
+    box-shadow: var(--box-shadow-xs);
+}
+
+.content-right {
+    flex: 40%;
+    padding: 1rem;
+
+
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+form input {
+    padding: 0.5rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 50px;
+}
+
+
+.keep-login {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.keep {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#loginbtn {
+    background: black !important;
+    color: #ffd700 !important;
+    height: 50px;
+}
+
+#cancel {
+    background: var(--button-secondary-bg);
+    color: #fff;
+    height: 50px;
+}
+
+.loginbtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 5%;
+
+}
+
+#cancel,
+#loginbtn {
+    flex: 45%;
+}

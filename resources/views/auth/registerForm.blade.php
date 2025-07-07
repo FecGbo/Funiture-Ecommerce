@@ -1,38 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.customer')
+<link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-
-<body>
-    <form action="{{ route('auth.createUser') }}" method="post">
-        @csrf
-        <h1>Register</h1>
-        <hr>
-        @if ($errors->any())
-            <div style="color:red;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Contact</h1>
+            <div class="title">
+                <a href="">Home</a>
+                <span>></span>
+                <span>Register</span>
             </div>
-        @endif
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="{{ route('auth.login') }}">Login here</a></p>
-</body>
+        </div>
+    </div>
 
-</html>
+    <div class="content">
+        <div class="content-left">
+            <img src="{{ asset('images/register.png') }}" alt="">
+        </div>
+        <div class="content-right">
+            <form action="{{ route('auth.login') }}" method="post">
+                @csrf
+                <h1>Register</h1>
+                <hr>
+                @if(session('error'))
+                    <div style="color:red;">{{ session('error') }}</div>
+                @endif
+                @if(session('success'))
+                    <div style="color:green;">{{ session('success') }}</div>
+                @endif
+                @if ($errors->any())
+                    <div style="color:red;">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="name">
+                    <x-input name="name" type="text" required placeholder="Full Name"></x-input>
+                </div>
+                <div class="dob">
+                    <x-input name="dob" type="text" required placeholder="Date of Birth"></x-input>
+                </div>
+                <div class="email">
+
+                    <x-input name="email" type="email" required placeholder="Email Address"></x-input>
+
+                </div>
+                <div class="phone">
+
+                    <x-input name="phone" type="text" required placeholder="Phone Number"></x-input>
+
+                </div>
+                <div class="address">
+                    <x-input name="address" type="text" required placeholder="Address"></x-input>
+                </div>
+
+                <div class="password">
+
+                    <x-input name="password" type="password" required placeholder="Password"></x-input>
+
+                </div>
+
+                <div class="customer-image">
+                    <x-input name="image" type="file" required placeholder="Upload Image"></x-input>
+                </div>
+                <div class="keep-login">
+                    <div class="keep">
+                        <input type="checkbox" name="remember" id="remember" style="width: 20px;height:20px;">
+                        <label for="remember">Keep me logged in</label>
+                    </div>
+                    <div class="forget-password">
+                        <a href="">Forgot password?</a>
+                    </div>
+                </div>
+
+
+                <div class="loginbtn">
+                    <x-button id="cancel" name="cancel" type="button">Cancel</x-button>
+                    <x-button id="loginbtn" name="login" type="submit">Log in</x-button>
+
+                </div>
+                <p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+@endsection

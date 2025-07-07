@@ -26,7 +26,8 @@
                 <div class="banner-btn">
                     <h1>Discover New Collection</h1>
                     <x-button :type="'button'" variant="primary"
-                        onclick="window.location.href='{{ route('customer.product') }}'">Shop Now</x-button>
+                        onclick="window.location.href='{{ route('customer.product') }}'"
+                        style="background:black;color:#ffd700;">Shop Now</x-button>
                 </div>
 
             </div>

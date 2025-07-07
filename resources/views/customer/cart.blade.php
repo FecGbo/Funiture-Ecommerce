@@ -1,5 +1,6 @@
 @extends('layouts.customer')
 <link rel="stylesheet" href="{{ asset('css/customer/cart.css') }}">
+<meta name="csrf-token" content={{ csrf_token() }}>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
@@ -49,7 +50,10 @@
                                     </td>
                                     <td>{{ $item['name'] }}</td>
                                     <td>MMK {{ number_format($item['price']) }}</td>
-                                    <td>{{ $item['quantity'] }}</td>
+                                    <td><input type="number" name="quantity" id="quantityInput" value="{{ $item['quantity'] }}"
+                                            min="1" max="{{ $item['stock'] }}"
+                                            onchange="updateQuantity({{ $item['id'] }}, this.value)">
+                                    </td>
                                     <td>MMK {{ number_format($item['price'] * $item['quantity']) }}</td>
                                     <td>
                                         <form action="{{ route('cart.remove') }}" method="POST">
@@ -73,8 +77,8 @@
                     @endphp
 
                     <!-- <div class="cart-total">
-                                                                                                                                                                                                                                                                                                                        <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
-                                                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                 @else
                     <p>Your cart is empty.</p>
                 @endif
@@ -83,24 +87,57 @@
 
         <div class="content-right">
             <div class="checkout">
-                <h2>Carts Total</h2>
+                <div class="checkout-title">
+                    <h1>Carts Total</h1>
+                </div>
+
                 @if (count($cart) > 0)
                     <div class="cart-subtotal">
                         @foreach ($cart as $item)
-                            <p>Subtotal: MMK {{ number_format($item['price'] * $item['quantity']) }}</p>
+                            <p style="color:white">Subtotal: MMK {{ number_format($item['price'] * $item['quantity']) }}</p>
                         @endforeach
                     </div>
                     <span class="total_price">Total: MMK {{ number_format($Total_price) }}</span>
                 @endif
 
+                <div class="checkout-button">
+                    <x-button type="button" :variant="'success'" class="checkoutbtn"
+                        onclick="window.location.href='{{ route('customer.checkout') }}'">Pay now</x-button>
+                </div>
 
-                <x-button type="button" :variant="'success'" class="checkoutbtn"
-                    onclick="window.location.href='{{ route('customer.checkout') }}'">Pay now</x-button>
             </div>
 
         </div>
     </div>
 
-    @stack('scripts')
+
+
+
 
 @endsection
+@push('scripts')
+<script>
+
+    function updateQuantity(productId, quantity) {
+        $.ajax({
+            type: 'POST',
+            url: '{{ route("cart.update") }}',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                product_id: productId,
+                quantity: quantity
+            },
+            success: function (response) {
+                if (response.success && response.html) {
+
+                    $('.content-right').replaceWith(response.html);
+                }
+
+                if (response.cart_count !== undefined) {
+                    $('#cartCount').text(response.cart_count);
+                }
+            }
+        });
+    }
+
+</script>

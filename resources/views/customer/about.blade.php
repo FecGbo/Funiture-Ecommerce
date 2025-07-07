@@ -55,7 +55,7 @@
                     Our designer already made a lot of beautiful prototype of rooms that inspire you. Our designer already
                     made a lot of beautiful prototype of rooms that inspire you. Our designer already made a lot of
                     beautiful prototype of rooms that inspire you. Our designer already made a lot of beautiful prototype of
-                    rooms that inspire you.
+                    rooms that inspire you. 
                 </p>
             </div>
         </div>

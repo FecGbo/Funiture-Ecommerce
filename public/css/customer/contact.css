@@ -1,6 +1,6 @@
-/* Contact Page */
 
-/* Banner */
+
+
 .banner {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/image.jpg');
     background-size: cover;
@@ -35,7 +35,7 @@
     margin: 0 10px;
 }
 
-/* Contact */
+
 .contact {
     padding: 80px 0;
     background-color: #f8f9fa;
@@ -47,7 +47,7 @@
     padding: 0 20px;
 }
 
-/* Title */
+
 .title {
     text-align: center;
     margin-bottom: 60px;
@@ -68,7 +68,7 @@
     line-height: 1.6;
 }
 
-/* Row */
+
 .row {
     display: flex;
     gap: 60px;
@@ -76,7 +76,7 @@
     justify-content: center;
 }
 
-/* Info */
+
 .info {
     flex: 1;
     max-width: 400px;
@@ -145,7 +145,7 @@
     min-height: 120px;
 }
 
-/* Button */
+
 .btn {
     background-color: #333;
     color: #ffd700;

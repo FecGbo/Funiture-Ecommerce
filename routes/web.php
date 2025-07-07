@@ -28,6 +28,10 @@ Route::get('/logout', function () {
     return redirect('/login')->with('success', 'Logged out successfully');
 })->name('logout');
 
+Route::get('/register', function () {
+    return view('auth.registerForm');
+})->name('register');
+
 Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])->name('auth.login');
 
 
@@ -52,6 +56,13 @@ Route::middleware(['auth', 'customer'])->group(function () {
     // Route::get('/customer-dashboard', function () {
     //     return view('welcome');
     // })->name('welcome');
+
+
+    Route::get('/checkout', function () {
+        return view('customer.checkout');
+    })->name('customer.checkout');
+
+
 
 });
 
@@ -153,11 +164,8 @@ Route::get('/cart', [App\Http\Controllers\CartController::class, 'cartList'])->n
 use App\Http\Controllers\CartController;
 
 
-Route::get('/checkout', function () {
-    return view('customer.checkout');
-})->name('customer.checkout');
 
-//Route::get('/cart/payment', [CartController::class, 'payment'])->name('cart.payment');
+Route::get('/cart/payment', [CartController::class, 'payment'])->name('cart.payment');
 Route::get('/cart/success', [CartController::class, 'success'])->name('cart.success');
 
 
@@ -170,3 +178,5 @@ Route::post('/cart/process-payment', [CartController::class, 'processPayment'])-
 //index page
 
 Route::get('/', [customerViewController::class, 'latestFuniture'])->name('customer.latestFuniture');
+
+Route::post('/cart-update-quantity', [CartController::class, 'updateQuantity'])->name('cart.update');

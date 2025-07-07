@@ -9,6 +9,10 @@
     color: white;
 }
 
+.content {
+    background-color: var(--border-color);
+}
+
 .banner-content {
     text-align: center;
 }
@@ -37,6 +41,7 @@
     justify-content: space-between;
     padding: 2rem 5%;
     flex-direction: row;
+    gap: 2rem;
 }
 
 table {
@@ -48,11 +53,9 @@ table {
 thead {
     background-color: black;
     color: #ffd700;
-
-
-
+    min-height: 50px;
+    height: 70px;
 }
-
 
 
 th {
@@ -79,30 +82,50 @@ form {
     margin: 0;
 }
 
-.content-left,
-.content-right {
+.content-left {
     width: 100%;
     padding: 1rem;
 }
 
 .content-left {
-    flex: 80%;
+    flex: 70%;
+    border-radius: var(--border-radius-md);
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .content-right {
-    flex: 20%;
+
+    flex: 30%;
     align-items: center;
-    padding: 1rem;
+
+
 }
 
 .cart-image {
-    width: 100%;
+    width: 100px;
     height: 100px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1rem;
 }
+
+th:first-child,
+td:first-child {
+    width: 100px;
+
+    min-width: 100px;
+    max-width: 100px;
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
 
 .cart-image img {
     width: 100%;
@@ -115,20 +138,22 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 260px;
+    justify-content: space-around;
+    height: 375px;
     min-width: 238px;
     min-height: 200px;
     background: black;
     color: #ffd700;
-    padding: 1rem 5px;
-    position: relative;
+    padding: 1rem;
+
+    border-radius: var(--border-radius-md);
 }
 
-.checkout h2 {
-    position: absolute;
-    top: 1rem;
+.checkout-button {
+    width: 100%;
 }
+
+
 
 
 
@@ -138,15 +163,16 @@ form {
 }
 
 .checkoutbtn {
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
+    width: 100%;
     padding: 0.5rem;
     background-color: #ffd700 !important;
     color: black !important;
     border: none;
-
+    height: 50px;
     cursor: pointer;
     font-size: 1rem;
-    position: absolute;
+
     bottom: 5px;
 }
 
@@ -158,15 +184,19 @@ form {
 }
 
 .cart-subtotal {
-    max-height: 105px;
+    max-height: 190px;
     width: 100%;
     overflow-y: auto;
 
 }
 
 .total_price {
-    position: absolute;
-    bottom: 50px;
+    /* position: absolute;
+    bottom: 50px; */
+}
+
+input#quantityInput {
+    padding: 5px;
 }
 
 .cart-subtotal::-webkit-scrollbar {
@@ -227,11 +257,7 @@ form {
         margin-top: 1rem;
     }
 
-    .table-responsive {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+
 
     table {
         min-width: 600px;
@@ -259,9 +285,7 @@ form {
         padding: 5px;
     }
 
-    .cart-image {
-        height: 50px;
-    }
+
 
     td img {
         width: 50px;

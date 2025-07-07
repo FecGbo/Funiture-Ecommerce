@@ -16,19 +16,72 @@
         </div>
     </div>
 
-    <h2>Pay with Card</h2>
-    <form id="payment-form" action="{{ route('cart.process-payment') }}" method="POST">
-        @csrf
-        <div id="card-element"></div>
-        <button id="payBtn">Pay Now</button>
-        <div id="card-errors" role="alert"></div>
-    </form>
+    <div class="payment">
+
+        <div class="payment-left">
+            <div class="card-info">
+                <div class="email">
+                    <label for="email">Email:</label>
+                    <!-- <input type="text" id="email" name="email" value="{{ auth()->user()->email }}" readonly> -->
+                    <x-input type="text" id="email" name="email" :value="auth()->user()->email" readonly></x-input>
+                </div>
+
+
+            </div>
+
+
+
+            <form id="payment-form" action="{{ route('cart.process-payment') }}" method="POST">
+                @csrf
+                <span>Card information</span>
+                <div class="card_fill">
+                    <div id="card-element"> </div>
+                    <div class="card-cv">
+                        <div id="card-exp"></div>
+                        <div id="card-cvc"></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+                <div class="card-holder">
+                    <label for="card-holder-name">Card Holder Name:</label>
+
+                    <x-input class="card-holder-input" type="text" id="card-holder-name" name="card_holder_name"
+                        placeholder="Enter card holder name" required>
+                    </x-input>
+                </div>
+
+                <x-button id="payBtn" type="submit">Pay Now</x-button>
+                <div id="card-errors" role="alert"></div>
+            </form>
+        </div>
+
+
+        <div class="payment-right">
+            <div class="payment-image">
+                <img src="{{ asset('images/payment.png') }}" alt="Logo">
+            </div>
+        </div>
+    </div>
+
+
+
+
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const stripe = Stripe('{{ config('services.stripe.key') }}');
         const elements = stripe.elements();
-        const card = elements.create('card');
+        const card = elements.create('cardNumber');
+        const cardExp = elements.create('cardExpiry');
+        const cardCvc = elements.create('cardCvc');
         card.mount('#card-element');
+        cardExp.mount('#card-exp');
+        cardCvc.mount('#card-cvc');
 
         const form = document.getElementById('payment-form');
         form.addEventListener('submit', async (event) => {
