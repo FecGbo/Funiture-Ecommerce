@@ -1,4 +1,4 @@
-/* Hero Section Styles */
+
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/image.jpg');
     background-size: cover;
@@ -22,7 +22,7 @@
     opacity: 0.8;
 }
 
-/* Main Content Styles */
+
 .main-content-about {
 
     margin: 80px auto;
@@ -87,7 +87,7 @@
     flex-direction: column;
 }
 
-/* Founder Section Styles */
+
 .founder-section {
     background: #1a1a1a;
     color: white;
@@ -143,7 +143,7 @@
     line-height: 1.8;
 }
 
-/* Features Section Styles */
+
 .features-section {
     max-width: 1200px;
     margin: 80px auto;
@@ -186,7 +186,7 @@
     line-height: 1.6;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .location-section {
         grid-template-columns: 1fr;
