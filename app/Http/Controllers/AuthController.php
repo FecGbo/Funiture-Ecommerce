@@ -20,9 +20,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role == 'admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Welcome Admin');
+                return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome Admin');
             } elseif ($user->role == 'customer') {
-                return redirect()->route('welcome')->with('success', 'Welcome User');
+                return redirect()->intended(route('customer.latestFuniture'))->with('success', 'Welcome User');
             } else {
                 return redirect()->back()->with('error', 'Unauthorized user type');
             }
@@ -42,10 +42,27 @@ class AuthController extends Controller
             'phone' => 'required|string|max:15',
             'dob' => 'required|date',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ])->validate();
+        ]);
 
-        
+
         $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->address = $request->input('address');
+        $user->phone = $request->input('phone');
+        $user->dob = $request->input('dob');
+        $user->role = 'customer';
+        if ($request->hasFile('image')) {
+            $user->image = $request->file('image')->store('users', 'public');
+        }
+        $user->save();
+
+
+
+        return redirect()->route('login')->with('success', 'Registration successful, please login');
+
+
 
 
     }

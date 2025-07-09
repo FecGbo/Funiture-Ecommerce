@@ -18,16 +18,11 @@
             <img src="{{ asset('images/register.png') }}" alt="">
         </div>
         <div class="content-right">
-            <form action="{{ route('auth.login') }}" method="post">
+            <form action="{{ route('auth.register') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h1>Register</h1>
                 <hr>
-                @if(session('error'))
-                    <div style="color:red;">{{ session('error') }}</div>
-                @endif
-                @if(session('success'))
-                    <div style="color:green;">{{ session('success') }}</div>
-                @endif
+
                 @if ($errors->any())
                     <div style="color:red;">
                         <ul>

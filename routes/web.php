@@ -32,6 +32,8 @@ Route::get('/register', function () {
     return view('auth.registerForm');
 })->name('register');
 
+Route::post('/register-customer', [App\Http\Controllers\AuthController::class, 'customerRegister'])->name('register');
+
 Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])->name('auth.login');
 
 
@@ -47,20 +49,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
-Route::get('/customer-dashboard', function () {
-    return view('welcome');
-})->name('welcome');
+
 
 Route::middleware(['auth', 'customer'])->group(function () {
 
-    // Route::get('/customer-dashboard', function () {
-    //     return view('welcome');
-    // })->name('welcome');
+
 
 
     Route::get('/checkout', function () {
         return view('customer.checkout');
     })->name('customer.checkout');
+
+    Route::post('/add-orders', [App\Http\Controllers\OrderController::class, 'addOrders'])->name('customer.addOrders');
 
 
 
@@ -128,9 +128,9 @@ Route::get('/customer-about', function () {
     return view('customer.about');
 })->name('customer.about');
 
-Route::get('/customer-product', function () {
-    return view('customer.product');
-})->name('customer.product');
+// Route::get('/customer-product', function () {
+//     return view('customer.product');
+// })->name('customer.product');
 
 
 

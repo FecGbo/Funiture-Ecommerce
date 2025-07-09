@@ -77,8 +77,8 @@
                     @endphp
 
                     <!-- <div class="cart-total">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div> -->
                 @else
                     <p>Your cart is empty.</p>
                 @endif
@@ -101,8 +101,12 @@
                 @endif
 
                 <div class="checkout-button">
-                    <x-button type="button" :variant="'success'" class="checkoutbtn"
-                        onclick="window.location.href='{{ route('customer.checkout') }}'">Pay now</x-button>
+                    <form action="{{ route('customer.addOrders') }}" method="POST">
+                        @csrf
+                        <x-button type="submit" :variant="'success'" class="checkoutbtn">Pay now</x-button>
+                    </form>
+
+
                 </div>
 
             </div>

@@ -50,7 +50,7 @@
                 <div class="keep-login">
                     <div class="keep">
                         <input type="checkbox" name="remember" id="remember" style="width: 20px;height:20px;">
-                        <label for="remember">Keep me logged in</label>
+                        <label for="remember" style="opacity: 0.5;">Keep me logged in</label>
                     </div>
                     <div class="forget-password">
                         <a href="">Forgot password?</a>
@@ -60,7 +60,8 @@
 
 
                 <x-button id="loginbtn" name="login" type="submit">Log in</x-button>
-                <p>Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
+                <p><span style="opacity: 0.5;">Don't have an account?</span> <a href="{{ route('register') }}">Register
+                        here</a></p>
 
             </form>
 

@@ -121,9 +121,7 @@
 
 
         </div>
-        <div class="pagination">
-            {{ $bestSelling->links() }}
-        </div>
+
 
 
     </div>

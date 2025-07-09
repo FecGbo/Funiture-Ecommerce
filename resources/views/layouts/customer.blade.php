@@ -52,13 +52,21 @@
 
             <div class="nav-icons">
                 <div class="admin-profile">
+                    @auth
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
+                            id="adminAvatar">
+                    @else
+                        <i class="fas fa-user" id="adminAvatar" style="font-size: 20px;"></i>
+                    @endauth
 
-                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
-                        id="adminAvatar">
                     <ul class="admin-dropdown" id="adminDropdown">
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Settings</a></li>
-                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                        @auth
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        @else
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                        @endauth
                     </ul>
                 </div>
 

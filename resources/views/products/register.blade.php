@@ -9,7 +9,6 @@
             <h3>Add New Product</h3>
             <p class="form-subtitle">Fill all information below</p>
         </div>
-
         <form action="{{ route('product.add') }}" method="POST" enctype="multipart/form-data" class="category-form">
             @csrf
 
@@ -160,3 +159,5 @@
         });
     </script>
 @endsection
+
+

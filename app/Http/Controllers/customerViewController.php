@@ -138,7 +138,7 @@ class customerViewController extends Controller
     {
         $products = Product::orderBy('created_at', 'desc')->take(4)->get();
 
-        $bestSelling = Product::paginate(8);
+        $bestSelling = Product::take(8)->get();
         return view('welcome', compact('products', 'bestSelling'));
     }
 

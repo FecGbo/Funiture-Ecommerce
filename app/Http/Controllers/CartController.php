@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -163,6 +164,9 @@ class CartController extends Controller
 
     public function success()
     {
+
+
+
         session()->forget('cart');
         return view('customer.success');
     }
@@ -185,11 +189,22 @@ class CartController extends Controller
             \Stripe\Charge::create([
                 'amount' => $usdAmount * 100, // USD in cents
                 'currency' => 'usd',
-                'description' => 'Order Payment',
+                'description' => auth()->user()->name . ' - Order Payment',
                 'source' => $request->stripeToken,
             ]);
+
+
+            $order = Order::where('customer_id', auth()->id())
+                ->where('status', 'pending')
+                ->first();
+
+            if ($order) {
+                $order->status = 'approved';
+                $order->save();
+            }
+
             session()->forget('cart');
-            return redirect()->route('cart.success');
+            return redirect()->route('cart.success')->with('success', 'Payment successful!');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -214,7 +229,7 @@ class CartController extends Controller
                 $Total_price += $item['price'] * $item['quantity'];
             }
 
-            // Build the HTML output (like your Blade)
+
             $output = '<div class="content-right">
             <div class="checkout">
                 <div class="checkout-title">

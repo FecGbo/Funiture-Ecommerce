@@ -56,7 +56,8 @@
                     </x-input>
                 </div>
 
-                <x-button id="payBtn" type="submit">Pay Now</x-button>
+
+                <x-button type="submit" id="payBtn">Pay Now</x-button>
                 <div id="card-errors" role="alert"></div>
             </form>
         </div>
