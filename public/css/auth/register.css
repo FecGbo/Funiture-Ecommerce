@@ -54,10 +54,15 @@
 
 .content-left img {
     width: 90%;
-    height: 100%;
+    /* height: 100%; */
     object-fit: cover;
 
     box-shadow: var(--box-shadow-xs);
+}
+
+form a:hover {
+    text-decoration: none;
+
 }
 
 .content-right {
@@ -123,4 +128,43 @@ form input {
 #cancel,
 #loginbtn {
     flex: 45%;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1rem;
+    }
+
+    .content-left {
+        flex: none;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .content-left img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: var(--box-shadow-xs);
+        display: block;
+        margin: 0 auto;
+    }
+
+    .content-right {
+        flex: none;
+        width: 100%;
+        padding: 0;
+    }
+
+    form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }

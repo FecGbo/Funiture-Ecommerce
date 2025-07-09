@@ -32,7 +32,7 @@ Route::get('/register', function () {
     return view('auth.registerForm');
 })->name('register');
 
-Route::post('/register-customer', [App\Http\Controllers\AuthController::class, 'customerRegister'])->name('register');
+Route::post('/register-customer', [App\Http\Controllers\AuthController::class, 'customerRegister'])->name('auth.register');
 
 Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])->name('auth.login');
 

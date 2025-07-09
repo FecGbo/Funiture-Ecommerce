@@ -73,6 +73,10 @@ form a {
     text-decoration: none;
 }
 
+form a:hover {
+    text-decoration: none;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -108,4 +112,46 @@ form input {
     background: black !important;
     color: #ffd700 !important;
     height: 50px;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 1rem;
+    }
+
+    .content-left {
+        flex: none;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .content-left img {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: var(--box-shadow-xs);
+        display: block;
+        margin: 0 auto;
+    }
+
+
+
+    .content-right {
+        flex: none;
+        width: 100%;
+        padding: 0;
+        height: 400px;
+    }
+
+    form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }
