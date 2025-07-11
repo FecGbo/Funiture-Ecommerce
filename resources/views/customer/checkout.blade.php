@@ -60,6 +60,10 @@
                 <x-button type="submit" id="payBtn">Pay Now</x-button>
                 <div id="card-errors" role="alert"></div>
             </form>
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
         </div>
 
 

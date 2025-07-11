@@ -51,7 +51,7 @@
                                     <td>{{ $item['name'] }}</td>
                                     <td>MMK {{ number_format($item['price']) }}</td>
                                     <td><input type="number" name="quantity" id="quantityInput" value="{{ $item['quantity'] }}"
-                                            min="1" max="{{ $item['stock'] }}"
+                                            min="1" max="10" oninput="if(this.value > 10) this.value = 10;"
                                             onchange="updateQuantity({{ $item['id'] }}, this.value)">
                                     </td>
                                     <td>MMK {{ number_format($item['price'] * $item['quantity']) }}</td>
@@ -77,8 +77,8 @@
                     @endphp
 
                     <!-- <div class="cart-total">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                 @else
                     <p>Your cart is empty.</p>
                 @endif
@@ -103,11 +103,14 @@
                 <div class="checkout-button">
                     <form action="{{ route('customer.addOrders') }}" method="POST">
                         @csrf
-                        <x-button type="submit" :variant="'success'" class="checkoutbtn">Pay now</x-button>
+                        <x-button type="submit" :variant="'success'" class="checkoutbtn">Check Out</x-button>
                     </form>
 
 
                 </div>
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
 
             </div>
 
@@ -121,6 +124,10 @@
 @endsection
 @push('scripts')
 <script>
+    // document.getElementById('quantityInput').addEventListener('change', function () {
+
+
+    // });
 
     function updateQuantity(productId, quantity) {
         $.ajax({

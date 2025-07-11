@@ -193,14 +193,18 @@ class CartController extends Controller
                 'source' => $request->stripeToken,
             ]);
 
+            $orderId = session('order_id');
 
-            $order = Order::where('customer_id', auth()->id())
+            $order = Order::where('id', $orderId)
                 ->where('status', 'pending')
+                ->where('customer_id', auth()->id())
                 ->first();
+
 
             if ($order) {
                 $order->status = 'approved';
                 $order->save();
+                session()->forget('order_id');
             }
 
             session()->forget('cart');
@@ -214,20 +218,29 @@ class CartController extends Controller
     public function updateQuantity(Request $request)
     {
         $id = $request->input('product_id');
+
         $cart = session()->get('cart', []);
+
         if (isset($cart[$id])) {
             $quantity = $request->input('quantity', 1);
             if ($quantity < 1) {
                 $quantity = 1;
             }
+            if ($quantity > 11) {
+                $quantity = 10;
+            }
             $cart[$id]['quantity'] = $quantity;
             session()->put('cart', $cart);
 
-            // Calculate total price
+
             $Total_price = 0;
             foreach ($cart as $item) {
                 $Total_price += $item['price'] * $item['quantity'];
             }
+
+
+
+
 
 
             $output = '<div class="content-right">
@@ -246,7 +259,10 @@ class CartController extends Controller
             }
 
             $output .= '<div class="checkout-button">
-                <button type="button" class="checkoutbtn btn btn-success" onclick="window.location.href=\'' . route('customer.checkout') . '\'">Pay now</button>
+                <form action="' . route('customer.addOrders') . '" method="POST">
+                    ' . csrf_field() . '
+                    <button type="submit" class="checkoutbtn btn btn-success">Check Out</button>
+                </form>
             </div>
         </div>
     </div>';

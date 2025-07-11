@@ -23,7 +23,8 @@
                 <p class="product-description">{{ $product->description }}</p>
 
                 <div class="addToCart-container">
-                    <input type="number" name="quantity" id="quantityInput" value="1" min="1" max="{{ $product->stock }}">
+                    <input type="number" name="quantity" id="quantityInput" value="1" min="1" max="{{ $product->stock }}"
+                        oninput="if(this.value>10) this.value = 10;">
                     <x-button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</x-button>
 
                 </div>

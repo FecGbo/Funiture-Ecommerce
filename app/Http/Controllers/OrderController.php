@@ -29,9 +29,24 @@ class OrderController extends Controller
             $order->order_date = now();
             $order->status = 'pending';
             $order->save();
+            session(['order_id' => $order->id]);
+
+
+
             foreach ($cart as $item) {
+                $product = Product::find($item['id']);
+                if (!$product) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Product not found.');
+                }
+                if ($product->stock < $item['quantity']) {
+                    DB::rollBack();
+                    return redirect()->back()->with('error', 'Insufficient stock for product: ' . $product->name);
+                }
+            }
 
 
+            foreach ($cart as $item) {
                 DB::table('orders_details')->insert([
                     'order_id' => $order->id,
                     'product_id' => $item['id'],
@@ -39,32 +54,18 @@ class OrderController extends Controller
                     'price' => $item['price'] * $item['quantity'],
                     'created_at' => now(),
                     'updated_at' => now(),
-
                 ]);
-
-                $product = new Product();
-                $product = Product::find($item['id']);
-                if ($product) {
-                    if ($product->stock < $item['quantity']) {
-                        DB::rollBack();
-                        return redirect()->back()->with('error', 'Insufficient stock for product: ' . $product->name);
-                    }
-                    $product->stock -= $item['quantity'];
-                    $product->save();
-                }
+                Product::where('id', $item['id'])->decrement('stock', $item['quantity']);
             }
 
 
             DB::commit();
 
 
-            return redirect()->route('customer.checkout');
-
-
-
+            return redirect()->route('customer.checkout')->with('success', 'Order placed! Please proceed to payment.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'An error occurred while processing your order. Please try again.');
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
 

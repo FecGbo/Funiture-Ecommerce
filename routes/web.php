@@ -7,9 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 //Search
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
@@ -65,6 +63,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
 
 
 });
+Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('cart.process-payment');
 
 // categories
 
@@ -171,7 +170,7 @@ Route::get('/cart/success', [CartController::class, 'success'])->name('cart.succ
 
 
 
-Route::post('/cart/process-payment', [CartController::class, 'processPayment'])->name('cart.process-payment');
+
 
 
 
