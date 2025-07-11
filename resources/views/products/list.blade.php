@@ -80,13 +80,14 @@
                                 </div>
                             </div>
                         </th>
-                        <th style="width: 80px;">ACTION</th>
+                        <!-- <th style="width: 80px;">ACTION</th> -->
                     </tr>
                 </thead>
                 <tbody class="all-data" id="all-data">
                     @foreach($products as $product)
                         <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}"
-                            data-product-id="{{ $product->id }}">
+                            data-product-id="{{ $product->id }}"
+                            data-url="{{ route('product.detail', $product->id) }}">
                             <td class="table-cell" data-label="Category">
                                 <div class="category-info">
                                     @if($product->category && $product->category->image)
@@ -127,14 +128,14 @@
                             <td class="table-cell" data-label="Stock">
                                 <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
                             </td>
-                            <td class="table-cell" data-label="Action">
+                            <!-- <td class="table-cell" data-label="Action">
                                 <div class="action-menu">
-                                    <a href="{{ route('product.detail', $product->id) }}" class="action-btn"
+                                    <a href="" class="action-btn"
                                         title="View Details">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                     @endforeach
                 </tbody>
@@ -150,6 +151,14 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.table-row').forEach(row => {
+                row.addEventListener('click', function (e) {
+
+                    if (e.target.closest('.editable')) return;
+                    window.location.href = row.getAttribute('data-url');
+                });
+            });
             function makeEditable(element, type = 'input') {
                 if (element.classList.contains('editing')) return;
                 element.classList.add('editing');

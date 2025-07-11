@@ -165,9 +165,16 @@ button#payBtn {
 
 @media (max-width: 900px) {
     .payment {
-        flex-direction: column;
+        flex-direction: column-reverse;
         padding: 1rem 2%;
         align-items: stretch;
+    }
+
+    .payment-right {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .payment-left,
@@ -178,12 +185,17 @@ button#payBtn {
 
     .payment-image {
         height: 220px;
+        width: 220px;
         margin-top: 2rem;
     }
 
     .payment-image img {
-        max-width: 100%;
-        max-height: 200px;
+
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 50%;
+
     }
 
     #payment-form {

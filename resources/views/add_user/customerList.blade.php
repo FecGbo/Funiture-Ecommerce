@@ -102,13 +102,13 @@
 
 
 
-
-                        <th style="width: 80px;">ACTION</th>
+                        <!-- 
+                                        <th style="width: 80px;">ACTION</th> -->
                     </tr>
                 </thead>
                 <tbody id="all-data">
                     @foreach($customers as $user)
-                        <tr class="table-row" data-user-id="{{ $user->id }}">
+                        <tr class="table-row" data-user-id="{{ $user->id }}" data-url="{{ route('user.detail', $user->id) }}">
 
                             <td class="table-cell" data-label="Category">
                                 <div class="user-info">
@@ -138,14 +138,14 @@
                             <td class="table-cell" data-label="Phone">
                                 <p class="user-phone editable" data-field="phone">{{ $user->phone }}</p>
                             </td>
-
-                            <td class="table-cell" data-label="Action">
-                                <div class="action-menu">
-                                    <a href="{{ route('user.detail', $user->id)}}" class="action-btn" title="View Details">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </td>
+                            <!-- 
+                                                    <td class="table-cell" data-label="Action">
+                                                        <div class="action-menu">
+                                                            <a href="" class="action-btn" title="View Details">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td> -->
                         </tr>
                     @endforeach
                 </tbody>
@@ -161,6 +161,14 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.table-row').forEach(row => {
+                row.addEventListener('click', function (e) {
+
+                    if (e.target.closest('.editable')) return;
+                    window.location.href = row.getAttribute('data-url');
+                });
+            });
             function makeEditable(element, type = 'input') {
                 if (element.classList.contains('editing')) return;
                 element.classList.add('editing');
@@ -172,6 +180,7 @@
                 } else {
                     input = document.createElement('input');
                     input.type = 'text';
+                    input.style.maxWidth = '100px';
                 }
                 input.value = oldValue.trim();
                 input.className = 'inline-edit-input';

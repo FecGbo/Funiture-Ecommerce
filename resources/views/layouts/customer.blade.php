@@ -53,8 +53,7 @@
             <div class="nav-icons">
                 <div class="admin-profile">
                     @auth
-                        <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
-                            id="adminAvatar">
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Admin" id="adminAvatar">
                     @else
                         <i class="fas fa-user" id="adminAvatar" style="font-size: 20px;"></i>
                     @endauth

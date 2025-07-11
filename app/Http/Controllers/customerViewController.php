@@ -115,6 +115,9 @@ class customerViewController extends Controller
         $cart = session()->get('cart', []);
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
+            if ($cart[$productId]['quantity'] > 10) {
+                $cart[$productId]['quantity'] = 10;
+            }
         } else {
             $cart[$productId] = [
                 "id" => $product->id,

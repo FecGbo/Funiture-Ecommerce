@@ -17,15 +17,14 @@
     <div class="mid-section">
         <div class="mid-content">
             <div class="mid-image">
-                <img src="{{ asset('images/sofa.jpg') }}" alt="Mr. David" class="mid-photo">
+                <img src="{{ asset('images/success.png') }}" alt="Mr. David" class="mid-photo">
             </div>
             <div class="mid-info">
                 <h2>Your Payment was successfully</h2>
 
 
                 <p class="description">
-                    Thank You for your purchase! Your payment has been successfully processed. We appreciate your business
-                    and hope you enjoy your new furniture.
+                    Thank You for your purchase! We will be in contact with more details shortly.
                 </p>
 
 

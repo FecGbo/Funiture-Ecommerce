@@ -63,7 +63,7 @@
         </nav>
         <div class="admin-card">
             <div class="admin-card-profile">
-                <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin">
+                <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Admin">
                 <p>Furino Owner</p>
                 <p>Mr. Kelvin</p>
             </div>
@@ -86,8 +86,7 @@
                 </form>
                 <div class="admin-profile">
                     <span>Admin</span>
-                    <img src="https://ui-avatars.com/api/?name=Admin&background=0D8ABC&color=fff" alt="Admin"
-                        id="adminAvatar">
+                    <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Admin" id="adminAvatar">
                     <ul class="admin-dropdown" id="adminDropdown">
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Settings</a></li>

@@ -22,7 +22,7 @@ class SearchController extends Controller
                     ->orWhere('description', 'like', '%' . $request->input('search') . '%')
                     ->get();
                 foreach ($results as $category) {
-                    $output .= '<tr class="table-row" data-category-id="' . $category->id . '">';
+                    $output .= '<tr class="table-row" data-category-id="' . $category->id . '" data-url="' . route('category.detail', $category->id) . '">';
 
                     $output .= '<td class="table-cell" data-label="Category"><div class="category-info">';
 
@@ -35,7 +35,7 @@ class SearchController extends Controller
                     $output .= '</div></td>';
                     $output .= '<td class="table-cell" data-label="Description"><p class="category-description editable" data-field="description">' . e($category->description) . '</p></td>';
                     $output .= '<td class="table-cell" data-label="Action"><div class="action-menu">';
-                    $output .= '<a href="' . route('category.detail', $category->id) . '" class="action-btn" title="View Details"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+
                     $output .= '</div></td>';
 
 
@@ -55,7 +55,7 @@ class SearchController extends Controller
                 $newProductId = session('new_product_id');
                 $output = '';
                 foreach ($results as $product) {
-                    $output .= '<tr class="table-row" data-category-id="' . ($product->category->id ?? '') . '" data-product-id="' . $product->id . '">';
+                    $output .= '<tr class="table-row" data-category-id="' . ($product->category->id ?? '') . '" data-product-id="' . $product->id . '" data-url="' . route('product.detail', $product->id) . '">';
                     // Category column
                     $output .= '<td class="table-cell" data-label="Category"><div class="category-info">';
                     if ($product->category && $product->category->image) {
@@ -82,7 +82,7 @@ class SearchController extends Controller
                     $output .= '<td class="table-cell" data-label="Stock"><span class="stock editable" data-field="stock">' . e($product->stock) . '</span></td>';
                     // Action
                     $output .= '<td class="table-cell" data-label="Action"><div class="action-menu">';
-                    $output .= '<a href="' . route('product.detail', $product->id) . '" class="action-btn" title="View Details"><i class="fa fa-eye"></i></a>';
+
                     $output .= '</div></td>';
                     $output .= '</tr>';
                 }
@@ -104,7 +104,7 @@ class SearchController extends Controller
                     $output .= '<td class="table-cell" data-label="Category">';
                     $output .= '<div class="user-info">';
                     if ($user->image) {
-                        $output .= '<img src="' . asset('storage/' . $user->image) . '" alt="' . e($user->name) . '" class="user-img">';
+                        $output .= '<img src="' . asset('storage/' . $user->image) . '" alt="' . e($user->name) . '" class="user-img" data-url="' . route('user.detail', $user->id) . '">';
                     } else {
                         $output .= '<div class="user-icon sofa">' . strtoupper(substr($user->name, 0, 2)) . '</div>';
                     }
@@ -115,7 +115,7 @@ class SearchController extends Controller
                     $output .= '<td class="table-cell" data-label="Address"><p class="user-address editable" data-field="address">' . e($user->address) . '</p></td>';
                     $output .= '<td class="table-cell" data-label="Phone"><p class="user-phone editable" data-field="phone">' . e($user->phone) . '</p></td>';
                     $output .= '<td class="table-cell" data-label="Action"><div class="action-menu">';
-                    $output .= '<a href="' . route('user.detail', $user->id) . '" class="action-btn" title="View Details"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+
                     $output .= '</div></td>';
                     $output .= '</tr>';
                 }
@@ -139,7 +139,7 @@ class SearchController extends Controller
                     ->get();
                 $output = '';
                 foreach ($results as $user) {
-                    $output .= '<tr class="table-row" data-user-id="' . $user->id . '">';
+                    $output .= '<tr class="table-row" data-user-id="' . $user->id . '" data-url="' . route('user.detail', $user->id) . '">';
                     $output .= '<td class="table-cell" data-label="Category">';
                     $output .= '<div class="user-info">';
                     if ($user->image) {
@@ -154,7 +154,7 @@ class SearchController extends Controller
                     $output .= '<td class="table-cell" data-label="Address"><p class="user-address editable" data-field="address">' . e($user->address) . '</p></td>';
                     $output .= '<td class="table-cell" data-label="Phone"><p class="user-phone editable" data-field="phone">' . e($user->phone) . '</p></td>';
                     $output .= '<td class="table-cell" data-label="Action"><div class="action-menu">';
-                    $output .= '<a href="' . route('user.detail', $user->id) . '" class="action-btn" title="View Details"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+
                     $output .= '</div></td>';
                     $output .= '</tr>';
                 }

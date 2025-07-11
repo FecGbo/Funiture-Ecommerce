@@ -25,7 +25,10 @@
             <table class="categories-table">
                 <thead class="categories-thead">
                     <tr>
-                        <!-- <th style="width: 40px;"></th> -->
+                        <th style="">
+
+
+                        </th>
                         <th class="sortable-header">
                             <!-- <span>CATEGORY</span> -->
                             <div class="sort-btn-group">
@@ -55,21 +58,24 @@
                                 </div>
                             </div>
                         </th>
-                        <th style="width: 80px;">ACTION</th>
+                        <!-- <th style="width: 80px;">ACTION</th> -->
                     </tr>
                 </thead>
                 <tbody class="all-data" id="all-data">
                     @foreach($categories as $category)
-                        <tr class="table-row" data-category-id="{{ $category->id }}">
-
+                        <tr class="table-row" data-category-id="{{ $category->id }}"
+                            data-url="{{ route('category.detail', $category->id) }}">
+                            <td class="table-cell" style="display:flex;justify-content: center;align-items: center;">
+                                @if($category->image)
+                                    <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                        class="category-img">
+                                @else
+                                    <div class="category-icon sofa">{{ strtoupper(substr($category->name, 0, 2)) }}</div>
+                                @endif
+                            </td>
                             <td class="table-cell" data-label="Category">
                                 <div class="category-info">
-                                    @if($category->image)
-                                        <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
-                                            class="category-img">
-                                    @else
-                                        <div class="category-icon sofa">{{ strtoupper(substr($category->name, 0, 2)) }}</div>
-                                    @endif
+
                                     <span class="category-name editable" data-field="name">
                                         {{ $category->name }}
                                         @if(isset($newCategoryId) && $category->id == $newCategoryId)
@@ -82,14 +88,14 @@
                                 <p class="category-description editable" data-field="description">{{ $category->description }}
                                 </p>
                             </td>
-                            <td class="table-cell" data-label="Action">
-                                <div class="action-menu">
-                                    <a href="{{ route('category.detail', $category->id) }}" class="action-btn"
-                                        title="View Details">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </td>
+                            <!-- <td class="table-cell" data-label="Action">
+                                                                                                                                        <div class="action-menu">
+                                                                                                                                            <a href="" class="action-btn"
+                                                                                                                                                title="View Details">
+                                                                                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                                                                            </a>
+                                                                                                                                        </div>
+                                                                                                                                    </td> -->
                         </tr>
                     @endforeach
 
@@ -108,6 +114,14 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.table-row').forEach(row => {
+                row.addEventListener('click', function (e) {
+
+                    if (e.target.closest('.editable')) return;
+                    window.location.href = row.getAttribute('data-url');
+                });
+            });
             function makeEditable(element, type = 'input') {
                 if (element.classList.contains('editing')) return;
                 element.classList.add('editing');
@@ -116,6 +130,7 @@
                 if (type === 'textarea') {
                     input = document.createElement('textarea');
                     input.style.minHeight = '20px';
+                    input.style.maxWidth = '400px';
                 } else {
                     input = document.createElement('input');
                     input.type = 'text';
