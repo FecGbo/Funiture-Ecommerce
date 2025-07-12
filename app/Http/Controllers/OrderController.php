@@ -76,8 +76,18 @@ class OrderController extends Controller
 
     }
 
-    public function listOrders()
+    public function listOrders(Request $request)
     {
+        $sort = $request->input('sort', 'id');
+        $dir = $request->input('dir', 'asc');
+        $allowedSorts = ['order_date', 'customer_name', 'price', 'quantity'];
+        $allowedDirs = ['asc', 'desc'];
+        if (!in_array($sort, $allowedSorts)) {
+            $sort = 'id';
+        }
+        if (!in_array($dir, $allowedDirs)) {
+            $dir = 'asc';
+        }
 
         $orders = DB::table('orders_details')
             ->join('orders', 'orders_details.order_id', '=', 'orders.id')
@@ -93,10 +103,10 @@ class OrderController extends Controller
                 'users.name as customer_name',
                 'users.image as customer_image'
             )
-            ->orderByDesc('orders.order_date')
+            ->orderBy($sort, $dir)
             ->paginate(6);
 
-        return view('orders.list', compact('orders'));
+        return view('orders.list', compact('orders', 'sort', 'dir'));
     }
 
 

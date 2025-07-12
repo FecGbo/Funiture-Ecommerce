@@ -38,10 +38,11 @@
                             <div class="sort-btn-group">
                                 <span>CUSTOMER</span>
                                 <div class="sort-btn-group-tdown">
-                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                    <button class="sort-btn" data-sort="customer_name" data-dir="asc" aria-label="Sort A-Z">
                                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     </button>
-                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                    <button class="sort-btn" data-sort="customer_name" data-dir="desc"
+                                        aria-label="Sort Z-A">
                                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -66,11 +67,10 @@
                             <div class="sort-btn-group">
                                 <span>QTY</span>
                                 <div class="sort-btn-group-tdown">
-                                    <button class="sort-btn" data-sort="sale_price" data-dir="asc"
-                                        aria-label="Sort Low-High">
+                                    <button class="sort-btn" data-sort="quantity" data-dir="asc" aria-label="Sort Low-High">
                                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     </button>
-                                    <button class="sort-btn" data-sort="sale_price" data-dir="desc"
+                                    <button class="sort-btn" data-sort="quantity" data-dir="desc"
                                         aria-label="Sort High-Low">
                                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                                     </button>
@@ -81,10 +81,10 @@
                             <div class="sort-btn-group">
                                 <span>TOTAL</span>
                                 <div class="sort-btn-group-tdown">
-                                    <button class="sort-btn" data-sort="stock" data-dir="asc" aria-label="Sort Low-High">
+                                    <button class="sort-btn" data-sort="price" data-dir="asc" aria-label="Sort Low-High">
                                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     </button>
-                                    <button class="sort-btn" data-sort="stock" data-dir="desc" aria-label="Sort High-Low">
+                                    <button class="sort-btn" data-sort="price" data-dir="desc" aria-label="Sort High-Low">
                                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -94,10 +94,10 @@
                             <div class="sort-btn-group">
                                 <span>DATE</span>
                                 <div class="sort-btn-group-tdown">
-                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                    <button class="sort-btn" data-sort="order_date" data-dir="asc" aria-label="Sort A-Z">
                                         <i class="fa fa-caret-up" aria-hidden="true"></i>
                                     </button>
-                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                    <button class="sort-btn" data-sort="order_date" data-dir="desc" aria-label="Sort Z-A">
                                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -144,10 +144,10 @@
                                     <span>{{ $order->product_name }}</span>
                                 </div>
                             </td>
-                            <td class="table-cell" data-label="Quantity">
+                            <td class="table-cell" data-label="Quantity" data-sort="quantity">
                                 <span>{{ $order->quantity }}</span>
                             </td>
-                            <td class="table-cell" data-label="Price">
+                            <td class="table-cell" data-label="Price" data-sort="price">
                                 <span>{{ $order->price }}</span>
                             </td>
                             <td class="table-cell" data-label="Date">
@@ -173,6 +173,19 @@
 @endsection
 @push('scripts')
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sortField = btn.getAttribute('data-sort');
+                    const dir = btn.getAttribute('data-dir');
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('sort', sortField);
+                    url.searchParams.set('dir', dir);
+                    window.location.href = url.toString();
+                });
+            });
+        });
 
 
 
