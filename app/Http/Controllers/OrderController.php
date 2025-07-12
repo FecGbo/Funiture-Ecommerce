@@ -76,6 +76,29 @@ class OrderController extends Controller
 
     }
 
+    public function listOrders()
+    {
+
+        $orders = DB::table('orders_details')
+            ->join('orders', 'orders_details.order_id', '=', 'orders.id')
+            ->join('products', 'orders_details.product_id', '=', 'products.id')
+            ->join('users', 'orders.customer_id', '=', 'users.id')
+            ->select(
+                'orders_details.*',
+                'products.name as product_name',
+                'products.image as product_image',
+                'orders.order_date',
+                'orders.status',
+                'orders.id as order_id',
+                'users.name as customer_name',
+                'users.image as customer_image'
+            )
+            ->orderByDesc('orders.order_date')
+            ->paginate(6);
+
+        return view('orders.list', compact('orders'));
+    }
+
 
 
 }

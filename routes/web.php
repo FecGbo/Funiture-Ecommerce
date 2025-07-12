@@ -87,8 +87,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/list-customers', [App\Http\Controllers\AddUserController::class, 'getCustomer'])->name('customer.list');
 
 
-
-
+    //orders
+    Route::get('/list-orders', [App\Http\Controllers\OrderController::class, 'listOrders'])->name('order.list');
 
 
 });

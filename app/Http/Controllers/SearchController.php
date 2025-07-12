@@ -52,7 +52,7 @@ class SearchController extends Controller
                     ->orWhere('sale_price', 'like', "%$search%")
                     ->orWhere('description', 'like', "%$search%")
                     ->get();
-                $newProductId = session('new_product_id');
+
                 $output = '';
                 foreach ($results as $product) {
                     $output .= '<tr class="table-row" data-category-id="' . ($product->category->id ?? '') . '" data-product-id="' . $product->id . '" data-url="' . route('product.detail', $product->id) . '">';
@@ -160,6 +160,54 @@ class SearchController extends Controller
                 }
                 if ($output === '') {
                     $output = '<tr><td colspan="6" style="text-align:center;color:#888;">No results found.</td></tr>';
+                }
+                return response()->json(['html' => $output]);
+
+            case 'orders':
+                $search = $request->input('search');
+                $results = \DB::table('orders_details')
+                    ->join('orders', 'orders_details.order_id', '=', 'orders.id')
+                    ->join('products', 'orders_details.product_id', '=', 'products.id')
+                    ->join('users', 'orders.customer_id', '=', 'users.id')
+                    ->where(function ($q) use ($search) {
+                        $q->where('orders.id', 'like', "%$search%")
+                            ->orWhere('users.name', 'like', "%$search%")
+                            ->orWhere('products.name', 'like', "%$search%")
+                            ->orWhere('orders.status', 'like', "%$search%")
+                            ->orWhere('orders.order_date', 'like', "%$search%");
+                    })
+                    ->select(
+                        'orders_details.*',
+                        'products.name as product_name',
+                        'products.image as product_image',
+                        'orders.order_date',
+                        'orders.status',
+                        'orders.id as order_id',
+                        'users.name as customer_name',
+                        'users.image as customer_image'
+                    )
+                    ->get();
+
+                $output = '';
+                foreach ($results as $order) {
+                    $output .= '<tr class="table-row">';
+                    $output .= '<td class="table-cell" data-label="Category"><span>' . $order->order_id . '</span></td>';
+                    $output .= '<td class="table-cell" data-label="Customer"><div class="category-info">';
+                    $output .= '<img class="category-img" src="' . asset('storage/' . $order->customer_image) . '" alt="">';
+                    $output .= '<span>' . e($order->customer_name) . '</span>';
+                    $output .= '</div></td>';
+                    $output .= '<td class="table-cell" data-label="Product"><div class="category-info">';
+                    $output .= '<img src="' . asset('storage/' . $order->product_image) . '" alt="Product Image" class="category-img">';
+                    $output .= '<span>' . e($order->product_name) . '</span>';
+                    $output .= '</div></td>';
+                    $output .= '<td class="table-cell" data-label="Quantity"><span>' . $order->quantity . '</span></td>';
+                    $output .= '<td class="table-cell" data-label="Total"><span>' . number_format($order->price * $order->quantity) . '</span></td>';
+                    $output .= '<td class="table-cell" data-label="Date"><span>' . $order->order_date . '</span></td>';
+                    $output .= '<td class="table-cell" data-label="Status"><span>' . ucfirst($order->status) . '</span></td>';
+                    $output .= '</tr>';
+                }
+                if ($output === '') {
+                    $output = '<tr><td colspan="7" style="text-align:center;color:#888;">No results found.</td></tr>';
                 }
                 return response()->json(['html' => $output]);
 
