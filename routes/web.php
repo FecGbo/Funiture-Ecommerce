@@ -41,7 +41,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Admin-only routes
 
     Route::get('/admin-dashboard', function () {
-        return view('layouts.admin');
+        return view('AdminWelcome');
     })->name('admin.dashboard');
 
 
