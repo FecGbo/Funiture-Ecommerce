@@ -6,6 +6,8 @@
 
 @section('content')
 
+
+
     <div class="chart-content">
         <div class="chart-left">
             <!-- total sale and  orders-->
@@ -211,8 +213,8 @@
             <div class="browser-type">
                 <div class="browser-type-chart-left">
                     <div class="browser-type-title">
-                        <h5>Browser Visit</h5>
-                        <span class="browser-type-subtitle">Last 6 months</span>
+                        <h5 style="margin-bottom: 0 !important;">Browser Visit</h5>
+                        <span class="browser-type-subtitle">Total</span>
                     </div>
                     <div class="browser-ty-chart">
                         <canvas id="browserTypeChart"></canvas>
@@ -222,8 +224,8 @@
 
                 <div class="browser-type-chart-right">
                     <div class="browser-type-title">
-                        <h5>Device Login</h5>
-                        <span class="browser-type-subtitle">Last 6 months</span>
+                        <h5 style="margin-bottom: 0 !important;">Device Login</h5>
+                        <span class="browser-type-subtitle">Total</span>
                     </div>
                     <div class="browser-ty-chart">
                         <canvas id="mobileTypeChart"></canvas>
@@ -275,19 +277,19 @@
                                     </tr>
                                 @endforeach
                                 <!-- <tr>
-                                                            <td>1</td>
-                                                            <td>Product 1</td>
-                                                            <td>
-                                                                <div class="popularity-bar">
-                                                                    <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="sales">
-                                                                    100
-                                                                </div>
-                                                            </td>
-                                                        </tr> -->
+                                                                                                <td>1</td>
+                                                                                                <td>Product 1</td>
+                                                                                                <td>
+                                                                                                    <div class="popularity-bar">
+                                                                                                        <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <div class="sales">
+                                                                                                        100
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr> -->
 
                             </tbody>
                         </table>
@@ -303,174 +305,204 @@
         </div>
         <!-- jessenger -->
 
+    </div>
 
 
 
-        <script>
-            fetch('/daily-sales-chart')
-                .then(response => response.json())
-                .then(json => {
-                    const sales = json.sales;
-                    const investment = json.investment;
+    <script>
+        fetch('/daily-sales-chart')
+            .then(response => response.json())
+            .then(json => {
+                const sales = json.sales;
+                const investment = json.investment;
 
 
-                    const investmentMap = {};
-                    investment.forEach(item => {
-                        investmentMap[item.date] = item.total_investment;
-                    });
-
-                    const merged = sales.map(item => {
-                        const invest = investmentMap[item.date] || 0;
-                        const profit = (item.total_sales || 0) - invest;
-                        return {
-                            date: item.date,
-                            investment: invest,
-                            profit: profit
-                        };
-                    });
-
-                    const labels = merged.map(item => item.date);
-                    const investmentData = merged.map(item => item.investment);
-                    const profitData = merged.map(item => item.profit);
-
-                    const ctx = document.getElementById('myChart').getContext('2d');
-
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: 'Investment (MMK)',
-                                    data: investmentData,
-                                    backgroundColor: '#4AB58E',
-                                    borderColor: '#4AB58E',
-
-                                },
-                                {
-                                    label: 'Profit (MMK)',
-                                    data: profitData,
-                                    backgroundColor: '#FFA800',
-                                    borderColor: '#FFA800)',
-
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: 'Amount (MMK)'
-                                    }
-                                },
-                                x: {
-                                    title: {
-                                        display: true,
-                                        text: 'Date'
-                                    }
-                                }
-                            },
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Daily Investment and Profit'
-                                },
-                                legend: {
-                                    display: false,
-                                    position: 'top'
-                                }
-                            }
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
+                const investmentMap = {};
+                investment.forEach(item => {
+                    investmentMap[item.date] = item.total_investment;
                 });
 
+                const merged = sales.map(item => {
+                    const invest = investmentMap[item.date] || 0;
+                    const profit = (item.total_sales || 0) - invest;
+                    return {
+                        date: item.date,
+                        investment: invest,
+                        profit: profit
+                    };
+                });
 
-            fetch('/monthly-customer-orders')
-                .then(res => res.json())
-                .then(data => {
+                const labels = merged.map(item => item.date);
+                const investmentData = merged.map(item => item.investment);
+                const profitData = merged.map(item => item.profit);
 
-                    data.reverse();
-                    const labels = data.map(item => item.month);  // ['July 2025', 'June 2025']
-                    const totals = data.map(item => item.total);  // [98, 123]
+                const ctx = document.getElementById('myChart').getContext('2d');
 
-                    const ctx = document.getElementById('lineChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Investment (MMK)',
+                                data: investmentData,
+                                backgroundColor: '#4AB58E',
+                                borderColor: '#4AB58E',
 
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: 'Total Orders per Month',
-                                data: totals,
-                                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Fill under the line
-                                borderColor: 'rgba(75, 192, 192, 1)',     // Line color
-                                borderWidth: 1,
-                                fill: true,
-                                tension: 0.3,
-                                pointBackgroundColor: totals.map((_, index) =>
-                                    index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
-                                ), // Alternating colors for points
-                                pointBorderColor: totals.map((_, index) =>
-                                    index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
-                                ), // Border color for points
-                                pointRadius: 5,        // Size of the points
-                                pointBorderWidth: 2    // Border width of the points
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: 'Total Monthly Orders'
-                                    }
-                                },
-                                x: {
-                                    title: {
-                                        display: true,
-                                        text: 'Month'
-                                    }
-                                }
                             },
-                            plugins: {
+                            {
+                                label: 'Profit (MMK)',
+                                data: profitData,
+                                backgroundColor: '#FFA800',
+                                borderColor: '#FFA800)',
+
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Monthly Orders'
-                                },
-                                legend: {
-                                    display: false
+                                    text: 'Amount (MMK)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
                                 }
                             }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Daily Investment and Profit'
+                            },
+                            legend: {
+                                display: false,
+                                position: 'top'
+                            }
                         }
-                    });
-                })
-                .catch(err => console.error('Chart error:', err));
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
 
-            //browser type
+
+        fetch('/monthly-customer-orders')
+            .then(res => res.json())
+            .then(data => {
+
+                data.reverse();
+                const labels = data.map(item => item.month);  // ['July 2025', 'June 2025']
+                const totals = data.map(item => item.total);  // [98, 123]
+
+                const ctx = document.getElementById('lineChart').getContext('2d');
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Orders per Month',
+                            data: totals,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)', // Fill under the line
+                            borderColor: 'rgba(75, 192, 192, 1)',     // Line color
+                            borderWidth: 1,
+                            fill: true,
+                            tension: 0.3,
+                            pointBackgroundColor: totals.map((_, index) =>
+                                index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
+                            ), // Alternating colors for points
+                            pointBorderColor: totals.map((_, index) =>
+                                index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
+                            ), // Border color for points
+                            pointRadius: 5,        // Size of the points
+                            pointBorderWidth: 2    // Border width of the points
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Total Monthly Orders'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Month'
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Monthly Orders'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(err => console.error('Chart error:', err));
+
+        //browser type
 
 
 
-            const browserLabels = @json($browserStats->pluck('browser'));
-            const browserData = @json($browserStats->pluck('total'));
+        const browserLabels = @json($browserStats->pluck('browser'));
+        const browserData = @json($browserStats->pluck('total'));
 
-            const browser = document.getElementById('browserTypeChart');
-            new Chart(browser, {
+        const browser = document.getElementById('browserTypeChart');
+        new Chart(browser, {
+            type: 'doughnut',
+            data: {
+                labels: browserLabels,
+                datasets: [{
+                    label: 'Browser Usage',
+                    data: browserData,
+                    backgroundColor: [
+                        '#4AB58E', '#FFA800', '#1976d2', '#e57373', '#FFD700', '#90a4ae'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: true, position: 'bottom' }
+                }
+            }
+        });
+
+
+
+
+        //device type
+        const deviceLabels = @json($deviceStats->pluck('device'));
+        const deviceData = @json($deviceStats->pluck('total'));
+
+        const ctx = document.getElementById('mobileTypeChart');
+        if (ctx) {
+            new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: browserLabels,
+                    labels: deviceLabels,
                     datasets: [{
-                        label: 'Browser Usage',
-                        data: browserData,
+                        label: 'Device Usage',
+                        data: deviceData,
                         backgroundColor: [
-                            '#4AB58E', '#FFA800', '#1976d2', '#e57373', '#FFD700', '#90a4ae'
+                            '#4AB58E', '#FFA800', '#1976d2', '#e57373'
                         ],
                         borderWidth: 1
                     }]
@@ -481,41 +513,12 @@
                     }
                 }
             });
+        }
 
 
 
 
-            //device type
-            const deviceLabels = @json($deviceStats->pluck('device'));
-            const deviceData = @json($deviceStats->pluck('total'));
-
-            const ctx = document.getElementById('mobileTypeChart');
-            if (ctx) {
-                new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: deviceLabels,
-                        datasets: [{
-                            label: 'Device Usage',
-                            data: deviceData,
-                            backgroundColor: [
-                                '#4AB58E', '#FFA800', '#1976d2', '#e57373'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: { display: true, position: 'bottom' }
-                        }
-                    }
-                });
-            }
-
-
-
-
-        </script>
+    </script>
 
 
 

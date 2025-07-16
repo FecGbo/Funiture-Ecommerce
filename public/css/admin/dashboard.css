@@ -4,15 +4,35 @@
 
 .chart-content {
     display: flex;
-    justify-content: space-between;
+    /* gap: 2rem; */
+    /* padding: 2rem; */
+    box-sizing: border-box;
 }
 
 .chart-left {
-
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    /* margin-right: 20px; */
+}
+
+
+.monthly-sale-chart {
+    min-width: 350px;
+
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.monthly-sale-chart canvas {
+    width: 100% !important;
+    height: 300px !important;
+
+    max-width: 100%;
+    display: block;
 }
 
 .total-sale-order-left,
@@ -59,13 +79,20 @@
 
 
 .chart-right {
-    flex: 1;
+    flex: 0 0 420px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    /* margin-left: 20px; */
 }
 
-
+.browser-type-subtitle {
+    text-align: center;
+    padding: 4px;
+    font-size: small;
+    background: #f3f4f6;
+    width: 50px;
+    border-radius: 5px;
+}
 
 .monthly-sale {
     padding: 1rem;
@@ -146,7 +173,7 @@
     padding: 1rem;
     gap: 1rem;
 
-    height: 462px;
+    height: 455px;
 }
 
 
@@ -180,7 +207,7 @@
     padding: 1rem;
     background: white;
     border-radius: 5px;
-    height: 429.6px;
+    height: 420.6px;
 
 }
 
