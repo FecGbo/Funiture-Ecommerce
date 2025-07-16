@@ -100,10 +100,25 @@
                             </div>
                         </th>
 
+                        <th>
+                            <!--  -->
+                            <div class="sort-btn-group">
+                                <span>LAST LOGIN</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="dob" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="dob" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+
 
 
                         <!-- 
-                                        <th style="width: 80px;">ACTION</th> -->
+                                                <th style="width: 80px;">ACTION</th> -->
                     </tr>
                 </thead>
                 <tbody id="all-data">
@@ -138,14 +153,18 @@
                             <td class="table-cell" data-label="Phone">
                                 <p class="user-phone editable" data-field="phone">{{ $user->phone }}</p>
                             </td>
+
+                            <td class="table-cell" data-label="Last Login">
+                                <p class="user-last-login">{{ $user->last_login }}</p>
+                            </td>
                             <!-- 
-                                                    <td class="table-cell" data-label="Action">
-                                                        <div class="action-menu">
-                                                            <a href="" class="action-btn" title="View Details">
-                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td> -->
+                                                                    <td class="table-cell" data-label="Action">
+                                                                        <div class="action-menu">
+                                                                            <a href="" class="action-btn" title="View Details">
+                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </td> -->
                         </tr>
                     @endforeach
                 </tbody>

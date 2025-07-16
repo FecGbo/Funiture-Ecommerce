@@ -13,10 +13,10 @@
                 <div class="total-sale-order-left">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>1000000000</h3>
+                            <h3>{{ $totalSales }}</h3>
                             <span>Total Sales</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total sales:1000000000</span>
+                                <span style="opacity: 0.6;">Total sales:&nbsp;{{ $totalSales }}</span>
 
 
                             </div>
@@ -36,10 +36,10 @@
                 <div class="total-sale-order-right">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>1000000</h3>
+                            <h3>{{ $totalOrders }}</h3>
                             <span>Total Orders</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total orders:1000000</span>
+                                <span style="opacity: 0.6;">Total orders: &nbsp;{{ $totalOrders }}</span>
                             </div>
                         </div>
                         <div class="sale-price-right">
@@ -88,7 +88,7 @@
 
 
                             <div class="monthly-sale-profit">
-                                <span>Invest</span>
+                                <span>Profit</span>
                                 <span style="opacity: 0.6;">Monthly</span>
 
 
@@ -108,7 +108,7 @@
             <div class="monthly-sale">
                 <div class="monthly-sale-chart">
                     <div class="monthly-sale-title">
-                        <h3>Monthly Sale</h3>
+                        <h3>Customer Orders</h3>
                         <span class="monthly-sale-subtitle">Last 6 months</span>
                     </div>
 
@@ -162,10 +162,10 @@
                 <div class="total-sale-order-left">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>1000000000</h3>
+                            <h3>{{ $totalProfits }}</h3>
                             <span>Total Profit</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total profits:1000000000</span>
+                                <span style="opacity: 0.6;">Total profits: &nbsp;{{ $totalProfits }}</span>
 
 
                             </div>
@@ -185,10 +185,10 @@
                 <div class="total-sale-order-right">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>1000000</h3>
+                            <h3>{{ $totalSignups }}</h3>
                             <span>Sign Up</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total signup:1000000</span>
+                                <span style="opacity: 0.6;">Total signup:&nbsp;{{ $totalSignups }}</span>
                             </div>
                         </div>
                         <div class="sale-price-right">
@@ -211,18 +211,24 @@
             <div class="browser-type">
                 <div class="browser-type-chart-left">
                     <div class="browser-type-title">
-                        <h3>Browser Type</h3>
+                        <h5>Browser Visit</h5>
                         <span class="browser-type-subtitle">Last 6 months</span>
                     </div>
-                    <canvas id="browserTypeChart"></canvas>
+                    <div class="browser-ty-chart">
+                        <canvas id="browserTypeChart"></canvas>
+                    </div>
+
                 </div>
 
                 <div class="browser-type-chart-right">
                     <div class="browser-type-title">
-                        <h3>Browser Type</h3>
+                        <h5>Device Login</h5>
                         <span class="browser-type-subtitle">Last 6 months</span>
                     </div>
-                    <canvas id="mobileTypeChart"></canvas>
+                    <div class="browser-ty-chart">
+                        <canvas id="mobileTypeChart"></canvas>
+                    </div>
+
 
 
                 </div>
@@ -251,16 +257,37 @@
                                     <th>Sales</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Product 1</td>
-                                    <td>
-                                        <div class="popularity-bar">
-                                            <div class="popularity-bar-inner" style="width: 80%"></div>
-                                        </div>
-                                    </td>
-                                    <td>1000</td>
-                                </tr>
+                                @foreach ($topProducts as $product)
+                                    <tr>
+                                        <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>
+                                            <div class="popularity-bar">
+                                                <div class="popularity-bar-inner"
+                                                    style="width: {{ $product->total_quantity }}%"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="sales">
+                                                {{ $product->total_quantity }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <!-- <tr>
+                                                            <td>1</td>
+                                                            <td>Product 1</td>
+                                                            <td>
+                                                                <div class="popularity-bar">
+                                                                    <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="sales">
+                                                                    100
+                                                                </div>
+                                                            </td>
+                                                        </tr> -->
 
                             </tbody>
                         </table>
@@ -274,102 +301,216 @@
 
 
         </div>
-
+        <!-- jessenger -->
 
 
 
 
         <script>
-            const ctx = document.getElementById('myChart');
+            fetch('/daily-sales-chart')
+                .then(response => response.json())
+                .then(json => {
+                    const sales = json.sales;
+                    const investment = json.investment;
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+
+                    const investmentMap = {};
+                    investment.forEach(item => {
+                        investmentMap[item.date] = item.total_investment;
+                    });
+
+                    const merged = sales.map(item => {
+                        const invest = investmentMap[item.date] || 0;
+                        const profit = (item.total_sales || 0) - invest;
+                        return {
+                            date: item.date,
+                            investment: invest,
+                            profit: profit
+                        };
+                    });
+
+                    const labels = merged.map(item => item.date);
+                    const investmentData = merged.map(item => item.investment);
+                    const profitData = merged.map(item => item.profit);
+
+                    const ctx = document.getElementById('myChart').getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Investment (MMK)',
+                                    data: investmentData,
+                                    backgroundColor: '#4AB58E',
+                                    borderColor: '#4AB58E',
+
+                                },
+                                {
+                                    label: 'Profit (MMK)',
+                                    data: profitData,
+                                    backgroundColor: '#FFA800',
+                                    borderColor: '#FFA800)',
+
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Amount (MMK)'
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Date'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Daily Investment and Profit'
+                                },
+                                legend: {
+                                    display: false,
+                                    position: 'top'
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
 
 
-            //line
-            const line = document.getElementById('lineChart');
+            fetch('/monthly-customer-orders')
+                .then(res => res.json())
+                .then(data => {
 
-            new Chart(line, {
-                type: 'line',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    data.reverse();
+                    const labels = data.map(item => item.month);  // ['July 2025', 'June 2025']
+                    const totals = data.map(item => item.total);  // [98, 123]
+
+                    const ctx = document.getElementById('lineChart').getContext('2d');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Total Orders per Month',
+                                data: totals,
+                                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Fill under the line
+                                borderColor: 'rgba(75, 192, 192, 1)',     // Line color
+                                borderWidth: 1,
+                                fill: true,
+                                tension: 0.3,
+                                pointBackgroundColor: totals.map((_, index) =>
+                                    index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
+                                ), // Alternating colors for points
+                                pointBorderColor: totals.map((_, index) =>
+                                    index % 2 === 0 ? 'rgba(54, 162, 235, 1)' : 'rgba(51, 234, 97, 1)'
+                                ), // Border color for points
+                                pointRadius: 5,        // Size of the points
+                                pointBorderWidth: 2    // Border width of the points
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Total Monthly Orders'
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Month'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Monthly Orders'
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
+                })
+                .catch(err => console.error('Chart error:', err));
 
-            //browser
+            //browser type
+
+
+
+            const browserLabels = @json($browserStats->pluck('browser'));
+            const browserData = @json($browserStats->pluck('total'));
+
             const browser = document.getElementById('browserTypeChart');
-
             new Chart(browser, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: browserLabels,
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        label: 'Browser Usage',
+                        data: browserData,
+                        backgroundColor: [
+                            '#4AB58E', '#FFA800', '#1976d2', '#e57373', '#FFD700', '#90a4ae'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            //mobile
-            const mobile = document.getElementById('mobileTypeChart');
-
-            new Chart(mobile, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                    plugins: {
+                        legend: { display: true, position: 'bottom' }
                     }
                 }
             });
 
 
 
+
+            //device type
+            const deviceLabels = @json($deviceStats->pluck('device'));
+            const deviceData = @json($deviceStats->pluck('total'));
+
+            const ctx = document.getElementById('mobileTypeChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: deviceLabels,
+                        datasets: [{
+                            label: 'Device Usage',
+                            data: deviceData,
+                            backgroundColor: [
+                                '#4AB58E', '#FFA800', '#1976d2', '#e57373'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: { display: true, position: 'bottom' }
+                        }
+                    }
+                });
+            }
 
 
 

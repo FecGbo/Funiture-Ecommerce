@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
                                 </a>
-                                <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</button>
+                                <button class="addToCart-btn" data-product-id="{{ $product->id }}">Add to Cart</button>
                             </div>
                         @endforeach
                     </div>
@@ -152,8 +152,10 @@
 
     <script>
         $(document).on('click', '.addToCart-btn', function (e) {
+            e.preventDefault();
             e.stopPropagation();
-
+            var productId = $(this).data('product-id');
+            addToCart(productId);
         });
 
 

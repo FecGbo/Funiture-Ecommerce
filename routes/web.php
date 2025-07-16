@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Auth;
 //Search
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
 
+Route::get('/daily-sales-chart', [App\Http\Controllers\dashboardController::class, 'dynamicChart']);
 
+Route::get('/monthly-customer-orders', [App\Http\Controllers\dashboardController::class, 'monthlyCustomerOrders'])->name('admin.monthlyCustomerOrders');
 
+Route::get('/browser-stats', [App\Http\Controllers\dashboardController::class, 'browserType'])->name('admin.browserStats');
 
 
 // Auth
@@ -40,9 +43,13 @@ Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])-
 Route::middleware(['auth', 'admin'])->group(function () {
     // Admin-only routes
 
-    Route::get('/admin-dashboard', function () {
-        return view('AdminWelcome');
-    })->name('admin.dashboard');
+    // Route::get('/admin-dashboard', function () {
+//     return view('AdminWelcome');
+// })->name('admin.dashboard');
+
+
+
+    Route::get('/admin-dashboard', [App\Http\Controllers\dashboardController::class, 'dashboard'])->name('admin.dashboard');
 
 
     // categories
@@ -91,11 +98,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/list-orders', [App\Http\Controllers\OrderController::class, 'listOrders'])->name('order.list');
 
 
+
+
+
 });
 
 
 
-Route::middleware(['auth', 'customer'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
 
 

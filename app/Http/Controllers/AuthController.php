@@ -16,9 +16,40 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
+
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            $previousLogin = $user->last_login;
+            $user->last_login = now();
+
+
+
+            $userAgent = $request->header('User-Agent');
+            $browser = 'Other';
+            $device = 'Desktop';
+            if (strpos($userAgent, 'Edg') !== false) {
+                $browser = 'Edge';
+            } elseif (strpos($userAgent, 'Chrome') !== false) {
+                $browser = 'Chrome';
+            } elseif (strpos($userAgent, 'Firefox') !== false) {
+                $browser = 'Firefox';
+            } elseif (strpos($userAgent, 'Safari') !== false) {
+                $browser = 'Safari';
+            }
+
+            if (strpos($userAgent, 'Mobile') !== false || strpos($userAgent, 'Android') !== false) {
+                $device = 'Mobile';
+            } elseif (strpos($userAgent, 'Tablet') !== false) {
+                $device = 'Tablet';
+            }
+
+            $user->browser = $browser;
+            $user->device = $device;
+            $user->save();
+
             if ($user->role == 'admin') {
                 return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome Admin');
             } elseif ($user->role == 'customer') {

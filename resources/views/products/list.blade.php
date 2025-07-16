@@ -86,8 +86,7 @@
                 <tbody class="all-data" id="all-data">
                     @foreach($products as $product)
                         <tr class="table-row" data-category-id="{{ $product->category->id ?? '' }}"
-                            data-product-id="{{ $product->id }}"
-                            data-url="{{ route('product.detail', $product->id) }}">
+                            data-product-id="{{ $product->id }}" data-url="{{ route('product.detail', $product->id) }}">
                             <td class="table-cell" data-label="Category">
                                 <div class="category-info">
                                     @if($product->category && $product->category->image)
@@ -95,7 +94,8 @@
                                             alt="{{ $product->category->name }}" class="category-img">
                                     @else
                                         <div class="category-icon sofa">
-                                            {{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}</div>
+                                            {{ strtoupper(substr($product->category->name ?? 'NA', 0, 2)) }}
+                                        </div>
                                     @endif
                                     <span class="category-name">
                                         {{ $product->category->name ?? 'No Category' }}
@@ -120,22 +120,23 @@
                             </td>
                             <td class="table-cell" data-label="Purchase Price">
                                 <span class="purchase-price editable"
-                                    data-field="purchase_price">{{ $product->purchase_price }}</span>MMK
+                                    data-field="purchase_price">{{ $product->purchase_price }}</span>&nbsp;MMK
                             </td>
                             <td class="table-cell" data-label="Sale Price">
-                                <span class="sale-price editable" data-field="sale_price">{{ $product->sale_price }}</span>MMK
+                                <span class="sale-price editable"
+                                    data-field="sale_price">{{ $product->sale_price }}</span>&nbsp;MMK
                             </td>
                             <td class="table-cell" data-label="Stock">
                                 <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
                             </td>
                             <!-- <td class="table-cell" data-label="Action">
-                                <div class="action-menu">
-                                    <a href="" class="action-btn"
-                                        title="View Details">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </div>
-                            </td> -->
+                                        <div class="action-menu">
+                                            <a href="" class="action-btn"
+                                                title="View Details">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </td> -->
                         </tr>
                     @endforeach
                 </tbody>
@@ -259,7 +260,7 @@
                     });
                 }
             });
-            
+
             // Sorting
             document.querySelectorAll('.sort-btn').forEach(btn => {
                 btn.addEventListener('click', function (e) {

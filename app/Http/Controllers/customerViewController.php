@@ -10,7 +10,7 @@ class customerViewController extends Controller
 
     public function productView(Request $request)
     {
-        $sortBy = $request->input('sort', 'id'); // default is 'id'
+        $sortBy = $request->input('sort', 'id');
         $sortDir = $request->input('dir', 'asc');
         $allowedSorts = ['id', 'sale_price'];
         $allowedDirs = ['asc', 'desc'];
@@ -39,7 +39,7 @@ class customerViewController extends Controller
                             <div class="product-price">MMK ' . number_format($product->sale_price) . '</div>
                         </div>
                     </a>
-                    <button class="addToCart-btn" onclick="addToCart(' . $product->id . ')">Add to Cart</button>
+                    <button class="addToCart-btn" data-product-id="' . $product->id . '">Add to Cart</button>
                 </div>';
             }
             if ($products->isEmpty()) {
@@ -86,15 +86,17 @@ class customerViewController extends Controller
             foreach ($products as $product) {
                 $output .= '
                 <div class="product-card">
-                    <div class="product-image">
-                        <img src="' . asset('storage/' . $product->image) . '" alt="' . $product->name . '">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">' . $product->name . '</h3>
-                        <p class="product-description">' . $product->description . '</p>
-                        <div class="product-price">MMK ' . number_format($product->sale_price, 2) . '</div>
-                    </div>
-                    <button class="addToCart-btn">Add to Cart</button>
+                    <a href="' . route('customerProduct.detail', $product->id) . '">
+                        <div class="product-image">
+                            <img src="' . asset('storage/' . $product->image) . '" alt="' . $product->name . '">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">' . $product->name . '</h3>
+                            <p class="product-description">' . $product->description . '</p>
+                            <div class="product-price">MMK ' . number_format($product->sale_price, 2) . '</div>
+                        </div>
+                    </a>
+                    <button class="addToCart-btn" data-product-id="' . $product->id . '">Add to Cart</button>
                 </div>';
             }
         }

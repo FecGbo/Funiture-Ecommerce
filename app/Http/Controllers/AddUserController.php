@@ -44,7 +44,7 @@ class AddUserController extends Controller
     }
     public function listUsers()
     {
-        $allowedSorts = ['name', 'email', 'role', 'address', 'phone', 'dob'];
+        $allowedSorts = ['name', 'email', 'role', 'address', 'phone', 'dob', 'last_login'];
         $allowedDirs = ['asc', 'desc'];
         $sort = request('sort', 'id');
         $dir = request('dir', 'desc');

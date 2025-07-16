@@ -15,13 +15,15 @@
 
     <div class="content">
         <div class="content-left">
-            <img src="{{ asset('images/register.png') }}" alt="">
+            <div class="content-left-img">
+                <img src="{{ asset('images/register.png') }}" alt="" width="100%" height="100%">
+            </div>
         </div>
         <div class="content-right">
             <form action="{{ route('auth.register') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h1>Register</h1>
-                <hr>
+
 
                 @if ($errors->any())
                     <div style="color:red;">
@@ -74,7 +76,7 @@
 
                 <div class="loginbtn">
                     <x-button id="cancel" name="cancel" type="button">Cancel</x-button>
-                    <x-button id="loginbtn" name="login" type="submit">Log in</x-button>
+                    <x-button id="loginbtn" name="login" type="submit">Register</x-button>
 
                 </div>
                 <p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>

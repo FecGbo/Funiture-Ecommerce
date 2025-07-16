@@ -154,4 +154,8 @@ form input {
         max-width: 400px;
         margin: 0 auto;
     }
+
+    form h1 {
+        text-align: center;
+    }
 }

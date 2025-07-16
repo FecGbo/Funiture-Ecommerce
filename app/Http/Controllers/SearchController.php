@@ -75,9 +75,9 @@ class SearchController extends Controller
                     $output .= '<span class="product-name editable" data-field="name">' . e($product->name) . '</span>';
                     $output .= '</div></td>';
                     // Purchase Price
-                    $output .= '<td class="table-cell" data-label="Purchase Price"><span class="purchase-price editable" data-field="purchase_price">' . e($product->purchase_price) . '</span> MMK</td>';
+                    $output .= '<td class="table-cell" data-label="Purchase Price"><span class="purchase-price editable" data-field="purchase_price">' . e($product->purchase_price) . '</span>&nbsp;MMK</td>';
                     // Sale Price
-                    $output .= '<td class="table-cell" data-label="Sale Price"><span class="sale-price editable" data-field="sale_price">' . e($product->sale_price) . '</span> MMK</td>';
+                    $output .= '<td class="table-cell" data-label="Sale Price"><span class="sale-price editable" data-field="sale_price">' . e($product->sale_price) . '</span>&nbsp;MMK</td>';
                     // Stock
                     $output .= '<td class="table-cell" data-label="Stock"><span class="stock editable" data-field="stock">' . e($product->stock) . '</span></td>';
                     // Action
