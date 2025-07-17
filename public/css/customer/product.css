@@ -290,6 +290,10 @@ body::-webkit-scrollbar {
     overflow: hidden;
 }
 
+ul.filter-options {
+    margin-top: 1rem;
+}
+
 .product-price {
     color: black;
     font-size: 1.3rem;

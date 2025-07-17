@@ -41,6 +41,10 @@
     margin-bottom: 0.25rem;
 }
 
+p.category-description {
+    margin-bottom: 0 !important;
+}
+
 .categories-subtitle {
     color: var(--text-light);
     font-size: 0.9rem;

@@ -141,7 +141,8 @@
 .user-email,
 .user-role,
 .user-address,
-.user-phone {
+.user-phone,
+.user-last-login {
     color: var(--text-light);
     font-size: 0.9rem;
     line-height: 1.5;

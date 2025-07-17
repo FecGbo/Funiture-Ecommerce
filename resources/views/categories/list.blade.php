@@ -89,13 +89,13 @@
                                 </p>
                             </td>
                             <!-- <td class="table-cell" data-label="Action">
-                                                                                                                                        <div class="action-menu">
-                                                                                                                                            <a href="" class="action-btn"
-                                                                                                                                                title="View Details">
-                                                                                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                                                                            </a>
-                                                                                                                                        </div>
-                                                                                                                                    </td> -->
+                                                                                                                                                        <div class="action-menu">
+                                                                                                                                                            <a href="" class="action-btn"
+                                                                                                                                                                title="View Details">
+                                                                                                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                                                                                            </a>
+                                                                                                                                                        </div>
+                                                                                                                                                    </td> -->
                         </tr>
                     @endforeach
 
@@ -115,13 +115,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            document.querySelectorAll('.table-row').forEach(row => {
-                row.addEventListener('click', function (e) {
-
-                    if (e.target.closest('.editable')) return;
+            document.addEventListener('click', function (e) {
+                const row = e.target.closest('.table-row[data-url]');
+                if (row && !e.target.closest('.editable')) {
                     window.location.href = row.getAttribute('data-url');
-                });
+                }
             });
+            
             function makeEditable(element, type = 'input') {
                 if (element.classList.contains('editing')) return;
                 element.classList.add('editing');

@@ -78,31 +78,17 @@
                         <h3>Filter</h3>
                         <h3>Furniture</h3>
                         <ul class="filter-options">
+                            @foreach ($categories as $category)
+                                <li>
+                                    <label>
+                                        <input type="checkbox" name="category[]" value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </label>
+                                </li>
+                            @endforeach
 
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="chair">
-                                    Chair
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="sofa">
-                                    Sofa
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="table">
-                                    Table
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox" name="category" value="lamp">
-                                    Lamp
-                                </label>
-                            </li>
+
+
                         </ul>
                     </div>
                 </div>
@@ -186,12 +172,17 @@
 
         //search
         $(document).ready(function () {
-            $('#searchInput, #minPrice, #maxPrice').on('input', function () {
+            $('#searchInput, #minPrice, #maxPrice, input[name="category[]"]').on('input', function () {
                 var $search = $('#searchInput').val();
                 var $minPrice = $('#minPrice').val();
                 var $maxPrice = $('#maxPrice').val();
+                var $category = [];
 
-                if ($search || $minPrice || $maxPrice) {
+                $('input[name="category[]"]:checked').each(function () {
+                    $category.push($(this).val());
+                });
+
+                if ($search || $minPrice || $maxPrice || $category.length) {
                     $('#all-data').hide();
                     $('#Content').show();
                 } else {
@@ -204,7 +195,8 @@
                     data: {
                         'customer-search': $search,
                         'min-price': $minPrice,
-                        'max-price': $maxPrice
+                        'max-price': $maxPrice,
+                        'category': $category
                     },
                     success: function (data) {
                         $('#Content').html(data.html);

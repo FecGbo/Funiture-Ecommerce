@@ -151,9 +151,6 @@ i.fas.fa-shopping-cart {
     transition: color 0.3s ease;
 }
 
-.nav-icons a:hover {
-    color: #B88E2F;
-}
 
 /* Mobile Menu */
 .mobile-menu-btn {
@@ -426,9 +423,9 @@ ul#cartItems {
     transition: background 0.2s;
 }
 
-.admin-dropdown li a:hover {
+/* .admin-dropdown li a:hover {
     background: #f3f4f6;
-}
+} */
 
 .admin-card {
     display: flex;

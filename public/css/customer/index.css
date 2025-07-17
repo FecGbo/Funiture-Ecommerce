@@ -121,6 +121,9 @@ body::-webkit-scrollbar {
     /* Chrome, Safari, Opera */
 }
 
+.product-card:hover a {
+    text-decoration: none;
+}
 
 
 .product-flex {

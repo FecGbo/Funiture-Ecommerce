@@ -186,7 +186,7 @@ class CartController extends Controller
         $usdAmount = round($total / $mmkToUsd, 2);
 
         try {
-            \Stripe\Charge::create([
+            \Stripe\Charge::create(params: [
                 'amount' => $usdAmount * 100, // USD in cents
                 'currency' => 'usd',
                 'description' => auth()->user()->name . ' - Order Payment',

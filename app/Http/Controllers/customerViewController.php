@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ class customerViewController extends Controller
 
     public function productView(Request $request)
     {
+        $categories = Category::all();
         $sortBy = $request->input('sort', 'id');
         $sortDir = $request->input('dir', 'asc');
         $allowedSorts = ['id', 'sale_price'];
@@ -50,14 +52,21 @@ class customerViewController extends Controller
             return response()->json(['html' => $output]);
         }
 
-        return view('customer.product', compact('products'));
+        return view('customer.product', compact('products', 'categories'));
     }
     public function customerSearch(Request $request)
     {
+
+
         $output = '';
         $search = $request->input('customer-search');
         $min = $request->input('min-price');
         $max = $request->input('max-price');
+        $checkedCategories = $request->input('category', []);
+
+
+
+
 
         $query = Product::query();
 
@@ -74,6 +83,9 @@ class customerViewController extends Controller
         }
         if ($max !== null && $max !== '') {
             $query->where('sale_price', '<=', $max);
+        }
+        if (!empty($checkedCategories)) {
+            $query->whereIn('category_id', $checkedCategories);
         }
 
         $products = $query->get();
