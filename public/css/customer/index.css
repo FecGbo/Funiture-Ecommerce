@@ -143,6 +143,8 @@ body::-webkit-scrollbar {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 460px;
+
 }
 
 .product-card:hover {
@@ -195,7 +197,7 @@ body::-webkit-scrollbar {
     color: black;
     font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: absolute;
     bottom: 11px;
     right: 50%;

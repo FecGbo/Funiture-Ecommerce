@@ -118,7 +118,7 @@ body::-webkit-scrollbar {
     border-radius: var(--border-radius-md);
     padding: 5px;
     font-size: small;
-    background-color: #ffd700;
+
     color: black;
 }
 
@@ -243,6 +243,7 @@ body::-webkit-scrollbar {
     overflow: hidden;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
 .product-card:hover {
@@ -412,6 +413,7 @@ ul.filter-options {
 .product-card {
     position: relative;
     overflow: hidden;
+    min-height: 460px;
 }
 
 .addToCart-btn {

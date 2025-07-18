@@ -46,7 +46,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 1rem;
+    padding: 0.5rem;
     gap: 1rem;
     min-height: 190px;
 
@@ -327,6 +327,15 @@ th {
 }
 
 @media (max-width: 769px) {
+
+    .browser-ty-chart {
+        padding: 3rem;
+    }
+
+    .monthly-sale-title {
+        padding: 5px 0 0px 5px;
+    }
+
     .chart-content {
         padding: 0.5rem;
     }
@@ -347,20 +356,15 @@ th {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
-    }
-
-    .monthly-sale-detail,
-    .monthly-sale-detail-left,
-    .monthly-sale-detail-right {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
+        padding: 5px 0 0px 5px;
     }
 
     .sale-price {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 0.5rem;
         padding: 0.5rem;
+
+        text-align: center;
     }
 
     .sale-price-icon {
@@ -385,5 +389,15 @@ th {
     .browser-type-chart-left,
     .browser-type-chart-right {
         width: 100%;
+    }
+}
+
+@media screen and (max-width:451px) {
+    .browser-ty-chart {
+        padding: 3rem;
+    }
+
+    .monthly-sale-title {
+        padding: 5px 0 0px 5px;
     }
 }

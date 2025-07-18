@@ -28,7 +28,7 @@
                             <div class="sale-price-icon">
                                 <img src="{{ asset('images/cart.png') }}" alt="">
                             </div>
-                            <span style="opacity: 0.6;">USD</span>
+                            <span style="opacity: 0.6;">MMK</span>
                         </div>
 
 
@@ -61,7 +61,7 @@
                 <div class="monthly-sale-chart">
                     <div class="monthly-sale-title">
                         <h3>Monthly Sale</h3>
-                        <span class="monthly-sale-subtitle">Last 6 months</span>
+                        <span class="monthly-sale-subtitle"></span>
                     </div>
                     <canvas id="myChart"></canvas>
                     <div class="monthly-sale-detail">
@@ -111,7 +111,7 @@
                 <div class="monthly-sale-chart">
                     <div class="monthly-sale-title">
                         <h3>Customer Orders</h3>
-                        <span class="monthly-sale-subtitle">Last 6 months</span>
+                        <span class="monthly-sale-subtitle"></span>
                     </div>
 
                     <canvas id="lineChart"></canvas>
@@ -177,7 +177,7 @@
                             <div class="sale-price-icon" style="background-color: #8D6E63;">
                                 <img src="{{ asset('images/profit.png') }}" alt="">
                             </div>
-                            <span style="opacity: 0.6;">USD</span>
+                            <span style="opacity: 0.6;">MMK</span>
                         </div>
 
 
@@ -277,19 +277,19 @@
                                     </tr>
                                 @endforeach
                                 <!-- <tr>
-                                                                                                <td>1</td>
-                                                                                                <td>Product 1</td>
-                                                                                                <td>
-                                                                                                    <div class="popularity-bar">
-                                                                                                        <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div class="sales">
-                                                                                                        100
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                            </tr> -->
+                                                                                                                                            <td>1</td>
+                                                                                                                                            <td>Product 1</td>
+                                                                                                                                            <td>
+                                                                                                                                                <div class="popularity-bar">
+                                                                                                                                                    <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                                                                                                </div>
+                                                                                                                                            </td>
+                                                                                                                                            <td>
+                                                                                                                                                <div class="sales">
+                                                                                                                                                    100
+                                                                                                                                                </div>
+                                                                                                                                            </td>
+                                                                                                                                        </tr> -->
 
                             </tbody>
                         </table>
@@ -317,6 +317,7 @@
                 const investment = json.investment;
 
 
+
                 const investmentMap = {};
                 investment.forEach(item => {
                     investmentMap[item.date] = item.total_investment;
@@ -335,6 +336,9 @@
                 const labels = merged.map(item => item.date);
                 const investmentData = merged.map(item => item.investment);
                 const profitData = merged.map(item => item.profit);
+                const isMobile = window.innerWidth <= 450;
+
+                const fontSize = window.innerWidth < 768 ? 12 : 16;
 
                 const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -365,10 +369,20 @@
                             y: {
                                 beginAtZero: true,
                                 title: {
-                                    display: true,
+                                    display: !isMobile,
                                     text: 'Amount (MMK)'
+                                },
+                                ticks: {
+                                    callback: function (value) {
+                                        if (value > 1_000_000) {
+                                            return (value / 1_00_000).toFixed(1) + ' Lakh'; // Convert to Lakhs
+                                        } else if (value > 1000) {
+                                            return (value / 1000).toFixed(1) + ' K'; // Convert to Thousands
+                                        }
+                                    }
                                 }
                             },
+
                             x: {
                                 title: {
                                     display: true,
@@ -403,6 +417,7 @@
                 const totals = data.map(item => item.total);  // [98, 123]
 
                 const ctx = document.getElementById('lineChart').getContext('2d');
+                const isMobile = window.innerWidth <= 450;
 
                 new Chart(ctx, {
                     type: 'line',
@@ -411,8 +426,8 @@
                         datasets: [{
                             label: 'Total Orders per Month',
                             data: totals,
-                            backgroundColor: 'rgba(75, 192, 192, 0.5)', // Fill under the line
-                            borderColor: 'rgba(75, 192, 192, 1)',     // Line color
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1,
                             fill: true,
                             tension: 0.3,
@@ -432,9 +447,10 @@
                             y: {
                                 beginAtZero: true,
                                 title: {
-                                    display: true,
+                                    display: !isMobile,
                                     text: 'Total Monthly Orders'
                                 }
+
                             },
                             x: {
                                 title: {
