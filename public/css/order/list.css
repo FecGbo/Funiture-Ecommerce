@@ -341,6 +341,10 @@ a.action-btn {
         display: block;
     }
 
+    .table-span {
+        margin-left: 6rem;
+    }
+
     p.category-description.editable {
         margin: 0;
     }

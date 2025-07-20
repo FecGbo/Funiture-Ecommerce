@@ -125,7 +125,7 @@
                         <tr class="table-row">
 
                             <td class="table-cell" data-label="Category">
-                                <span>{{ $order->order_id }}</span>
+                                <span class="table-span">{{ $order->order_id }}</span>
                             </td>
                             <td class="table-cell" data-label="Image">
                                 <div class="category-info">
@@ -145,16 +145,16 @@
                                 </div>
                             </td>
                             <td class="table-cell" data-label="Quantity" data-sort="quantity">
-                                <span>{{ $order->quantity }}</span>
+                                <span class="table-span">{{ $order->quantity }}</span>
                             </td>
                             <td class="table-cell" data-label="Price" data-sort="price">
-                                <span>{{ $order->price }}</span>
+                                <span class="table-span">{{ $order->price }}</span>
                             </td>
                             <td class="table-cell" data-label="Date">
-                                <span>{{ $order->order_date }}</span>
+                                <span class="table-span">{{ $order->order_date }}</span>
                             </td>
                             <td class="table-cell" data-label="Status">
-                                <span>{{ $order->status }}</span>
+                                <span class="table-span">{{ $order->status }}</span>
                             </td>
                         </tr>
 

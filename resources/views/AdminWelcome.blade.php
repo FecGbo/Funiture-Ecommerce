@@ -476,7 +476,6 @@
         //browser type
 
 
-
         const browserLabels = @json($browserStats->pluck('browser'));
         const browserData = @json($browserStats->pluck('total'));
 

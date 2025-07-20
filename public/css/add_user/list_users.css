@@ -300,6 +300,15 @@
         overflow-x: hidden;
     }
 
+    .user-email,
+    .user-role,
+    .user-address,
+    .user-phone,
+    .user-last-login {
+
+        margin-left: 6rem;
+    }
+
     .categories-table,
     .categories-thead,
     .categories-thead tr,
