@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use DB;
 use Illuminate\Http\Request;
 
 class customerViewController extends Controller
@@ -155,7 +156,29 @@ class customerViewController extends Controller
     {
         $products = Product::orderBy('created_at', 'desc')->take(4)->get();
 
-        $bestSelling = Product::take(8)->get();
+        // $bestSelling = Product::take(8)->get();
+        $bestSelling = DB::table('orders_details')
+            ->join('products', 'orders_details.product_id', '=', 'products.id')
+            ->select(
+                'products.id',
+                'products.name',
+                'products.image',
+                'products.sale_price',
+                'products.description',
+                DB::raw('SUM(orders_details.quantity) as total_quantity')
+            )
+            ->groupBy(
+                'products.id',
+                'products.name',
+                'products.image',
+                'products.sale_price',
+                'products.description'
+            )
+            ->orderByDesc('total_quantity')
+            ->limit(8)
+            ->get();
+
+
         return view('welcome', compact('products', 'bestSelling'));
     }
 

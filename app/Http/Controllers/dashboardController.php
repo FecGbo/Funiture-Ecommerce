@@ -41,7 +41,7 @@ class dashboardController extends Controller
             ->get();
 
 
-        $topProducts = DB::table('orders_details')
+        $topProducts = DB::table(table: 'orders_details')
             ->join('products', 'orders_details.product_id', '=', 'products.id')
             ->select(
                 'products.name',
