@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Auth;
 //Search
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
 
-Route::get('/daily-sales-chart', [App\Http\Controllers\dashboardController::class, 'dynamicChart']);
+Route::get('/daily-sales-chart', [App\Http\Controllers\DashboardController::class, 'dynamicChart']);
 
-Route::get('/monthly-customer-orders', [App\Http\Controllers\dashboardController::class, 'monthlyCustomerOrders'])->name('admin.monthlyCustomerOrders');
+Route::get('/monthly-customer-orders', [App\Http\Controllers\DashboardController::class, 'monthlyCustomerOrders'])->name('admin.monthlyCustomerOrders');
 
-Route::get('/browser-stats', [App\Http\Controllers\dashboardController::class, 'browserType'])->name('admin.browserStats');
+Route::get('/browser-stats', [App\Http\Controllers\DashboardController::class, 'browserType'])->name('admin.browserStats');
 
 
 // Auth

@@ -277,19 +277,19 @@
                                     </tr>
                                 @endforeach
                                 <!-- <tr>
-                                                                                                                                            <td>1</td>
-                                                                                                                                            <td>Product 1</td>
-                                                                                                                                            <td>
-                                                                                                                                                <div class="popularity-bar">
-                                                                                                                                                    <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                                                                                                </div>
-                                                                                                                                            </td>
-                                                                                                                                            <td>
-                                                                                                                                                <div class="sales">
-                                                                                                                                                    100
-                                                                                                                                                </div>
-                                                                                                                                            </td>
-                                                                                                                                        </tr> -->
+                                                                                                                                                                                                                                                                <td>1</td>
+                                                                                                                                                                                                                                                                <td>Product 1</td>
+                                                                                                                                                                                                                                                                <td>
+                                                                                                                                                                                                                                                                    <div class="popularity-bar">
+                                                                                                                                                                                                                                                                        <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                                                                <td>
+                                                                                                                                                                                                                                                                    <div class="sales">
+                                                                                                                                                                                                                                                                        100
+                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                                                            </tr> -->
 
                             </tbody>
                         </table>
@@ -313,10 +313,14 @@
         fetch('/daily-sales-chart')
             .then(response => response.json())
             .then(json => {
-                const sales = json.sales;
-                const investment = json.investment;
+                const sales = json.investment || [];
+                const investment = json.profit || [];
 
 
+                if (!sales.length || !investment.length) {
+                    console.error('No data available for charting');
+                    return;
+                }
 
                 const investmentMap = {};
                 investment.forEach(item => {
@@ -328,17 +332,16 @@
                     const profit = (item.total_sales || 0) - invest;
                     return {
                         date: item.date,
-                        investment: invest,
-                        profit: profit
+                        sales: item.total_sales,
+                        profit: profit,
                     };
                 });
 
                 const labels = merged.map(item => item.date);
-                const investmentData = merged.map(item => item.investment);
+                const salesData = merged.map(item => item.sales);
                 const profitData = merged.map(item => item.profit);
                 const isMobile = window.innerWidth <= 450;
-
-                const fontSize = window.innerWidth < 768 ? 12 : 16;
+                const fontSize = isMobile ? 10 : 14;
 
                 const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -348,18 +351,16 @@
                         labels: labels,
                         datasets: [
                             {
-                                label: 'Investment (MMK)',
-                                data: investmentData,
+                                label: 'Sales (MMK)',
+                                data: salesData,
                                 backgroundColor: '#4AB58E',
-                                borderColor: '#4AB58E',
-
+                                borderColor: '#4AB58E'
                             },
                             {
                                 label: 'Profit (MMK)',
                                 data: profitData,
                                 backgroundColor: '#FFA800',
-                                borderColor: '#FFA800)',
-
+                                borderColor: '#FFA800'
                             }
                         ]
                     },
@@ -370,34 +371,53 @@
                                 beginAtZero: true,
                                 title: {
                                     display: !isMobile,
-                                    text: 'Amount (MMK)'
+                                    text: 'Amount (MMK)',
+                                    font: { size: fontSize }
                                 },
                                 ticks: {
+                                    font: { size: fontSize },
                                     callback: function (value) {
-                                        if (value > 1_000_000) {
-                                            return (value / 1_00_000).toFixed(1) + ' Lakh'; // Convert to Lakhs
-                                        } else if (value > 1000) {
-                                            return (value / 1000).toFixed(1) + ' K'; // Convert to Thousands
+                                        if (value >= 1000000) {
+                                            return (value / 100000).toFixed(1) + ' Lakh';
+                                        } else if (value >= 1000) {
+                                            return (value / 1000).toFixed(1) + ' K';
                                         }
+                                        return value;
                                     }
                                 }
                             },
-
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Date'
+                                    text: 'Date',
+                                    font: { size: fontSize }
+                                },
+                                ticks: {
+                                    font: { size: fontSize }
                                 }
                             }
                         },
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Daily Investment and Profit'
+                                text: 'Daily Sales and Profit',
+                                font: { size: fontSize }
                             },
                             legend: {
-                                display: false,
-                                position: 'top'
+                                display: true, // Enabled legend
+                                position: 'top',
+                                labels: {
+                                    font: { size: fontSize }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        let label = context.dataset.label || '';
+                                        let value = context.parsed.y;
+                                        return `${label}: ${value.toLocaleString()} MMK`;
+                                    }
+                                }
                             }
                         }
                     }
@@ -406,7 +426,6 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-
 
         fetch('/monthly-customer-orders')
             .then(res => res.json())
@@ -418,6 +437,7 @@
 
                 const ctx = document.getElementById('lineChart').getContext('2d');
                 const isMobile = window.innerWidth <= 450;
+                const fontSize = isMobile ? 7 : 14;
 
                 new Chart(ctx, {
                     type: 'line',
@@ -448,24 +468,46 @@
                                 beginAtZero: true,
                                 title: {
                                     display: !isMobile,
-                                    text: 'Total Monthly Orders'
+                                    text: 'Total Monthly Orders',
+
+                                    font: {
+                                        size: fontSize
+                                    }
+                                },
+                                ticks: {
+                                    font: {
+                                        size: fontSize
+                                    }
                                 }
+
 
                             },
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Month'
+                                    text: 'Month',
+                                    font: {
+                                        size: fontSize
+                                    }
+                                },
+                                ticks: {
+                                    font: { size: fontSize }
                                 }
                             }
                         },
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Monthly Orders'
+                                text: 'Monthly Orders',
+                                font: {
+                                    size: fontSize
+                                }
                             },
                             legend: {
-                                display: false
+                                display: false,
+                                font: {
+                                    size: fontSize
+                                }
                             }
                         }
                     }

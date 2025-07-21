@@ -23,8 +23,9 @@ class dashboardController extends Controller
             ->count();
 
         $totalProfits = DB::table('orders_details')
-            ->sum('price') - DB::table('products')
-                ->sum('sale_price');
+            ->join('products', 'orders_details.product_id', '=', 'products.id')
+            ->select(DB::raw('SUM(orders_details.price * orders_details.quantity) - SUM(products.purchase_price * orders_details.quantity) as profit'))
+            ->value('profit');
 
 
         $browserStats = DB::table('users')
@@ -60,7 +61,7 @@ class dashboardController extends Controller
     public function dynamicChart()
     {
 
-        $salesData = DB::table('orders_details')
+        $investment = DB::table('orders_details')
             ->join('orders', 'orders_details.order_id', '=', 'orders.id')
             ->select(
                 DB::raw('DATE(orders.created_at) as date'),
@@ -72,7 +73,7 @@ class dashboardController extends Controller
             ->get();
 
 
-        $invest = DB::table('orders_details')
+        $profit = DB::table('orders_details')
             ->join('orders', 'orders_details.order_id', '=', 'orders.id')
             ->join('products', 'orders_details.product_id', '=', 'products.id')
             ->select(
@@ -85,8 +86,8 @@ class dashboardController extends Controller
             ->get();
 
         return response()->json([
-            'sales' => $salesData,
-            'investment' => $invest
+            'investment' => $investment,
+            'profit' => $profit
         ]);
 
     }
