@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
 .admin-search-bar {
     margin-bottom: 0 !important;
 }
@@ -278,6 +282,10 @@ th {
     color: #0095FF;
 }
 
+.line-break {
+    display: none;
+}
+
 
 
 
@@ -401,6 +409,10 @@ th {
 @media screen and (max-width:451px) {
     .browser-ty-chart {
         padding: 3rem;
+    }
+
+    .line-break {
+        display: block;
     }
 
     .monthly-sale-title {

@@ -289,6 +289,26 @@
     transition: border 0.2s, box-shadow 0.2s;
 }
 
+@media(min-width:800px) {
+
+    thead tr th:first-child {
+        padding-left: 5rem;
+    }
+
+
+
+    tbody tr td:first-child {
+        padding-left: 4rem;
+    }
+
+    thead tr th:last-child {
+        padding-left: 3rem;
+    }
+
+
+}
+
+
 @media (min-width: 551px) and (max-width: 800px) {
     .categories-table {
         min-width: 700px;

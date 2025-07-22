@@ -167,7 +167,8 @@
                             <h3>{{ $totalProfits }}</h3>
                             <span>Total Profit</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total profits: &nbsp;{{ $totalProfits }}</span>
+                                <span style="opacity: 0.6;">Total profits:<span class="line-break"></span>
+                                    &nbsp;{{ $totalProfits }}</span>
 
 
                             </div>
@@ -190,7 +191,8 @@
                             <h3>{{ $totalSignups }}</h3>
                             <span>Sign Up</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total signup:&nbsp;{{ $totalSignups }}</span>
+                                <span style="opacity: 0.6;">Total signup: <span class="line-break"></span>
+                                    &nbsp;{{ $totalSignups }}</span>
                             </div>
                         </div>
                         <div class="sale-price-right">
@@ -277,19 +279,19 @@
                                     </tr>
                                 @endforeach
                                 <!-- <tr>
-                                                                                                                                                                                                                                                                <td>1</td>
-                                                                                                                                                                                                                                                                <td>Product 1</td>
-                                                                                                                                                                                                                                                                <td>
-                                                                                                                                                                                                                                                                    <div class="popularity-bar">
-                                                                                                                                                                                                                                                                        <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                </td>
-                                                                                                                                                                                                                                                                <td>
-                                                                                                                                                                                                                                                                    <div class="sales">
-                                                                                                                                                                                                                                                                        100
-                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                </td>
-                                                                                                                                                                                                                                                            </tr> -->
+                                                                                                                                                                                                                                                                                                                                <td>1</td>
+                                                                                                                                                                                                                                                                                                                                <td>Product 1</td>
+                                                                                                                                                                                                                                                                                                                                <td>
+                                                                                                                                                                                                                                                                                                                                    <div class="popularity-bar">
+                                                                                                                                                                                                                                                                                                                                        <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                                                                                                                                <td>
+                                                                                                                                                                                                                                                                                                                                    <div class="sales">
+                                                                                                                                                                                                                                                                                                                                        100
+                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                                                                                                                            </tr> -->
 
                             </tbody>
                         </table>
@@ -530,14 +532,22 @@
                     label: 'Browser Usage',
                     data: browserData,
                     backgroundColor: [
-                        '#4AB58E', '#FFA800', '#1976d2', '#e57373', '#FFD700', '#90a4ae'
+                        '#d21332', '#4AB58E', '#1976d2', '#FFD700', '#90a4ae'
                     ],
                     borderWidth: 1
                 }]
             },
             options: {
                 plugins: {
-                    legend: { display: true, position: 'bottom' }
+                    legend: {
+                        display: true, position: 'bottom', labels: {
+                            boxWidth: 12,
+                            boxHeight: 12,
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 20
+                        }
+                    }
                 }
             }
         });
@@ -566,7 +576,15 @@
                 },
                 options: {
                     plugins: {
-                        legend: { display: true, position: 'bottom' }
+                        legend: {
+                            display: true, position: 'bottom', labels: {
+                                boxWidth: 12,
+                                boxHeight: 12,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                padding: 20
+                            }
+                        }
                     }
                 }
             });

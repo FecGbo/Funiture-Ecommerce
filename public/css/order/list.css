@@ -1,3 +1,8 @@
+/* body {
+    font-family: Arial, sans-serif;
+} */
+
+
 /* Table container for horizontal scrolling */
 .table-container {
     overflow-x: auto;
@@ -24,12 +29,7 @@
     background: #f5f5f5;
 }
 
-.table-row:hover>.table-cell {
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    transition: box-shadow 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    z-index: 2;
-    position: relative;
-}
+
 
 .categories-title {
     font-size: 1.5rem;
@@ -304,6 +304,43 @@ a.action-btn {
     padding-left: 2.5em;
 }
 
+
+@media(min-width:800px) {
+
+    thead tr th:first-child {
+        padding-left: 5rem;
+    }
+
+    thead tr th:nth-child(4) {
+        text-align: center;
+        width: 150px;
+    }
+
+
+
+    tbody tr td:first-child {
+        text-align: center;
+        width: 202px;
+    }
+
+    tbody tr td:nth-child(4) {
+        text-align: left;
+
+        width: 100px;
+    }
+
+    tbody tr td:nth-child(4) span {
+        margin-left: 10px;
+    }
+
+    /* tbody tr td:nth-child(3) {
+        text-align: center;
+        width: 200px;
+    } */
+
+
+}
+
 @media (max-width: 350px) {
     .btn-full-text {
         display: none;
@@ -328,7 +365,7 @@ a.action-btn {
     }
 
     .categories-table {
-        min-width: 400px;
+        min-width: 420px;
     }
 
     p.category-description,
@@ -424,6 +461,13 @@ a.action-btn {
         min-width: 700px;
 
     }
+
+
+    /* tbody tr td:nth-child(6) {
+
+        min-width: 149px;
+    } */
+
 }
 
 @media (min-width: 800px) {

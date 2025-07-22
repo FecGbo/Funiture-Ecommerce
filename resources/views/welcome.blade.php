@@ -9,7 +9,7 @@
             <div class="banner-content">
                 <div class="image-slider" id="slider">
                     <div class="slide active">
-                        <img src="{{ asset('images/sofa.jpg') }}" alt="">
+                        <img src="{{ asset('images/MakeGroup.png') }}" alt="">
                     </div>
                     <div class="slide">
                         <img src="{{ asset('images/sofa2.jpg') }}" alt="">

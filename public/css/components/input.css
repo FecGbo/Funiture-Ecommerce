@@ -4,6 +4,10 @@
      flex-direction: column;
  }
 
+ input {
+     height: 49.78px;
+ }
+
  .form-label {
      margin-bottom: 0.5rem;
      font-weight: 500;
@@ -13,7 +17,7 @@
  .form-control {
      padding: 0.5rem 0.75rem;
      border: 1px solid var(--border-color);
-     border-radius: 0.5rem;
+     border-radius: 0.25rem;
      font-size: 1rem;
      color: var(--text-dark);
      background: #fff;

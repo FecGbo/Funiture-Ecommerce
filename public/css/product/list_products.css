@@ -304,6 +304,18 @@ a.action-btn {
     padding-left: 2.5em;
 }
 
+
+@media(min-width:800px) {
+    thead tr th:first-child {
+        padding-left: 5rem;
+    }
+
+    tbody tr td:first-child {
+        padding-left: 4rem;
+    }
+
+}
+
 @media (max-width: 350px) {
     .btn-full-text {
         display: none;
@@ -403,7 +415,7 @@ a.action-btn {
     span.purchase-price.editable,
     span.sale-price.editable,
     a.action-btn {
-        margin-left: 5.5rem;
+        margin-left:6.1rem;
         min-width: 0;
         overflow-wrap: break-word;
         word-break: break-word;
@@ -415,9 +427,9 @@ a.action-btn {
     }
 }
 
-@media (min-width: 551px) and (max-width: 800px) {
+@media (min-width: 551px) and (max-width: 1025px) {
     .categories-table {
-        min-width: 700px;
+        min-width: 894px;
 
     }
 }
