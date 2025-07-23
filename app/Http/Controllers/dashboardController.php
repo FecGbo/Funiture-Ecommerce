@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $totalSales = DB::table('orders_details')
-            ->sum('price');
+            ->select(DB::raw('SUM(price * quantity) as all_sales'))->first();
 
         $totalOrders = DB::table('orders')
             ->where('status', 'approved')
