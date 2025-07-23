@@ -18,6 +18,8 @@ class DashboardController extends Controller
             ->where('status', 'approved')
             ->count();
 
+        // Count total customers
+
         $totalSignups = DB::table('users')
             ->where('role', 'customer')
             ->count();
