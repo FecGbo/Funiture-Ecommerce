@@ -235,7 +235,8 @@ button#payBtn {
     }
 
     .payment-image img {
-        max-height: 100px;
+        max-height: 110px;
+        max-width: 110px;
     }
 
     #card-element,
