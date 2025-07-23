@@ -366,9 +366,14 @@ th {
         padding: 0.5rem;
     }
 
+    .browser-type {
+        display: flex;
+        flex-direction: row;
+    }
+
     .monthly-sale-title,
     .browser-type-title {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
         gap: 0.5rem;
         padding: 5px 0 0px 5px;
@@ -409,7 +414,12 @@ th {
 
 @media screen and (max-width:451px) {
     .browser-ty-chart {
-        padding: 3rem;
+        padding: 2rem;
+    }
+
+    .browser-type {
+        display: flex;
+        flex-direction: column;
     }
 
     .line-break {

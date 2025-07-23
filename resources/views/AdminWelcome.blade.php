@@ -220,7 +220,7 @@
                         <span class="browser-type-subtitle">Total</span>
                     </div>
                     <div class="browser-ty-chart">
-                        <canvas id="browserTypeChart"></canvas>
+                        <canvas id="browserTypeChart" ></canvas>
                     </div>
 
                 </div>
@@ -280,19 +280,19 @@
                                     </tr>
                                 @endforeach
                                 <!-- <tr>
-                                                                                                                                                                                                                                                                                                                                            <td>1</td>
-                                                                                                                                                                                                                                                                                                                                            <td>Product 1</td>
-                                                                                                                                                                                                                                                                                                                                            <td>
-                                                                                                                                                                                                                                                                                                                                                <div class="popularity-bar">
-                                                                                                                                                                                                                                                                                                                                                    <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                                                                                                                                                            <td>
-                                                                                                                                                                                                                                                                                                                                                <div class="sales">
-                                                                                                                                                                                                                                                                                                                                                    100
-                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                            </td>
-                                                                                                                                                                                                                                                                                                                                        </tr> -->
+                                                                                                                                                                                                                                                                                                                                                    <td>1</td>
+                                                                                                                                                                                                                                                                                                                                                    <td>Product 1</td>
+                                                                                                                                                                                                                                                                                                                                                    <td>
+                                                                                                                                                                                                                                                                                                                                                        <div class="popularity-bar">
+                                                                                                                                                                                                                                                                                                                                                            <div class="popularity-bar-inner" style="width: 80%"></div>
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                    <td>
+                                                                                                                                                                                                                                                                                                                                                        <div class="sales">
+                                                                                                                                                                                                                                                                                                                                                            100
+                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                </tr> -->
 
                             </tbody>
                         </table>
@@ -449,7 +449,8 @@
                         datasets: [{
                             label: 'Total Orders per Month',
                             data: totals,
-                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+
+
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 1,
                             fill: true,

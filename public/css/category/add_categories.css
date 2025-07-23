@@ -253,6 +253,17 @@
     .form-actions-right>* {
         width: auto;
     }
+
+    .form-actions {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .form-actions>button {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 
