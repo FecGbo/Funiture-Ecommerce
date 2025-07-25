@@ -53,9 +53,11 @@
             </div>
             <div class="main-content-product">
 
-                <div class="product-sidebar">
-                    <div class="filter-section">
+                <div class="product-sidebar" id="filterPanel">
+                    <div class="filter-section filter-header">
                         <h3>Searching Information</h3>
+                        <button id="toggleFilter" class="tablet-only filter-toggle-btn"><i
+                                class="fa-solid fa-filter"></i></button>
                     </div>
 
                     <div class="filter-section">
@@ -92,6 +94,7 @@
                         </ul>
                     </div>
                 </div>
+
 
 
                 <div class="product-flex">
@@ -226,6 +229,13 @@
                     }
                 });
             });
+        })
+
+        const toggleFilter = document.getElementById('toggleFilter');
+        const filterPanel = document.getElementById('filterPanel');
+
+        toggleFilter.addEventListener('click', function () {
+            filterPanel.classList.toggle('show');
         })
 
     </script>
