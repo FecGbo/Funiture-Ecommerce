@@ -67,7 +67,7 @@ class DashboardController extends Controller
             ->join('orders', 'orders_details.order_id', '=', 'orders.id')
             ->select(
                 DB::raw('DATE(orders.created_at) as date'),
-                DB::raw('SUM(orders_details.price * orders_details.quantity) as total_sales')
+                DB::raw('SUM(orders_details.price) as total_sales')
             )
             ->where('orders.status', 'approved')
             ->groupBy(DB::raw('DATE(orders.created_at)'))
