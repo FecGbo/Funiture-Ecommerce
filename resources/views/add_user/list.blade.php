@@ -24,9 +24,9 @@
             <table class="categories-table">
                 <thead class="categories-thead">
                     <tr>
-                        <!-- <th style="width: 40px;"></th> -->
+
                         <th class="sortable-header">
-                            <!-- <span>CATEGORY</span> -->
+
                             <div class="sort-btn-group">
                                 USER
                                 <div class="sort-btn-group-tdown">
@@ -116,7 +116,7 @@
 
 
 
-                            <!-- <th style="width: 80px;">ACTION</th> -->
+
                     </tr>
                 </thead>
                 <tbody id="all-data">
@@ -156,13 +156,6 @@
                                 <p class="user-phone" data-field="phone">{{ $user->last_login }}</p>
                             </td>
 
-                            <!-- <td class="table-cell" data-label="Action">
-                                                                                                        <div class="action-menu">
-                                                                                                            <a href="" class="action-btn" title="View Details">
-                                                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                    </td> -->
                         </tr>
                     @endforeach
                 </tbody>

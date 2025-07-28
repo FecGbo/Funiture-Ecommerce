@@ -88,7 +88,7 @@ input#quantityInput {
         display: flex;
         align-items: center;
         justify-content: center;
-        /* Optionally set a fixed height for consistent aspect ratio */
+     
         min-height: 250px;
         max-height: 400px;
         overflow: hidden;

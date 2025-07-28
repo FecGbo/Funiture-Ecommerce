@@ -180,9 +180,3 @@ select.form-input:focus {
     }
 }
 
-/* 
-@media (max-width: 400px) {
-    .category-form-container {
-        min-width: 400px;
-    }
-} */

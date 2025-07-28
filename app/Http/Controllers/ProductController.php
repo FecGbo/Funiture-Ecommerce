@@ -107,36 +107,6 @@ class ProductController extends Controller
         $categories = Category::all();
         return view('products.detail', compact('product', 'categories'));
     }
-
-    // public function update(Request $request, $id)
-    // {
-    //     $product = Product::findOrFail($id);
-    //     $request->validate([
-    //         'product_name' => 'required|string|max:255',
-    //         'purchase_price' => 'required|numeric|min:0',
-    //         'sale_price' => 'required|numeric|min:0',
-    //         'stock' => 'required|integer|min:0',
-    //         'product_description' => 'required|string',
-    //         'category_id' => 'required|exists:categories,id',
-    //         'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-    //     $product->name = $request->input('product_name');
-    //     $product->purchase_price = $request->input('purchase_price');
-    //     $product->sale_price = $request->input('sale_price');
-    //     $product->stock = $request->input('stock');
-    //     $product->description = $request->input('product_description');
-    //     $product->category_id = $request->input('category_id');
-
-    //     if ($request->hasFile('product_image')) {
-    //         $path = $request->file('product_image')->store('products', 'public');
-    //         $product->image = $path;
-    //     }
-
-    //     $product->save();
-
-    //     return redirect()->route('product.detail', $product->id)->with('success', 'Product updated successfully!');
-    // }
-
     public function update(Request $request, $id)
     {
         try {

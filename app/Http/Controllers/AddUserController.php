@@ -32,7 +32,7 @@ class AddUserController extends Controller
         if ($request->hasFile('image')) {
             $users->image = $request->file('image')->store('users', 'public');
         } else {
-            $users->image = null; // or set a default image path
+            $users->image = null; 
         }
         $users->save();
         session()->flash('new_user_id', $users->id);
@@ -117,7 +117,7 @@ class AddUserController extends Controller
     {
         $customers = DB::table('users')
             ->where('role', 'customer')
-            ->paginate(6); // Use paginate instead of get
+            ->paginate(6); 
 
         return view('add_user.customerList', compact('customers'));
     }

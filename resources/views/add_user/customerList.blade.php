@@ -25,9 +25,9 @@
             <table class="categories-table">
                 <thead class="categories-thead">
                     <tr>
-                        <!-- <th style="width: 40px;"></th> -->
+                     
                         <th class="sortable-header">
-                            <!-- <span>CATEGORY</span> -->
+                        
                             <div class="sort-btn-group">
                                 CUSTOMER
                                 <div class="sort-btn-group-tdown">
@@ -71,7 +71,7 @@
                         </th>
 
                         <th class="sortable-header">
-                            <!--  -->
+                      
                             <div class="sort-btn-group">
                                 <span>ADDRESS</span>
                                 <div class="sort-btn-group-tdown">
@@ -86,7 +86,7 @@
                         </th>
 
                         <th class="sortable-header">
-                            <!--  -->
+                            
                             <div class="sort-btn-group">
                                 <span>PHONE</span>
                                 <div class="sort-btn-group-tdown">
@@ -101,7 +101,7 @@
                         </th>
 
                         <th>
-                            <!--  -->
+                            
                             <div class="sort-btn-group">
                                 <span>LAST LOGIN</span>
                                 <div class="sort-btn-group-tdown">
@@ -117,8 +117,6 @@
 
 
 
-                        <!-- 
-                                                <th style="width: 80px;">ACTION</th> -->
                     </tr>
                 </thead>
                 <tbody id="all-data">
@@ -157,14 +155,7 @@
                             <td class="table-cell" data-label="Last Login">
                                 <p class="user-last-login">{{ $user->last_login }}</p>
                             </td>
-                            <!-- 
-                                                                    <td class="table-cell" data-label="Action">
-                                                                        <div class="action-menu">
-                                                                            <a href="" class="action-btn" title="View Details">
-                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </td> -->
+                     
                         </tr>
                     @endforeach
                 </tbody>

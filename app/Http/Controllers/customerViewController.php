@@ -156,7 +156,7 @@ class customerViewController extends Controller
     {
         $products = Product::orderBy('created_at', 'desc')->take(4)->get();
 
-        // $bestSelling = Product::take(8)->get();
+      
         $bestSelling = DB::table('orders_details')
             ->join('products', 'orders_details.product_id', '=', 'products.id')
             ->select(
