@@ -129,14 +129,7 @@
                             <td class="table-cell" data-label="Stock">
                                 <span class="stock editable" data-field="stock">{{ $product->stock }}</span>
                             </td>
-                            <!-- <td class="table-cell" data-label="Action">
-                                                <div class="action-menu">
-                                                    <a href="" class="action-btn"
-                                                        title="View Details">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                </div>
-                                            </td> -->
+                           
                         </tr>
                     @endforeach
                 </tbody>

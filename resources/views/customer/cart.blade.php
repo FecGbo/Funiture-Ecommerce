@@ -77,8 +77,8 @@
                     @endphp
 
                     <!-- <div class="cart-total">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <h3>Total Price: MMK {{ number_format($Total_price) }}</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
                 @else
                     <p>Your cart is empty.</p>
                 @endif
@@ -124,10 +124,7 @@
 @endsection
 @push('scripts')
 <script>
-    // document.getElementById('quantityInput').addEventListener('change', function () {
 
-
-    // });
 
     function updateQuantity(productId, quantity) {
         $.ajax({

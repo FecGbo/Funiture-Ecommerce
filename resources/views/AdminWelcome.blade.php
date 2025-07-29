@@ -220,7 +220,7 @@
                         <span class="browser-type-subtitle">Total</span>
                     </div>
                     <div class="browser-ty-chart">
-                        <canvas id="browserTypeChart" ></canvas>
+                        <canvas id="browserTypeChart"></canvas>
                     </div>
 
                 </div>
@@ -279,20 +279,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                <!-- <tr>
-                                                                                                                                                                                                                                                                                                                                                    <td>1</td>
-                                                                                                                                                                                                                                                                                                                                                    <td>Product 1</td>
-                                                                                                                                                                                                                                                                                                                                                    <td>
-                                                                                                                                                                                                                                                                                                                                                        <div class="popularity-bar">
-                                                                                                                                                                                                                                                                                                                                                            <div class="popularity-bar-inner" style="width: 80%"></div>
-                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                    </td>
-                                                                                                                                                                                                                                                                                                                                                    <td>
-                                                                                                                                                                                                                                                                                                                                                        <div class="sales">
-                                                                                                                                                                                                                                                                                                                                                            100
-                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                    </td>
-                                                                                                                                                                                                                                                                                                                                                </tr> -->
 
                             </tbody>
                         </table>

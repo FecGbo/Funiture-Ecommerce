@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </th>
-                        <!-- <th style="width: 80px;">ACTION</th> -->
+
                     </tr>
                 </thead>
                 <tbody class="all-data" id="all-data">
@@ -88,14 +88,8 @@
                                 <p class="category-description editable" data-field="description">{{ $category->description }}
                                 </p>
                             </td>
-                            <!-- <td class="table-cell" data-label="Action">
-                                                                                                                                                        <div class="action-menu">
-                                                                                                                                                            <a href="" class="action-btn"
-                                                                                                                                                                title="View Details">
-                                                                                                                                                                <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                                                                                            </a>
-                                                                                                                                                        </div>
-                                                                                                                                                    </td> -->
+
+
                         </tr>
                     @endforeach
 
@@ -121,7 +115,7 @@
                     window.location.href = row.getAttribute('data-url');
                 }
             });
-            
+
             function makeEditable(element, type = 'input') {
                 if (element.classList.contains('editing')) return;
                 element.classList.add('editing');
