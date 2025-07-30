@@ -22,7 +22,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            $previousLogin = $user->last_login;
+
             $user->last_login = now();
 
 

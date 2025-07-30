@@ -159,6 +159,19 @@ button.btn.btn-success {
     display: block;
 }
 
+.form-actions-left {
+    gap: 1rem;
+    display: flex;
+}
+input#searchInput {
+    height: inherit;
+}
+
+button#showDeleteModalBtn {
+    /* width: 120px; */
+    height: 40px;
+}
+
 @media (max-width: 900px) {
     .form-grid {
         flex-direction: column;
@@ -212,13 +225,46 @@ button.btn.btn-success {
         font-size: 1.25rem;
     }
 
+    /* 
     .image-preview {
         width: 120px;
         height: 120px;
-    }
+    } */
+
 
     .product-form-container {
         min-width: 350px;
+    }
+
+    .form-actions-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .form-actions-left,
+    .form-actions-right {
+        width: 100% !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+
+    .form-actions-left>*,
+    .form-actions-right>* {
+        width: 100% !important;
+    }
+
+    .form-actions-left {
+        gap: 1rem;
+    }
+
+    button.btn.btn-success {
+        width: 100% !important;
+    }
+
+    div#imagePreview {
+        width: 220px;
+        height: 180px;
     }
 }
 

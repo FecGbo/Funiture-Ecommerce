@@ -1,4 +1,4 @@
-.product-form-container {
+.category-form-container {
 
     background: #fff;
     border-radius: var(--border-radius-md);
@@ -87,7 +87,7 @@
 }
 
 div#stockGroup {
-    margin-top: 1rem;
+    margin-top: 1.4rem;
 }
 
 .form-actions-group {
@@ -111,6 +111,7 @@ div#stockGroup {
 
 select#category_id {
     padding: 10.5px;
+    height: 49.18px;
 }
 
 button.btn.btn-success {
@@ -159,7 +160,22 @@ button.btn.btn-success {
     display: block;
 }
 
+button#showDeleteModalBtn {
+    /* width: 120px; */
+    height: 40px;
+}
+
+input#searchInput {
+    height: inherit;
+}
+
 @media (max-width: 900px) {
+
+    .form-actions-left {
+        display: flex;
+        gap: 1rem;
+    }
+
     .form-grid {
         flex-direction: column;
     }
@@ -219,6 +235,37 @@ button.btn.btn-success {
 
     .product-form-container {
         min-width: 350px;
+    }
+
+    .form-actions-group {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .form-actions-left,
+    .form-actions-right {
+        width: 100% !important;
+        justify-content: center !important;
+        display: flex !important;
+    }
+
+    .form-actions-left>*,
+    .form-actions-right>* {
+        width: 100% !important;
+    }
+
+    .form-actions-left {
+        gap: 1rem;
+    }
+
+    button.btn.btn-success {
+        width: 100% !important;
+    }
+
+    div#imagePreview {
+        width: 220px;
+        height: 180px;
     }
 }
 

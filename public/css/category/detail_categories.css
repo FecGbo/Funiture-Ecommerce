@@ -116,6 +116,14 @@ button.btn.btn-success {
     justify-content: flex-end;
 }
 
+button#showDeleteModalBtn {
+    /* width: 120px; */
+    height: 40px;
+}
+input#searchInput {
+    height: inherit;
+}
+
 @media (max-width: 768px) {
     .form-actions {
         flex-direction: column;
@@ -311,9 +319,9 @@ button.btn.btn-success {
         font-size: 1.25rem;
     }
 
-    .image-preview {
-        width: 120px;
-        height: 120px;
+    div#imagePreview {
+        width: 220px;
+        height: 180px;
     }
 
     .category-form-container {
