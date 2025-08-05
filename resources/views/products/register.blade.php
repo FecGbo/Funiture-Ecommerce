@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="product_code" class="form-label">Product Code</label>
                         <input type="text" id="product_code" name="product_code" class="form-input"
-                            placeholder="Enter category name" value="{{ old('product_code') }}" required>
+                            placeholder="Enter product code" value="{{ old('product_code') }}" required>
                         @error('product_code')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="product_stock" class="form-label">Product Stock</label>
                         <input type="text" id="product_stock" name="product_stock" class="form-input"
-                            placeholder="Enter category name" value="{{ old('product_stock') }}" required>
+                            placeholder="Enter product stock" value="{{ old('product_stock') }}" required>
                         @error('product_stock')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="purchase_price" class="form-label">Purchase Price</label>
                         <input type="text" id="purchase_price" name="purchase_price" class="form-input"
-                            placeholder="Enter category name" value="{{ old('purchase_price') }}" required>
+                            placeholder="Enter purchase price" value="{{ old('purchase_price') }}" required>
                         @error('purchase_price')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label for="sale_price" class="form-label">Sale Price</label>
                         <input type="text" id="sale_price" name="sale_price" class="form-input"
-                            placeholder="Enter category name" value="{{ old('sale_price') }}" required>
+                            placeholder="Enter sale price" value="{{ old('sale_price') }}" required>
                         @error('sale_price')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
@@ -95,7 +95,7 @@
                     <div class="form-group">
                         <label for="product_description" class="form-label">Product Description</label>
                         <input type="text" id="product_description" name="product_description" class="form-input"
-                            placeholder="Enter category name" value="{{ old('product_description') }}" required>
+                            placeholder="Enter product description" value="{{ old('product_description') }}" required>
                         @error('product_description')
                             <span class="error-message">{{ $message }}</span>
                         @enderror
