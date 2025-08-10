@@ -389,3 +389,14 @@ p.category-description {
         display: inline;
     }
 }
+
+@media (max-width:800px) {
+    .table-row:hover {
+        background: none !important;
+    }
+
+    .table-row:hover>.table-cell {
+        box-shadow: none !important;
+        transition: none !important;
+    }
+}

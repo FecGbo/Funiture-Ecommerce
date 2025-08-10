@@ -291,6 +291,18 @@
     transition: border 0.2s, box-shadow 0.2s;
 }
 
+
+@media (max-width:800px) {
+    .table-row:hover {
+        background: none !important;
+    }
+
+    .table-row:hover>.table-cell {
+        box-shadow: none !important;
+        transition: none !important;
+    }
+}
+
 @media(min-width:800px) {
 
     thead tr th:first-child {

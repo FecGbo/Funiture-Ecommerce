@@ -120,6 +120,7 @@ button#showDeleteModalBtn {
     /* width: 120px; */
     height: 40px;
 }
+
 input#searchInput {
     height: inherit;
 }
@@ -305,8 +306,8 @@ input#searchInput {
     }
 
     .image-preview {
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 180px;
     }
 
     .category-form-container {
