@@ -20,3 +20,8 @@
     min-width: 320px;
     max-width: 90vw;
 }
+
+.custom-modal-content p {
+    margin-bottom: 2rem;
+
+}

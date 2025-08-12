@@ -7,7 +7,7 @@ use App\Models\Product;
 use DB;
 use Illuminate\Http\Request;
 
-class customerViewController extends Controller
+class CustomerViewController extends Controller
 {
 
     public function productView(Request $request)
@@ -156,7 +156,7 @@ class customerViewController extends Controller
     {
         $products = Product::orderBy('created_at', 'desc')->take(4)->get();
 
-      
+
         $bestSelling = DB::table('orders_details')
             ->join('products', 'orders_details.product_id', '=', 'products.id')
             ->select(

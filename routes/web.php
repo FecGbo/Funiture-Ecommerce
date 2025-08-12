@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\customerViewController;
+use App\Http\Controllers\CustomerViewController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -147,10 +147,10 @@ Route::get('/customer-about', function () {
 
 
 // customer view
-Route::get('/customer-product', [App\Http\Controllers\customerViewController::class, 'productView'])->name('customer.product');
-Route::get('/customer-search', [App\Http\Controllers\customerViewController::class, 'customerSearch'])->name('customer.search');
+Route::get('/customer-product', [App\Http\Controllers\CustomerViewController::class, 'productView'])->name('customer.product');
+Route::get('/customer-search', [App\Http\Controllers\CustomerViewController::class, 'customerSearch'])->name('customer.search');
 
-Route::post('/add-to-cart', [App\Http\Controllers\customerViewController::class, 'addToCart'])->name('cart.add');
+Route::post('/add-to-cart', [App\Http\Controllers\CustomerViewController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/product/{id}/detail', function ($id) {
     $product = Product::findOrFail($id);
@@ -188,6 +188,6 @@ Route::get('/cart/success', [CartController::class, 'success'])->name('cart.succ
 
 //index page
 
-Route::get('/', [customerViewController::class, 'latestFuniture'])->name('customer.latestFuniture');
+Route::get('/', [CustomerViewController::class, 'latestFuniture'])->name('customer.latestFuniture');
 
 Route::post('/cart-update-quantity', [CartController::class, 'updateQuantity'])->name('cart.update');
