@@ -27,7 +27,7 @@
                     <h1>Discover New Collection</h1>
                     <x-button :type="'button'" variant="primary"
                         onclick="window.location.href='{{ route('customer.product') }}'"
-                        style="background:black;color:#ffd700;">Shop Now</x-button>
+                        style="background:black;color:#ffd700;border-radius: 8px;">Shop Now</x-button>
                 </div>
 
             </div>
@@ -67,14 +67,14 @@
 
         </div>
         <!-- @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif -->
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif -->
         <div class="mid-section">
             <div class="mid-content">
                 <div class="mid-image">
-                    <img src="{{ asset('images/sofa.jpg') }}" alt="Mr. David" class="mid-photo">
+                    <img src="{{ asset('images/BED.jpg') }}" alt="Mr. David" class="mid-photo">
                 </div>
                 <div class="mid-info">
                     <h2>Luxury Golden Furniture</h2>
@@ -87,7 +87,8 @@
                     </p>
 
 
-                    <x-button class="midbtn" onclick="window.location.href='{{ route('customer.product')}}'">Shop</x-button>
+                    <x-button class="midbtn" onclick="window.location.href='{{ route('customer.product')}}'"
+                        style="border-radius: 8px;">Shop</x-button>
                 </div>
             </div>
         </div>

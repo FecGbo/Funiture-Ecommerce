@@ -26,7 +26,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('order.list') }}" class="{{ request()->is('admin/orders*') ? 'active' : '' }}">
+                    <a href="{{ route('order.list') }}"
+                        class="{{ request()->routeIs('order.list') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="sidebar-text">Orders</span>
                     </a>
