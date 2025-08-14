@@ -55,6 +55,7 @@
                             <option value="customer" {{ old('role', 'customer') == 'customer' ? 'selected' : '' }}>Customer
                             </option>
                             <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            
 
                         </select>
                         @error('role')
