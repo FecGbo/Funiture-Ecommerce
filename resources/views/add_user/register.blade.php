@@ -54,8 +54,12 @@
                         <select id="role" name="role" class="form-input" required>
                             <option value="customer" {{ old('role', 'customer') == 'customer' ? 'selected' : '' }}>Customer
                             </option>
-                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            @if (auth()->user() && auth()->user()->role == 'admin')
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
                             
+                            @endif
+                            <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
 
                         </select>
                         @error('role')

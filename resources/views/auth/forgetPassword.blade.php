@@ -1,5 +1,5 @@
 @extends('layouts.customer')
-<link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/auth/forgetpass.css') }}">
 @section('content')
 
     <div class="banner">
@@ -8,7 +8,7 @@
             <div class="title">
                 <a href="">Home</a>
                 <span>></span>
-                <span>Login</span>
+                <span>Reset Password</span>
             </div>
         </div>
     </div>
@@ -18,10 +18,10 @@
             <img src="{{ asset('images/login.png') }}" alt="">
         </div>
         <div class="content-right">
-            <form action="{{ route('auth.login') }}" method="post">
+            <form action="{{ route('password.email') }}" method="post">
                 @csrf
-                <h1>Login</h1>
-                <hr>
+                <h1>Forget Password</h1>
+
                 @if(session('error'))
                     <div style="color:red;">{{ session('error') }}</div>
                 @endif
@@ -37,31 +37,28 @@
                         </ul>
                     </div>
                 @endif
+
+                <p>
+                    Forgot your password? Just let us know you email address and we will send you a password reset link that
+                    will allow you to choose a new one.
+                </p>
+
                 <div class="email">
 
                     <x-input name="email" type="email" required placeholder="Email Address"></x-input>
 
                 </div>
-                <div class="password">
 
-                    <x-input name="password" type="password" required placeholder="Password"></x-input>
 
-                </div>
-                <div class="keep-login">
-                    <div class="keep">
-                        <input type="checkbox" name="remember" id="remember" style="width: 20px;height:20px;">
-                        <label for="remember" style="opacity: 0.5;">Keep me logged in</label>
-                    </div>
-                    <div class="forget-password">
-                        <a href="{{ route('password.request') }}">Forgot password?</a>
-                    </div>
+
+                <div class="sent-mail">
+                    <x-button id="loginbtn" name="login" type="submit">Sent</x-button>
+                    <x-button id="loginbtn" name="login" type="submit">Back</x-button>
                 </div>
 
 
 
-                <x-button id="loginbtn" name="login" type="submit">Log in</x-button>
-                <p><span style="opacity: 0.5;">Don't have an account?</span> <a href="{{ route('register') }}">Register
-                        here</a></p>
+
 
             </form>
 

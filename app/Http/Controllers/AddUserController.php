@@ -15,7 +15,7 @@ class AddUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255 ',
             'password' => 'required|string|min:8',
-            'role' => 'required|in:admin,customer',
+            'role' => 'required|in:admin,customer,staff',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|max:15',
             'dob' => 'required|date',
@@ -32,7 +32,7 @@ class AddUserController extends Controller
         if ($request->hasFile('image')) {
             $users->image = $request->file('image')->store('users', 'public');
         } else {
-            $users->image = null; 
+            $users->image = null;
         }
         $users->save();
         session()->flash('new_user_id', $users->id);
@@ -117,7 +117,7 @@ class AddUserController extends Controller
     {
         $customers = DB::table('users')
             ->where('role', 'customer')
-            ->paginate(6); 
+            ->paginate(6);
 
         return view('add_user.customerList', compact('customers'));
     }

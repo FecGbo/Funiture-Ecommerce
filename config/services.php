@@ -41,4 +41,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'mail' => [
+
+        'host' => env('CMAIL_HOST'),
+        'username' => env('CMAIL_USER'),
+        'password' => env('CMAIL_PASSWORD'),
+        'port' => env('CMAIL_PORT'),
+        'encryption' => env('CMAIL_ENCRYPTION'),
+        'from_address' => env('CMAIL_FROM_ADDRESS'),
+        'from_name' => env('CMAIL_FROM_NAME'),
+
+    ]
+
 ];

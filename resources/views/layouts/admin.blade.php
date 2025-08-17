@@ -26,8 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('order.list') }}"
-                        class="{{ request()->routeIs('order.list') ? 'active' : '' }}">
+                    <a href="{{ route('order.list') }}" class="{{ request()->routeIs('order.list') ? 'active' : '' }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="sidebar-text">Orders</span>
                     </a>
@@ -86,7 +85,7 @@
                         id="searchInput">
                 </form>
                 <div class="admin-profile">
-                    <span>Admin</span>
+                    <span>{{ ucfirst(auth()->user()->role) }}</span>
                     <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Admin" id="adminAvatar">
                     <ul class="admin-dropdown" id="adminDropdown">
                         <li><a href="#">Profile</a></li>

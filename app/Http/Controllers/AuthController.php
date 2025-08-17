@@ -50,7 +50,7 @@ class AuthController extends Controller
             $user->device = $device;
             $user->save();
 
-            if ($user->role == 'admin') {
+            if ($user->role == 'admin' || $user->role == 'staff') {
                 return redirect()->intended(route('admin.dashboard'))->with('success', 'Welcome Admin');
             } elseif ($user->role == 'customer') {
                 return redirect()->intended(route('customer.latestFuniture'))->with('success', 'Welcome User');

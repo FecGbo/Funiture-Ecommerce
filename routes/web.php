@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PasswordResetController;
 
 
 
@@ -18,6 +19,18 @@ Route::get('/monthly-customer-orders', [App\Http\Controllers\DashboardController
 
 Route::get('/browser-stats', [App\Http\Controllers\DashboardController::class, 'browserType'])->name('admin.browserStats');
 
+//Passwrod reset
+
+// Route::get('/rest-password', function () {
+//     return view('auth.forgetPassword');
+// })->name('resetpassword');
+
+
+
+Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
 
 // Auth
 Route::get('/login', function () {
@@ -40,7 +53,8 @@ Route::post('/auth', [App\Http\Controllers\AuthController::class, 'checkAuth'])-
 
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+
+Route::middleware(['auth', 'adminOrStaff'])->group(function () {
     // Admin-only routes
 
     // Route::get('/admin-dashboard', function () {
@@ -54,17 +68,32 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     // categories
 
-    Route::get('/register-category', function () {
-        return view('categories.register');
-    })->name('category.register');
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/register-category', function () {
+            return view('categories.register');
+        })->name('category.register');
+
+
+        Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('category.add');
+        Route::post('/categories/{id}/inline-update', [CategoryController::class, 'inlineUpdate']);
+        Route::get('/category/{id}/detail', [CategoryController::class, 'detail'])->name('category.detail');
+        Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+
+
+        Route::post('/users/{id}/inline-update', [App\Http\Controllers\AddUserController::class, 'inlineUpdate']);
+        Route::get('/user/{id}/detail', [App\Http\Controllers\AddUserController::class, 'detail'])->name('user.detail');
+        Route::post('/user/{id}/update', [App\Http\Controllers\AddUserController::class, 'update'])->name('user.update');
+
+        Route::delete('/user/{id}/delete', [App\Http\Controllers\AddUserController::class, 'delete'])->name('user.delete');
+
+
+
+    });
+
 
     Route::get('/list-categories', [CategoryController::class, 'listCategories'])->name('category.list');
-
-    Route::post('/add-category', [CategoryController::class, 'addCategory'])->name('category.add');
-    Route::post('/categories/{id}/inline-update', [CategoryController::class, 'inlineUpdate']);
-    Route::get('/category/{id}/detail', [CategoryController::class, 'detail'])->name('category.detail');
-    Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
 
 
 
@@ -84,11 +113,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     })->name('user.register');
     Route::get('/list-users', [App\Http\Controllers\AddUserController::class, 'listUsers'])->name('user.list');
     Route::post('/register-user', [App\Http\Controllers\AddUserController::class, 'addUser'])->name('user.register');
-    Route::post('/users/{id}/inline-update', [App\Http\Controllers\AddUserController::class, 'inlineUpdate']);
-    Route::get('/user/{id}/detail', [App\Http\Controllers\AddUserController::class, 'detail'])->name('user.detail');
-    Route::post('/user/{id}/update', [App\Http\Controllers\AddUserController::class, 'update'])->name('user.update');
-
-    Route::delete('/user/{id}/delete', [App\Http\Controllers\AddUserController::class, 'delete'])->name('user.delete');
 
 
     Route::get('/list-customers', [App\Http\Controllers\AddUserController::class, 'getCustomer'])->name('customer.list');
