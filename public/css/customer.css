@@ -473,7 +473,7 @@ ul#cartItems {
         flex-direction: column;
         padding: 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .nav-links.active {

@@ -117,6 +117,8 @@
                     </div>
                 @endforeach
             </div>
+             <x-add-success modalId="addCartSuccessModal" 
+            message="Product added to cart successfully!" confirmId="closeAddCartSuccessBtn"></x-add-success>
 
 
             <div id="Content" class="search-data"></div>
@@ -167,6 +169,13 @@
         });
 
 
+        //  document.getElementById('addCartSuccessModal').style.display = 'block';
+            document.getElementById('closeAddCartSuccessBtn').onclick = function() {
+                document.getElementById('addCartSuccessModal').style.display = 'none';
+            };
+
+
+
         function addToCart(productId) {
             $.ajax({
                 type: 'POST',
@@ -179,10 +188,18 @@
                     // alert(response.message);
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
+                        if (response.cart_count > 0) {
+                            $('#cartCount').show();
+                        } else {
+                            $('#cartCount').hide();
+                        }
                     }
                     if (response.cart_items !== undefined) {
                         console.log(response.cart_items);
+
+
                     }
+                     document.getElementById('addCartSuccessModal').style.display = 'block';
 
                     $.get('{{ route("cart.items") }}', function (data) {
                         $('#cartItems').parent().html(data.html);

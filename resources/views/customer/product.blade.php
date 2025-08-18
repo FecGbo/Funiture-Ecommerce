@@ -127,12 +127,16 @@
 
 
             </div>
-
+            
 
 
             <div class="pagination">
                 {{ $products->links() }}
             </div>
+
+              <x-add-success modalId="addCartSuccessModal" 
+            message="Product added to cart successfully!" confirmId="closeAddCartSuccessBtn"></x-add-success>
+
 
 
         </div>
@@ -146,6 +150,10 @@
             var productId = $(this).data('product-id');
             addToCart(productId);
         });
+
+        document.getElementById('closeAddCartSuccessBtn').onclick = function() {
+            document.getElementById('addCartSuccessModal').style.display = 'none';
+        };
 
 
         function addToCart(productId) {
@@ -164,6 +172,8 @@
                     if (response.cart_items !== undefined) {
                         console.log(response.cart_items);
                     }
+
+                    document.getElementById('addCartSuccessModal').style.display = 'block';
 
                     $.get('{{ route("cart.items") }}', function (data) {
                         $('#cartItems').parent().html(data.html);

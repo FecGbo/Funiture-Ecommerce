@@ -108,8 +108,8 @@
 
 
                 </div>
-                @if(session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @if(session('stock_error'))
+                    <div class="alert alert-danger">{{ session('stock_error') }}</div>
                 @endif
 
             </div>

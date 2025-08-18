@@ -39,10 +39,10 @@
                 <div class="total-sale-order-right">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>{{ $totalOrders }}</h3>
+                            <h3>{{ number_format( $totalOrders) }}</h3>
                             <span>Total Orders</span>
                             <div class="total-sale">
-                                <span style="opacity: 0.6;">Total orders: &nbsp;{{ $totalOrders }}</span>
+                                <span style="opacity: 0.6;">Total orders: &nbsp;{{ number_format( $totalOrders) }}</span>
                             </div>
                         </div>
                         <div class="sale-price-right">
@@ -165,11 +165,11 @@
                 <div class="total-sale-order-left">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>{{ $totalProfits }}</h3>
+                            <h3>{{number_format($totalProfits) }}</h3>
                             <span>Total Profit</span>
                             <div class="total-sale">
                                 <span style="opacity: 0.6;">Total profits:<span class="line-break"></span>
-                                    &nbsp;{{ $totalProfits }}</span>
+                                    &nbsp;{{ number_format($totalProfits) }}</span>
 
 
                             </div>
@@ -189,11 +189,11 @@
                 <div class="total-sale-order-right">
                     <div class="sale-price">
                         <div class="sale-price-left">
-                            <h3>{{ $totalSignups }}</h3>
+                            <h3>{{number_format( $totalSignups) }}</h3>
                             <span>Sign Up</span>
                             <div class="total-sale">
                                 <span style="opacity: 0.6;">Total signup: <span class="line-break"></span>
-                                    &nbsp;{{ $totalSignups }}</span>
+                                    &nbsp;{{ number_format( $totalSignups) }}</span>
                             </div>
                         </div>
                         <div class="sale-price-right">

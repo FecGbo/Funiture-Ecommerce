@@ -26,17 +26,27 @@
                     <input type="number" name="quantity" id="quantityInput" value="1" min="1" max="{{ $product->stock }}"
                         oninput="if(this.value>10) this.value = 10;">
                     <x-button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</x-button>
-
+                  <div class="stock">
+                    <p class="stock-text">Stock: {{ $product->stock }}</p>
+                  </div>
                 </div>
 
             </div>
+            <x-add-success modalId="addCartSuccessModal" 
+            message="Product added to cart successfully!" confirmId="closeAddCartSuccessBtn"></x-add-success>
 
 
         </div>
     </div>
     <script>
+        
+          
+            document.getElementById('closeAddCartSuccessBtn').onclick = function() {
+                document.getElementById('addCartSuccessModal').style.display = 'none';
+            };
 
         function addToCart(productId) {
+
             var quantity = $('#quantityInput').val();
             $.ajax({
                 type: 'POST',
@@ -58,6 +68,8 @@
                     if (response.cart_items !== undefined) {
                         console.log(response);
                     }
+                    // alert(response.message || 'Product added to cart successfully.');
+                    document.getElementById('addCartSuccessModal').style.display = 'block';
                 },
 
             });

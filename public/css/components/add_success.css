@@ -1,0 +1,45 @@
+/* Delete pop up */
+.add-success-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.add-success-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    min-width: 320px;
+    max-width: 90vw;
+    width: 25%;
+    margin: 0 auto;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mid-image {
+    width: 70px;
+    height: 70px;
+
+}
+
+.add-success-content p {
+    color: black;
+}

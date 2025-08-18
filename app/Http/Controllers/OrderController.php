@@ -41,7 +41,7 @@ class OrderController extends Controller
                 }
                 if ($product->stock < $item['quantity']) {
                     DB::rollBack();
-                    return redirect()->back()->with('error', 'Insufficient stock for product: ' . $product->name);
+                    return redirect()->back()->with('stock_error', 'Insufficient stock for product: ' . $product->name);
                 }
             }
 

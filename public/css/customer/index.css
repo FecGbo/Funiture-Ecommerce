@@ -437,4 +437,8 @@ h1 {
     .mid-info h2 {
         font-size: 2rem;
     }
+
+    .banner {
+        height: 400px;
+    }
 }

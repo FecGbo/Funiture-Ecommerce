@@ -51,6 +51,18 @@
             </ul>
 
             <div class="nav-icons">
+
+               <i class="fa fa-history" aria-hidden="true" style="font-size:20px"></i>
+
+
+              <a href="javascript:void(0)" title="Cart" id="cartIcon"
+                    style="position:relative; display:inline-block;">
+                    <i class="fas fa-shopping-cart" onclick="openmodal()" style="font-size:20px"></i>
+                 
+<span id="cartCount" class="cart-count-badge" style="{{ $cartCount == 0 ? 'display:none;' : '' }}">{{ $cartCount }}</span>
+                
+         
+                </a>
                 <div class="admin-profile">
                     @auth
                         <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="Admin" id="adminAvatar">
@@ -69,11 +81,9 @@
                     </ul>
                 </div>
 
-                <a href="javascript:void(0)" title="Cart" id="cartIcon"
-                    style="position:relative; display:inline-block;">
-                    <i class="fas fa-shopping-cart" onclick="openmodal()"></i>
-                    <span id="cartCount" class="cart-count-badge">{{ $cartCount }}</span>
-                </a>
+             
+
+              
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -248,8 +258,13 @@
                 success: function (response) {
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
-
+                        if (response.cart_count> 0) {
+                        $('#cartCount').show();
+                             }else{
+                        $('#cartCount').hide();
+                             }
                     }
+                  
 
                     $.get('{{ route("cart.items") }}', function (data) {
                         $('#cartItems').parent().html(data.html);

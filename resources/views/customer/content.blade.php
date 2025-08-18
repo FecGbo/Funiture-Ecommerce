@@ -15,6 +15,8 @@
         </div>
     </div>
 
+
+
     <!-- Contact -->
     <div class="contact">
         <div class="container">
@@ -80,7 +82,7 @@
 
                 <!-- Form -->
                 <div class="form">
-                    <form action="#" method="POST">
+                    <form action="{{route('contact.send')}}" method="POST">
                         @csrf
 
                         <div class="field">
@@ -110,4 +112,14 @@
             </div>
         </div>
     </div>
+
+    @if(session('mail-success'))
+  <x-add-success modalId="mailSuccess" message="{{session('mail-success')}}" confirmId="closeMailSuccess"></x-add-success>
+      <script>
+        document.getElementById('mailSuccess').style.display = 'block';
+        document.getElementById('closeMailSuccess').onclick = function() {
+            document.getElementById('mailSuccess').style.display = 'none';
+        };
+    </script>
+@endif
 @endsection

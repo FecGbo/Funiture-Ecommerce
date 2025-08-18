@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -24,6 +25,8 @@ Route::get('/browser-stats', [App\Http\Controllers\DashboardController::class, '
 // Route::get('/rest-password', function () {
 //     return view('auth.forgetPassword');
 // })->name('resetpassword');
+
+Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.send');
 
 
 

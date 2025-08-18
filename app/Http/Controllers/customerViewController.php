@@ -148,6 +148,9 @@ class CustomerViewController extends Controller
         foreach ($cart as $item) {
             $cartCount += $item['quantity'];
         }
+        if ($product->stock < $cart[$productId]['quantity']) {
+            return response()->json(['message' => 'Insufficient stock for this product.', 'cart_count' => $cartCount]);
+        }
         return response()
             ->json(['message' => 'success', 'cart_count' => $cartCount, 'cart_items' => $cart]);
     }
