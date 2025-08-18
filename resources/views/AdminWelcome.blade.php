@@ -124,7 +124,7 @@
 
                             <div class="monthly-sale-profit">
                                 <span style="opacity: 0.6;">Last Month</span>
-                                <span>89</span>
+                         <span>{{ $lastMonthOrders }}</span>
 
 
 
@@ -141,7 +141,7 @@
 
                             <div class="monthly-sale-profit">
                                 <span style="opacity: 0.6;">This Month</span>
-                                <span>90</span>
+                                  <span>{{ $thisMonthOrders }}</span>
 
 
 

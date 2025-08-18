@@ -10,6 +10,10 @@
         $subTotal += $item['price'] * $item['quantity'];
 
     }
+
+    
+    $ordersHistory = $ordersHistory ?? [];
+
 @endphp
 
 <head>
@@ -52,7 +56,7 @@
 
             <div class="nav-icons">
 
-               <i class="fa fa-history" aria-hidden="true" style="font-size:20px"></i>
+               <i class="fa fa-history" aria-hidden="true" style="font-size:20px" onclick="openhistory()"></i>
 
 
               <a href="javascript:void(0)" title="Cart" id="cartIcon"
@@ -90,6 +94,36 @@
             </div>
         </nav>
     </header>
+
+   <div class="order-modal" style="display:none;">
+      <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+         
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <span style="cursor:pointer;float:right;font-size:24px;"
+                    onclick="document.querySelector('.order-modal').style.display='none'">&times;</span>
+        </thead>
+        <tbody>
+            @foreach($ordersHistory as $history)
+                <tr>
+                    <td>{{ $history->id }}</td>
+                
+                    <td>MMK {{ number_format($history->price) }}</td>
+                    <td>{{ $history->status }}</td>
+                    <td><a href="" class="btn btn-primary">View</a></td>
+                </tr>
+            @endforeach
+        </tbody>
+      </table>
+    
+   </div>
+
 
     <div class="cart-modal" style="display: none;">
         <div class="cart-content">
@@ -274,8 +308,10 @@
 
             });
         });
-
-
+      
+        function openhistory() {
+            document.querySelector('.order-modal').style.display = 'block';
+        }
 
     </script>
 

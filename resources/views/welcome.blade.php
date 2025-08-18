@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/customer/index.css') }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+
 @section('title', 'Home')
 @section('content')
     <div class="main-wrapper">

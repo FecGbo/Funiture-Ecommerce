@@ -55,7 +55,19 @@ class DashboardController extends Controller
             ->limit(4)
             ->get();
 
-        return view('AdminWelcome', compact('totalSales', 'totalOrders', 'totalSignups', 'totalProfits', 'browserStats', 'deviceStats', 'topProducts'));
+
+
+         $lastMonthOrders = DB::table('orders')
+            ->where('status', 'approved')
+            ->whereMonth('created_at', now()->subMonth()->month)
+            ->count();
+
+      $thisMonthOrders = DB::table('orders')
+            ->where('status', 'approved')
+            ->whereMonth('created_at', now()->month)
+            ->count();
+
+        return view('AdminWelcome', compact('totalSales', 'totalOrders', 'totalSignups', 'totalProfits', 'browserStats', 'deviceStats', 'topProducts','lastMonthOrders', 'thisMonthOrders'));
 
     }
 
@@ -108,6 +120,7 @@ class DashboardController extends Controller
 
         return response()->json($monthlyOrders);
     }
+
 
 
 

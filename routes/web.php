@@ -15,10 +15,13 @@ use App\Http\Controllers\ContactController;
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('admin.search');
 
 Route::get('/daily-sales-chart', [App\Http\Controllers\DashboardController::class, 'dynamicChart']);
+Route::get('/monthly-order-count', [App\Http\Controllers\DashboardController::class, 'orderCount'])->name('admin.monthlyOrderCount');
 
 Route::get('/monthly-customer-orders', [App\Http\Controllers\DashboardController::class, 'monthlyCustomerOrders'])->name('admin.monthlyCustomerOrders');
 
 Route::get('/browser-stats', [App\Http\Controllers\DashboardController::class, 'browserType'])->name('admin.browserStats');
+
+Route::get('/orderHistory', [App\Http\Controllers\OrderController::class, 'orderHistory'])->name('customer.orderHistory');
 
 //Passwrod reset
 

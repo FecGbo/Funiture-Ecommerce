@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/components/add_success.css">
 <div class="add-success-modal" id="{{ $modalId }}" style="display:none;">
     <div class="add-success-content">
-         <div class="mid-image">
+         <div class="mid-success-image">
                 <img src="{{ asset('images/success.png') }}" alt="Mr. David" class="mid-photo">
             </div>
         <!-- <h4>{{ $title ?? 'Success' }}</h4> -->

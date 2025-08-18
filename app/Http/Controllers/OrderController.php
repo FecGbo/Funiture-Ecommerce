@@ -109,6 +109,29 @@ class OrderController extends Controller
         return view('orders.list', compact('orders', 'sort', 'dir'));
     }
 
+    public function orderHistory(){
+        // $ordersHistory = Order::where('customer_id', auth()->id())
+        //     ->with(['orderDetails.product'])
+        //     ->orderBy('order_date', 'desc')
+        //     ->paginate(10);
+
+        $ordersHistory = DB::table('orders')
+            ->join('orders_details', 'orders.id', '=', 'orders_details.order_id')
+            ->join('products', 'orders_details.product_id', '=', 'products.id')
+            ->where('orders.customer_id', auth()->id())
+            ->select(
+                'orders.*',
+                'products.name as product_name',
+                'products.image as product_image',
+                'orders_details.quantity',
+                'orders_details.price'
+            )
+            ->orderBy('orders.order_date', 'desc')
+            ->paginate(10);
+
+        return view('layouts.customer', compact('ordersHistory'));
+    }
+
 
 
 }
