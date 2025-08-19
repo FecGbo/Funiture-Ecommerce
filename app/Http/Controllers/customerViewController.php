@@ -127,11 +127,19 @@ class CustomerViewController extends Controller
         $product = Product::find($productId);
 
 
+        if (!$product || $product->stock < $quantity || $product->stock == 0) {
+            return response()->json(['insufficient_stock' => 'Insufficient stock for this product.', 'cart_count' => 0]);
+        }
+
         $cart = session()->get('cart', []);
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
             if ($cart[$productId]['quantity'] > 10) {
                 $cart[$productId]['quantity'] = 10;
+            }
+
+            if ($cart[$productId]['quantity'] > $product->stock) {
+                return response()->json(['insufficient_stock' => 'Insufficient stock for this product.', 'cart_count' => array_sum(array_column($cart, 'quantity'))]);
             }
         } else {
             $cart[$productId] = [
@@ -144,20 +152,13 @@ class CustomerViewController extends Controller
             ];
         }
         session()->put('cart', $cart);
-        $cartCount = 0;
-        foreach ($cart as $item) {
-            $cartCount += $item['quantity'];
-        }
-        if ($product->stock < $cart[$productId]['quantity']) {
-            return response()->json(['message' => 'Insufficient stock for this product.', 'cart_count' => $cartCount]);
-        }
-        return response()
-            ->json(['message' => 'success', 'cart_count' => $cartCount, 'cart_items' => $cart]);
-    }
+        $cartCount = array_sum(array_column($cart, 'quantity'));
 
+        return response()->json(['message' => 'success', 'cart_count' => $cartCount, 'cart_items' => $cart]);
+    }
     public function latestFuniture()
     {
-        $products = Product::orderBy('created_at', 'desc')->take(4)->get();
+        $products = Product::where('stock', '>', 0)->orderBy('created_at', 'desc')->take(4)->get();
 
 
         $bestSelling = DB::table('orders_details')

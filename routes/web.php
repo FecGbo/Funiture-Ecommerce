@@ -31,6 +31,10 @@ Route::get('/orderHistory', [App\Http\Controllers\OrderController::class, 'order
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.send');
 
+Route::get('/order-history',function(){
+    return view('customer.order');
+});
+
 
 
 Route::get('/forgot-password', [PasswordResetController::class, 'showForgotPasswordForm'])->name('password.request');

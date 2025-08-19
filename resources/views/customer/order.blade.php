@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/customer/order.css">
+    <link rel="stylesheet" href="/css/global.css">
 </head>
 <body>
     <div class="content">
@@ -28,14 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($orders as $order)
-                    <tr>
-                        <td>{{ $order->id }}</td>
-                        <td>{{ $order->created_at->format('Y-m-d') }}</td>
-                        <td>MMK {{ number_format($order->total_amount) }}</td>
-                        <td>{{ $order->status }}</td>
-                    </tr>
-                @endforeach
+              
             </tbody>
 
     </div>

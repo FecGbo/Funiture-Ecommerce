@@ -1,7 +1,10 @@
 @extends('layouts.customer')
 <link rel="stylesheet" href="{{ asset('css/customer/index.css') }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+@php
+    $ordersHistory = $ordersHistory ?? [];
 
+@endphp
 
 @section('title', 'Home')
 @section('content')
@@ -43,23 +46,32 @@
             <h1>Latest Luxury Furniture</h1>
 
             <div class="products-container" class="all-data" id="all-data">
-                @foreach($products as $product)
-                    <div class="product-card">
-                        <a href="{{ route('customerProduct.detail', $product->id) }}">
-                            <div class="product-image">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-name">{{ $product->name }}</h3>
-                                <p class="product-description">{{ $product->description }}</p>
-                            </div>
-                            <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
 
-                        </a>
-                        <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</button>
-                    </div>
+
+                @foreach($products as $product)
+                    @if($product->stock > 0)
+                        <div class="product-card">
+                            <a href="{{ route('customerProduct.detail', $product->id) }}">
+                                <div class="product-image">
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">{{ $product->name }}</h3>
+                                    <p class="product-description">{{ $product->description }}</p>
+                                </div>
+                                <div class="product-price">MMK {{ number_format($product->sale_price) }}</div>
+
+                            </a>
+                            <button class="addToCart-btn" onclick="addToCart({{ $product->id }})">Add to Cart</button>
+                        </div>
+                    @endif
                 @endforeach
+
+
             </div>
+
+            <x-add-success modalId="insufficientStockModal" message="Insufficient stock available!"
+                confirmId="insufficientStockBtn" image="report.png"></x-add-success>
             <div id="Content" class="search-data"></div>
 
 
@@ -68,10 +80,10 @@
 
         </div>
         <!-- @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif -->
+                                                                                                                                <div class="alert alert-success">
+                                                                                                                                    {{ session('success') }}
+                                                                                                                                </div>
+                                                                                                                            @endif -->
         <div class="mid-section">
             <div class="mid-content">
                 <div class="mid-image">
@@ -118,8 +130,8 @@
                     </div>
                 @endforeach
             </div>
-             <x-add-success modalId="addCartSuccessModal" 
-            message="Product added to cart successfully!" confirmId="closeAddCartSuccessBtn"></x-add-success>
+
+
 
 
             <div id="Content" class="search-data"></div>
@@ -129,6 +141,10 @@
 
 
         </div>
+        <x-add-success modalId="addCartSuccessModal" message="Product added to cart successfully!"
+            confirmId="closeAddCartSuccessBtn"></x-add-success>
+
+
 
 
 
@@ -171,10 +187,13 @@
 
 
         //  document.getElementById('addCartSuccessModal').style.display = 'block';
-            document.getElementById('closeAddCartSuccessBtn').onclick = function() {
-                document.getElementById('addCartSuccessModal').style.display = 'none';
-            };
+        document.getElementById('closeAddCartSuccessBtn').onclick = function () {
+            document.getElementById('addCartSuccessModal').style.display = 'none';
+        };
 
+        document.getElementById('insufficientStockBtn').onclick = function () {
+            document.getElementById('insufficientStockModal').style.display = 'none';
+        };
 
 
         function addToCart(productId) {
@@ -186,7 +205,18 @@
                     product_id: productId
                 },
                 success: function (response) {
-                    // alert(response.message);
+
+                    document.getElementById('addCartSuccessModal').style.display = 'none';
+                    document.getElementById('insufficientStockModal').style.display = 'none';
+
+                    if (response.insufficient_stock) {
+                        document.getElementById('insufficientStockModal').style.display = 'block';
+                        document.querySelector('#insufficientStockModal .add-success-message').textContent = response.insufficient_stock;
+                        // console.log(response);
+                        // alert(response.insufficient_stock);
+                        return;
+                    }
+
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);
                         if (response.cart_count > 0) {
@@ -197,10 +227,13 @@
                     }
                     if (response.cart_items !== undefined) {
                         console.log(response.cart_items);
-
-
                     }
-                     document.getElementById('addCartSuccessModal').style.display = 'block';
+
+                    if (response.message === 'success') {
+                        document.getElementById('addCartSuccessModal').style.display = 'block';
+                    }
+
+
 
                     $.get('{{ route("cart.items") }}', function (data) {
                         $('#cartItems').parent().html(data.html);

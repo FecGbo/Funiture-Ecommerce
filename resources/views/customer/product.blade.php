@@ -127,15 +127,17 @@
 
 
             </div>
-            
+
 
 
             <div class="pagination">
                 {{ $products->links() }}
             </div>
 
-              <x-add-success modalId="addCartSuccessModal" 
-            message="Product added to cart successfully!" confirmId="closeAddCartSuccessBtn"></x-add-success>
+            <x-add-success modalId="addCartSuccessModal" message="Product added to cart successfully!"
+                confirmId="closeAddCartSuccessBtn"></x-add-success>
+            <x-add-success modalId="insufficientStockModal" message="Insufficient stock available!"
+                confirmId="insufficientStockBtn" image="report.png"></x-add-success>
 
 
 
@@ -151,8 +153,12 @@
             addToCart(productId);
         });
 
-        document.getElementById('closeAddCartSuccessBtn').onclick = function() {
+        document.getElementById('closeAddCartSuccessBtn').onclick = function () {
             document.getElementById('addCartSuccessModal').style.display = 'none';
+        };
+
+        document.getElementById('insufficientStockBtn').onclick = function () {
+            document.getElementById('insufficientStockModal').style.display = 'none';
         };
 
 
@@ -165,6 +171,17 @@
                     product_id: productId
                 },
                 success: function (response) {
+
+                    document.getElementById('insufficientStockModal').style.display = 'none';
+
+                    if (response.insufficient_stock) {
+                        document.getElementById('insufficientStockModal').style.display = 'block';
+                        document.querySelector('#insufficientStockModal .add-success-message').textContent = response.insufficient_stock;
+                        // console.log(response);
+                        // alert(response.insufficient_stock);
+                        return;
+                    }
+
                     // alert(response.message);
                     if (response.cart_count !== undefined) {
                         $('#cartCount').text(response.cart_count);

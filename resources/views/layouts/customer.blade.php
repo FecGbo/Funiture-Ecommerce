@@ -56,7 +56,7 @@
 
             <div class="nav-icons">
 
-               <i class="fa fa-history" aria-hidden="true" style="font-size:20px" onclick="openhistory()"></i>
+               <!-- <i class="fa fa-history" aria-hidden="true" style="font-size:20px" onclick="openhistory()"></i> -->
 
 
               <a href="javascript:void(0)" title="Cart" id="cartIcon"
