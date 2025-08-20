@@ -99,6 +99,7 @@ class OrderController extends Controller
                 'products.image as product_image',
                 'orders.order_date',
                 'orders.status',
+                'orders.delivery',
                 'orders.id as order_id',
                 'users.name as customer_name',
                 'users.image as customer_image'
@@ -109,7 +110,8 @@ class OrderController extends Controller
         return view('orders.list', compact('orders', 'sort', 'dir'));
     }
 
-    public function orderHistory(){
+    public function orderHistory()
+    {
         // $ordersHistory = Order::where('customer_id', auth()->id())
         //     ->with(['orderDetails.product'])
         //     ->orderBy('order_date', 'desc')
@@ -130,6 +132,21 @@ class OrderController extends Controller
             ->paginate(10);
 
         return view('layouts.customer', compact('ordersHistory'));
+    }
+
+
+    public function orderDelivery(Request $request, $id)
+    {
+        $request->validate([
+            'delivery' => 'in:pending,delivered,cancelled'
+        ]);
+        $order = Order::findOrFail($id);
+        $order->delivery = $request->input('delivery');
+        $order->save();
+
+        // return redirect()->route('orders.list')->with('success', 'Order delivery status updated successfully!');
+
+        return response()->json(['success' => true]);
     }
 
 

@@ -31,7 +31,7 @@ Route::get('/orderHistory', [App\Http\Controllers\OrderController::class, 'order
 
 Route::post('/contact', [ContactController::class, 'sendMail'])->name('contact.send');
 
-Route::get('/order-history',function(){
+Route::get('/order-history', function () {
     return view('customer.order');
 });
 
@@ -74,6 +74,8 @@ Route::middleware(['auth', 'adminOrStaff'])->group(function () {
 
 
     Route::get('/admin-dashboard', [App\Http\Controllers\dashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::post('/delivery/{id}', [App\Http\Controllers\OrderController::class, 'orderDelivery'])->name('order.delivery');
 
 
     // categories

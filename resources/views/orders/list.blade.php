@@ -116,6 +116,25 @@
                                 </div>
                             </div>
                         </th>
+
+
+
+                        <th class="sortable-header">
+                            <div class="sort-btn-group">
+                                <span>Delivery</span>
+                                <div class="sort-btn-group-tdown">
+                                    <button class="sort-btn" data-sort="name" data-dir="asc" aria-label="Sort A-Z">
+                                        <i class="fa fa-caret-up" aria-hidden="true"></i>
+                                    </button>
+                                    <button class="sort-btn" data-sort="name" data-dir="desc" aria-label="Sort Z-A">
+                                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+
+
+
                         <!-- <th style="width: 80px;">ACTION</th> -->
                     </tr>
 
@@ -156,11 +175,25 @@
                             <td class="table-cell" data-label="Status">
                                 <span class="table-span">{{ $order->status }}</span>
                             </td>
+
+                            <td class="table-cell" data-label="Delivery">
+                                <select name="delivery" class="table-span" data-order-id="{{ $order->order_id }}">
+                                    <option value="pending" {{ $order->delivery == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="delivered" {{ $order->delivery == 'delivered' ? 'selected' : '' }}>Delivered
+                                    </option>
+                                    <option value="cancelled" {{ $order->delivery == 'cancelled' ? 'selected' : '' }}>Cancelled
+                                    </option>
+                                </select>
+
+
+                            </td>
                         </tr>
 
 
                     @endforeach
                 </tbody>
+                <x-add-success modalId="addCartSuccessModal" message="Status Changed!"
+                    confirmId="closeAddCartSuccessBtn"></x-add-success>
                 <tbody id="Content" class="search-data"></tbody>
 
             </table>
@@ -173,6 +206,12 @@
 @endsection
 @push('scripts')
     <script>
+        document.getElementById('closeAddCartSuccessBtn').onclick = function () {
+            document.getElementById('addCartSuccessModal').style.display = 'none';
+        };
+
+
+
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.sort-btn').forEach(btn => {
                 btn.addEventListener('click', function (e) {
@@ -207,6 +246,26 @@
                 },
                 success: function (data) {
                     $('#Content').html(data.html);
+                },
+            });
+        });
+
+
+
+        $(document).on('change', 'select[name="delivery"]', function () {
+            var orderId = $(this).data('order-id');
+            var delivery = $(this).val();
+            $.ajax({
+                url: '/delivery/' + orderId,
+                type: 'POST',
+                data: {
+                    delivery: delivery,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // alert("Delivery status updated!");
+                    document.getElementById('addCartSuccessModal').style.display = 'block';
+
                 },
             });
         });

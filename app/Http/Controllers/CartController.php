@@ -203,6 +203,7 @@ class CartController extends Controller
 
             if ($order) {
                 $order->status = 'approved';
+                $order->delivery = 'pending';
                 $order->save();
                 session()->forget('order_id');
             }
